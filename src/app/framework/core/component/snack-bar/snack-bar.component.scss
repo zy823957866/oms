@@ -1,0 +1,35 @@
+.oms-snack{
+    &>p{
+        display: block;
+        padding: 7px 0;
+        margin-right: 15px;
+        font-size: 13px;
+        color: #6d6f71;
+        &>span{
+            line-height: 24px;
+        }
+    }
+    &>.mat-icon{
+        display: block;
+        text-align: center;
+        float: left;
+        line-height: 18px;
+        width: 18px;
+        height: 18px;
+        color: #f5222d;
+        border: 2px solid #f5222d;
+        margin: 6px 15px;
+        border-radius: 50%;
+        font-size: 14px;
+    }
+    &>.success{
+        color: #5ec82a;
+        border: 2px solid #5ec82a;
+    }
+
+    button{
+        color: #666;
+        float: right;
+    }
+    
+}

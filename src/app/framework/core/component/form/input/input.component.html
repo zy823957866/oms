@@ -1,0 +1,39 @@
+<mat-form-field  
+    appearance="outline" 
+    [ngClass]="inputClass"
+    [oms-valid-style]="_formErrors && _formErrors[formCtrlName]">
+    
+    <mat-label>
+        {{ label | translate }}
+        <span aria-hidden="true" *ngIf="inputClass === 'inputWithClick' && _required" class="mat-placeholder-required mat-form-field-required-marker">&nbsp;*</span>
+    </mat-label>
+    <span (click)="inputClick()">
+        <input 
+            matInput 
+            #inputArea
+            autocomplete="off" 
+            [type]="type" 
+            step="{{step}}"
+            [min]="min"
+            [maxlength]="maxlength"
+            placeholder="{{ (placeholder || label) | translate }}" 
+            [(ngModel)]="value"
+            (ngModelChange)="inputChange($event)"
+            (keyup)="keyUpBack($event)"
+            [disabled]="disabled"
+            (focus)="focus($event)"
+            (blur)="blur($event)"
+            [required]="_required"
+        >
+    </span>
+    
+    <a *ngIf="value && (isFocus || originProp)" class="input-icon" matSuffix mat-icon-button aria-label="Clear" (click)="clickClearIcon($event, value)">
+        <mat-icon>close</mat-icon>
+    </a>
+
+    <a *ngIf="icon" class="input-icon" matSuffix mat-icon-button aria-label="Clear" (click)="iconAction()">
+        <mat-icon>{{icon}}</mat-icon>
+    </a>
+
+    <p class="error-info" *ngIf="_formErrors && _formErrors[formCtrlName]">{{_formErrors[formCtrlName] | translate}}</p>
+</mat-form-field>

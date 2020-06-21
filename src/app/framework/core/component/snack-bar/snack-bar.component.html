@@ -1,0 +1,10 @@
+<!-- 错误消息提示 -->
+<div class="oms-snack" fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon [ngClass]="snackMsg?.icon==='clear' ? 'error': 'success'">{{snackMsg?.icon}}</mat-icon>
+    <p [ngStyle]="{'width': snackMsg.autoClose ? 'calc(100% - 110px)' : 'calc(100% - 50px)'}"> 
+        <span>{{snackMsg?.message}}</span> 
+    </p>
+    <button color="primary" fxFlexAlign="start" *ngIf="snackMsg.autoClose" mat-icon-button (click)="close()" class="close-icon">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>

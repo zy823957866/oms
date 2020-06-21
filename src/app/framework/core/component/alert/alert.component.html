@@ -1,0 +1,12 @@
+<oms-dialog-title [title]="title">
+    <div mat-dialog-content class="alert-content">
+        <p [innerHTML]="message"></p>
+    </div>
+
+    <div class="action">
+        <button mat-raised-button color="primary" (click)="submit()">
+            <mat-icon>close</mat-icon>
+            {{sureButton}}
+        </button>
+    </div>
+</oms-dialog-title>

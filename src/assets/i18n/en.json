@@ -1,0 +1,8 @@
+{
+    "PUBLIC": {
+        "TOTAL_DATA": "Total {{value}} Datas",
+        "PER_PAGE": "Each page",
+        "UNIT_T": "条",
+        "TOTAL_PAGE": "{{value}} Pages"
+    }
+}

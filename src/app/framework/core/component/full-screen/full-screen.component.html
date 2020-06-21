@@ -1,0 +1,13 @@
+<button 
+    mat-icon-button
+    #fullScreen
+    [fxHide]="true" 
+    [fxHide.gt-sm]="false">
+    <mat-icon *ngIf="!isFullscreen" (click)="showFull()" title='全屏'>
+        fullscreen
+    </mat-icon>
+
+    <mat-icon *ngIf="isFullscreen" (click)='delFull()' id="hideFullScreen" title='收起'>
+        fullscreen_exit
+    </mat-icon>
+</button>

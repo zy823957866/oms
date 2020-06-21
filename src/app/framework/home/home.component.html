@@ -1,0 +1,25 @@
+<mat-sidenav-container [class.boxed]="layoutMode">
+    <mat-sidenav class="sidenav" [position]="sidenavAlign" [mode]="sidenavMode" [opened]="sidenavOpen" #sidenav>
+        <oms-brand [ngClass]="settings.colorClasses.brand"></oms-brand>
+        <oms-navigation [ngClass]="settings.colorClasses.navigation"></oms-navigation>
+    </mat-sidenav>
+
+    <div class="sidenav-container" fxLayout="column">
+        <oms-header 
+            [customizer]="customizerSidenavAlign" 
+            [sidenav]="sidenav" 
+            [ngClass]="settings.colorClasses.header" 
+            *ngIf="settings.layout.header=='below'"
+        ></oms-header>
+
+        <div class="main-container">
+            <router-outlet></router-outlet>
+        </div>
+
+        <oms-footer></oms-footer>
+    </div>
+</mat-sidenav-container>
+
+
+
+

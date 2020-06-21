@@ -1,0 +1,140 @@
+@import 'mixin.scss';
+@import 'common.scss';
+@import 'datepicker.scss';
+
+// 弹性布局
+.flex {
+	height: 100%;
+	flex-flow: column;
+	display:flex;
+	.dataTable{
+		flex: 1;
+		display:flex;
+		flex-flow: column;
+        overflow: hidden;
+        border: 1px solid #e7e7e7;
+		&>.ngx-table{
+			height: 100%;
+			.visible{
+				height: 100%;
+				.datatable-body{
+					width: 100%;
+					height: calc(100% - 81px) !important;
+					overflow-y: scroll;
+                    overflow-x: hidden;
+                    border-bottom: none;
+					border-top: none;
+				}
+			}
+		}
+	}
+	oms-table{
+		height: 100%;
+		.ngx-datatable.material{
+			height: 100%;
+			.visible{
+				height: 100%;
+				.datatable-body{
+					width: 100%;
+					height: calc(100% - 81px) !important;
+                    overflow-y: scroll;
+                    border-bottom: none;
+					border-top: none;
+				}
+			}
+		}
+    }
+    
+    .datatable-footer{
+        height: 51px;
+        app-pagination{
+            height: 49px;
+        }
+    }
+
+	
+
+	app-pagination{
+		margin-top: 8px;
+		padding-right: 15px;
+	}
+  }
+  
+  .tableCheckbox{
+	padding: 0 !important;
+	line-height: 30px;
+	.datatable-body-cell-label, .datatable-header-cell-template-wrap{
+		line-height: 30px;
+		.mat-checkbox-inner-container-no-side-margin{
+			width: 14px;
+			height: 14px;
+			top: -2px;
+		}
+	}
+
+	.datatable-header-cell-template-wrap{
+		.mat-checkbox-inner-container-no-side-margin{
+			top: -2px;
+		}
+	}
+
+	.mat-checkbox{
+		width: 100%;
+		padding: 0;
+		height: 30px;
+		display: block;
+		label{
+			width: 100%;
+			height: 100%;
+			line-height: 30px;
+			display: block;
+		}
+	}
+}
+
+
+.mat-snack-bar-container{
+    padding: 0 !important;
+    border: 1px solid #ccc;
+    min-height: 40px !important;
+    border-radius: 4px;
+    background: #eee !important;
+    box-shadow:  0px 3px 1px -2px rgba(0, 0, 0, 0.05), 0px 2px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 5px 0px rgba(0, 0, 0, 0.03);
+}
+
+// 如果为查询条件，则缩小form表单子项目的padding-bottom值
+.search-form{
+    .mat-form-field-wrapper{
+        padding-bottom: 14px !important;
+    }
+}
+
+// 按钮加载中图标样式
+.loading-icon {
+	width: 20px!important;
+	vertical-align: middle;
+	margin-top: -4px;
+	margin-right: 4px;
+	-webkit-animation: rotate 1.5s linear infinite;
+	        animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate{
+	0%{
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+//
+//弹框动画处理
+.mat-dialog-container{
+    overflow: visible !important;
+	.ng-trigger-routeAnimation{
+		position: inherit !important;
+		width: 100% !important;
+	}
+}
+

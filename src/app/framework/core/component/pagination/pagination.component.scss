@@ -1,0 +1,75 @@
+.pagination{
+  .page-count{
+    padding-left: 10px;
+    float: left;
+  }
+
+  select{
+    width: 50px;
+    border: 1px solid #ccc;
+    line-height: 26px;
+    height: 26px;
+    option{
+      &:hover{
+        background: red
+      }
+    }
+  }
+
+  .datatable-pager{
+    display: block;
+    float: right;
+    padding-right: 10px;
+    a{
+      line-height: 50px;
+      height: auto;
+      margin: 0;
+      padding:0;
+      i{
+        vertical-align: middle;
+        &:hover{
+          background: none;
+        }
+      }
+
+      input{
+        outline: none;
+        padding: 0 0 0 6px;
+        line-height: 24px;
+        border: 1px solid #ccc;
+        width: 50px;
+      }
+
+      &:hover{
+        background: none;
+      }
+    }
+  }
+
+  .goPage{
+    border: 1px solid #ccc;
+    margin-left: 15px !important;
+    transition: 0.3s;
+    a{
+      padding:0 4px;
+      margin: 0 5px;
+      line-height: 26px;
+      &:hover{
+        background: none;
+      }
+    }
+    &:hover{
+      background: #616162;
+      a{
+        color: #fff;
+      }
+    }  
+  }
+}
+
+:host ::ng-deep{
+  .page-count{
+    line-height: 50px !important;
+    height: 50px !important;
+  }
+}

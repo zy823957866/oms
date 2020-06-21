@@ -1,0 +1,62 @@
+
+
+.navigation-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  text-decoration: none;
+  padding: 0 24px;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: currentColor;
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    line-height: 16px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  &-title {
+    flex: 1;
+    white-space: nowrap;
+  }
+  &-badge {
+    display: flex;
+    align-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 7px;
+    font-weight: 500;
+    border-radius: 20px;
+    transition: opacity 0.2s ease-in-out 0.1s;
+    margin-left: 8px;
+    box-sizing: border-box;
+    line-height: 20px;
+    font-size: 11px;
+  }
+}
+
+.navigation-link.active {
+  background: #2196f3;
+  color: #fff;
+}
+
+.navigation-children {
+  .navigation-link {
+    padding-left: 40px;
+    
+  }
+  .navigation-children{
+    .navigation-link{
+      padding-left: 60px;
+    }
+  }
+}

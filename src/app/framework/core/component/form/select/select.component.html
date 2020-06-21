@@ -1,0 +1,49 @@
+<ng-container [ngClass]="modelCtrl['id'] ? 'null-ey-select': ''">
+    <mat-form-field 
+        class="ey-select"  
+        (click)="selectClick()"
+        [ngStyle]="colSpan ? {'width': 'calc('+ (100 / colSpan) + '% - ' + ((colSpan - 1 ) / colSpan * 0.4) + 'rem)','margin-right': gap / 100 + 'rem'} : {}"
+        [ngClass]="{'ng-invalid-form-select':_formErrors ? _formErrors[formCtrlName]:'','ng-valid-form-select':_formErrors? !_formErrors[formCtrlName]:'','selectClick': selectWithClick}">
+        <mat-select
+            *ngIf="!multifySelect" 
+            [required]="_required" 
+            [formControl]="modelCtrl" 
+            placeholder="{{label}}" 
+            #singleSelect>
+            <mat-option>
+                <ngx-mat-select-search 
+                    [placeholderLabel]="'搜索...'"
+                    [formControl]="optionFilterCtrl"
+                    [noEntriesFoundLabel]="noData"
+                ></ngx-mat-select-search>
+            </mat-option>
+
+            <mat-option [value]="''" *ngIf="showDefault">请选择</mat-option>
+
+            <mat-option *ngFor="let child of filteredOptions | async" [value]="child">
+                <span matTooltip="{{child.name}}">{{child.name}}</span>
+            </mat-option>
+        </mat-select>
+
+        <!-- 多选 -->
+        <mat-select 
+            *ngIf="multifySelect"
+            [required]="_required" 
+            [formControl]="modelCtrl" 
+            placeholder="{{label}}" 
+            [multiple]="true" 
+            #multiSelect>
+            <ngx-mat-select-search 
+                [formControl]="optionFilterCtrl"
+                [placeholderLabel]="'搜索...'" 
+                [noEntriesFoundLabel]="noData"
+            ></ngx-mat-select-search>
+
+            <mat-option *ngFor="let child of filteredOptions | async" [value]="child">
+                <span matTooltip="{{child.name}}">{{child.name}}</span>
+            </mat-option>
+        </mat-select>
+        <p class="error-info" *ngIf="_formErrors && _formErrors[formCtrlName]">{{_formErrors[formCtrlName]}}</p>
+    </mat-form-field>
+</ng-container>
+

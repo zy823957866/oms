@@ -1,0 +1,125 @@
+<div class="form-outer">
+    <form [formGroup]="formGroup" class="form">
+        <ng-container *ngFor="let item of formData.data; let i = index;">
+
+           <div *ngIf="
+                    (  item.type==='text' 
+                    || item.type==='number' 
+                    || item.type==='inputWithClick')
+                    && (!more || (more && i< minShowColumn))
+                "
+                [ngClass]="{'search-form': !formData.layer}">
+                <!-- 输入框 -->
+                <oms-input
+                    [form]="formGroup"
+                    [originProp]="item.originProp"
+                    [inputClass]="item.class || (item.type==='inputWithClick' ? 'inputWithClick' : '')"
+                    [label]="item.label"
+                    [formErrors]="formErrors"
+                    [type]="item.type"
+                    [thousands]="item.transfer === 'thousands'"
+                    [percent]="item.transfer === 'percent'"
+                    [maxlength]="item.rules && item.rules.maxlength"
+                    [icon]="item.config && item.config.icon"
+                    [placeholder]="item.placeholder"
+                    [formCtrlName]="item.prop"
+                    [disabled]="item.type==='inputWithClick' ? true : (formGroup.controls[item.prop].disabled || item.disabled)"
+                    [value]="formGroup.controls[item.prop].value"
+                    (inputV)="vChange($event, item)"
+                    (inputBlur)="inputBlur(item)"
+                    (keyupEvt)="enterToSearh($event)"
+                    (iconClick)="vChange(item.config && item.config.cb, item)"
+                    (clickInput)="vChange(item.cb, item)"
+                ></oms-input>
+            </div>
+
+            <!-- 文本域 -->
+            <div *ngIf="item.type==='textarea' && (!more || (more && i< minShowColumn))" 
+                [ngClass]="{'search-form': !formData.layer}"
+                [ngStyle]="{ width: item.type==='textarea' && (item.width || '100%')}">
+                <oms-textarea
+                    [form]="formGroup"
+                    [inputClass]="item.class"
+                    [label]="item.label"
+                    [height]="item.height"
+                    [maxlength]="item.rules && item.rules.maxlength"
+                    [formErrors]="formErrors"
+                    [placeholder]="item.placeholder"
+                    [formCtrlName]="item.value"
+                    [disabled]="formGroup.controls[item.prop].disabled || item.disabled"
+                    [value]="formGroup.controls[item.prop].value"
+                    (textareaV)="vChange($event, item)"
+                ></oms-textarea>
+            </div>
+
+            <!-- 下拉框 -->
+            <div *ngIf="item.type==='select' && item.async !== false && (!more || (more && i< minShowColumn))"
+                [ngClass]="{'search-form': !formData.layer}">
+                <oms-select
+                    [form]="formGroup"
+                    [dic_key]="item.dic_key || 'DIC_KEY'"
+                    [dic_value]="item.dic_value|| 'DIC_VALUE'"
+                    [multifySelect]="item.multify"
+                    [value]="formGroup.controls[item.prop].value"
+                    (selectV)="vChange($event, item)"
+                    [formCtrlName]="item.value"
+                    [formErrors]="formErrors"
+                    [label]="item.label"
+                    [showDefault]="!item.showDefault"
+                    (clickInput)="vChange(item.cb, item)"
+                    [selectWithClick]="item.cb ? true : false"
+                    [disabled]="formGroup.controls[item.prop].disabled || item.disabled || item.cb"
+                    [options]="item.options"
+                ></oms-select>
+            </div>
+
+            <div *ngIf="item.type==='select' && item.async === false && (!more || (more && i< minShowColumn))"
+                [ngClass]="{'search-form': !formData.layer}">
+                <oms-select
+                    [form]="formGroup"
+                    [dic_key]="item.dic_key || 'DIC_KEY'"
+                    [dic_value]="item.dic_value|| 'DIC_VALUE'"
+                    [multifySelect]="item.multify"
+                    [value]="formGroup.controls[item.prop].value"
+                    (selectV)="vChange($event, item)"
+                    [formCtrlName]="item.value"
+                    [formErrors]="formErrors"
+                    [label]="item.label"
+                    [showDefault]="!item.showDefault"
+                    (clickInput)="vChange(item.cb, item)"
+                    [selectWithClick]="item.cb ? true : false"
+                    [disabled]="formGroup.controls[item.prop].disabled || item.disabled || item.cb"
+                    [syncOptions]="item.options"
+                ></oms-select>
+            </div>
+
+            <div *ngIf="item.type==='date' && (!more || (more && i< minShowColumn))"
+                [ngClass]="{'search-form': !formData.layer}">
+                <oms-datepicker
+                    [opens]="item.openPos"
+                    [name]="item.name || 'daterange'"
+                    [formErrors]="formErrors"
+                    [startTime]="formGroup.controls[item.prop[0]].value"
+                    [endTime]="!item.single && formGroup.controls[item.prop[1]].value"
+                    [label]="item.label"
+                    [timePicker]="item.dateType === 'yyyy-MM-dd hh:mm:ss' ? true : false"
+                    [singleDatePicker]="item.single"
+                    [minDate]="item.min"
+                    [maxDate]="item.max"
+                    [dateType]="item.dateType"
+                    (timeChange)="vChange($event, item)"
+                ></oms-datepicker>
+            </div>
+        </ng-container> 
+
+        <div class="actions">
+            <oms-actions
+                [layer]="formData.layer"
+                [btns]="formData.actions"
+                [loading]="loading"
+                [(more)]="more"
+                (actionsCb)="actionsCb($event)"
+            ></oms-actions>
+        </div>
+    </form>
+</div>

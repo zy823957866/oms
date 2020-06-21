@@ -1,0 +1,91 @@
+:host ::ng-deep{
+    .mat-form-field {
+        width: 100%;
+        &.mat-focused .mat-form-field-label{
+            color: #666;
+        }
+    }
+
+    .mat-form-field-appearance-outline{
+        .mat-form-field-wrapper{
+            margin: 0;
+            padding-bottom: 26px;
+            .mat-form-field-flex{
+                padding: 0 5px 0 15px;
+                margin-top: 0;
+                height: 34px;
+            }
+    
+            .mat-form-field-outline{
+                height: 34px;
+            }
+    
+            .mat-form-field-infix{
+                padding: 5px 0;
+                line-height: 24px;
+                border-top: 5px;
+            }
+    
+            .mat-form-field-label{
+                color: #999;
+                top: 19px;
+                margin-top: -5px;
+            }
+    
+            .mat-form-field-label-wrapper{
+                top: -8px;
+                padding-top: 8px;
+            }
+        }
+
+        .mat-form-field-outline-thick{
+            .mat-form-field-outline-start,
+            .mat-form-field-outline-end,
+            .mat-form-field-outline-gap{
+                border-width: 1px;
+            }
+        }
+
+        &.mat-focused,&:hover,&:active,&:focus{
+            .mat-form-field-outline-thick{
+                color: #0cb495;
+            }
+        }
+
+        .mat-form-field-outline{
+            top: 0;
+        }
+    }
+
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+        transform: translateY(-16px) scale(0.85);
+        color: #666;
+
+        // mat-label{
+        //     padding-right: 3px;
+        //     background: #fff;
+        // }
+    }
+
+    .mat-form-field-suffix{
+        top: 3px !important;
+    }
+
+    .input-icon{
+        .mat-icon{
+            position: relative;
+            top: 2px;
+            line-height: 20px;
+            height: 20px;
+            text-align: center;
+        }
+    }
+
+    .ng-invalid-form{
+        .mat-form-field-outline-start, 
+        .mat-form-field-outline-end,
+        .mat-form-field-outline-gap{
+            border-color: red;
+        }
+    }
+}

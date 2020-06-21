@@ -1,0 +1,11 @@
+// 这里定义一些推荐的插件
+// ================================================================================================
+
+{
+    "recommendations": [
+        "hoovercj.vscode-power-mode",           // -- 打字特效
+        "mrmlnc.vscode-autoprefixer",           // -- 自动修正
+        // "eg2.tslint",                           // -- tslint检测
+        // "obkoro1.korofileheader",               // -- 生成作者信息
+    ]
+}

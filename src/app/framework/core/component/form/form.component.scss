@@ -1,0 +1,21 @@
+
+
+.form-outer{
+    width: 100%;
+    .form{
+        width: calc(100% + 40px);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        div{
+            display: block;
+            width: calc(20% - 40px) !important;
+            margin-right: 40px;
+        }
+
+        .actions{
+            width: auto !important;
+        }  
+    }
+}
+

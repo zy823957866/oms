@@ -1,27 +1,39 @@
+<!--
+ * @Author: zhouyong
+ * @Date: 2020-06-12 22:48:24
+ * @Description: 前端程序开发文档
+--> 
 # Oms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+## 安装vscode插件
+请按照右下角提示，安装插件；
 
-## Development server
+作者信息配置步骤：
+a、点击编辑器左下角设置
+b、搜索设置中输入"header",并点击"在settings.json中编辑";
+c、在"fileheader.customMade"中配置作者信息,
+    "fileheader.customMade":{
+        "Author":"zhouyong",
+        "Date":"Do not edit",
+        "Description":"Modify here please",
+    }
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 支持的browserPlat 
+    Safari >= 10
+    Chrome >= 55
+    Edge >= 13
+    iOS 10
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## 打包设置
+    --aot  为了代码更高效，更安全
+    --build-optimizer 对文件进一步压缩
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    本系统打包两种模式均开启，打包速度会变慢，但是页面访问速度会大幅度提高。
 
-## Running unit tests
+## 路由
+    1.路由中是否需要#，在app.routing.ts中设置useHash属性；
+    2. 考虑到首页信息量较大，采用预加载模式; 其它页面采用懒加载模式！
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    

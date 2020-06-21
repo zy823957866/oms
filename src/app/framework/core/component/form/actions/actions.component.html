@@ -1,0 +1,44 @@
+<!-- 按钮 -->
+<div class="btns" *ngIf="!layer">
+    <ng-container *ngFor="let item of btns">
+        <div *ngIf="item.icon!=='close' && item.action">
+            <button 
+                class="btn"
+                color="{{item.color}}" 
+                mat-raised-button 
+                [loading]="loading[item.action]"
+                (click)="backFunToForm(item.action)" 
+                type="button">
+                <mat-icon>{{ item.icon }}</mat-icon>
+                {{ item.label | translate }} 
+            </button> 
+        </div>
+
+        <mat-icon class="more" *ngIf="item.type==='hasMore' && !more" (click)="toggleSearch()" title="收起">unfold_more</mat-icon>
+        <mat-icon class="more" *ngIf="item.type==='hasMore'&& more" (click)="toggleSearch()" title="展开">unfold_less</mat-icon>
+    </ng-container>
+</div>
+
+<ng-container *ngIf="layer && (btns && btns.length > 0)">
+<mat-dialog-actions align="end" [ngClass]="{'layer-action':layer}">
+    <ng-container *ngFor="let item of btns">
+
+        <div class="btn-outer" *ngIf="item.icon!=='close' && item.action">
+            <button 
+                color="{{item.color}}" 
+                mat-raised-button 
+                [loading]="loading[item.action]"
+                (click)="backFunToForm(item.action)" 
+                type="button" >
+                <mat-icon>{{ item.icon }}</mat-icon>
+                {{ item.label | translate }}
+            </button>
+        </div>
+        
+        <button *ngIf="item.icon==='close' || !item.action" color="{{item.color}}" mat-raised-button [mat-dialog-close]="false">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            {{ item.label | translate }}
+        </button>
+    </ng-container>
+</mat-dialog-actions>
+</ng-container>

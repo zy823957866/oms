@@ -1,0 +1,28 @@
+$height__main-toolbar: 98px;
+
+.main-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - #{$height__main-toolbar});
+    position: relative;
+    padding: 24px;
+    background-color: #fff;
+}
+
+.sidenav{
+    width: 264px;
+	max-width: 264px;
+	overflow-x: hidden;
+	z-index: 4;
+    border-right: none;
+}
+
+.sidenav-container {
+	height: 100%
+}
+
+:host {
+    .mat-sidenav-container{
+        height: 100%;
+    } 
+}

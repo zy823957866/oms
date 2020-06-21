@@ -1,0 +1,43 @@
+.fullScreen{
+    height: 100%;
+}
+.dialog-wrap{
+  height: 100%;
+}
+.content-wrap{
+  max-height: calc(100vh - 35px);
+  overflow-y: auto;
+}
+
+:host ::ng-deep{
+    .mat-dialog-title{
+		line-height: 40px;
+		margin: 0;
+		background: #e7e7e7;
+		color: #333 !important;
+		border-bottom: 1px solid #cbcbcb;
+		width: 100%;
+		display: block;
+		cursor: move;
+        padding-left: 20px;
+        font-size: 17px;
+    }
+
+    .close-icon{
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #666;
+    }
+
+    .cdk-program-focused{
+        .mat-button-focus-overlay{
+            background-color: #eaeaea !important;
+            &:active{
+                background-color: #eaeaea !important;
+            }
+        }
+    }
+    
+    
+}

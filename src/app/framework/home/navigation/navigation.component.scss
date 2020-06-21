@@ -1,0 +1,87 @@
+:host ::ng-deep {
+    display: block;
+    height: calc(100% - 50px);
+    background-color: #3c4252;
+    color: rgba(255, 255, 255, 0.87);
+    
+    .activeLink{
+        padding-left: 20px;
+        background-color: #0cb495;
+        color: #fff;
+    }
+
+    .navigation-children{
+        .activeLink{
+            padding-left: 36px;
+        }
+    }
+    
+    .navigation-children .navigation-children{
+        .activeLink{
+            padding-left: 56px;
+        }
+    }
+    
+    .navigation-link{
+        height: 42px !important;
+    }
+    
+  
+    .navigation-container {
+      flex-direction: column;
+      box-sizing: border-box;
+      display: flex;
+      height: 100%;
+      line-height: 42px;
+      font-size: 14px;
+    }
+    
+    .navigation-scrollbar-container {
+      flex-direction: column;
+      box-sizing: border-box;
+      display: flex;
+      height: calc(100% - 36px);
+    }
+    
+    .navigation-footer {
+      flex-direction: row;
+      box-sizing: border-box;
+      display: flex;
+      background: #343c4c;
+      > a {
+          display: flex;
+          align-items: center;
+          flex: 1 1 100%;
+          box-sizing: border-box;
+          max-width: 100%;
+          background-color: #343c4c;
+          filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#19000000, endcolorstr=#19000000);
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          text-align: center;
+          min-width: 88px;
+          line-height: 36px;
+          padding: 0 24px;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+    
+          > mat-icon {
+              width: 16px;
+              height: 16px;
+              min-width: 16px;
+              min-height: 16px;
+              line-height: 28px;
+              margin-right: 16px;
+              font-size: 16px;
+          }
+      }
+    }
+  
+    @media screen and (max-width: 1600px){
+      .navigation-container{
+          font-size: 13px;
+      }
+    }
+  }
+  

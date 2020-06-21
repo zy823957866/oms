@@ -1,0 +1,8 @@
+{
+    "PUBLIC": {
+        "TOTAL_DATA": "总共 {{value}} 条数据",
+        "PER_PAGE": "每页",
+        "UNIT_T": "条",
+        "TOTAL_PAGE": "共 {{value}} 页"
+    }
+}

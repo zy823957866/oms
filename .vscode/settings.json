@@ -1,0 +1,35 @@
+// 这里是控制代码格式的书写规范
+// ================================================================================================
+
+{
+    // "extensions.ignoreRecommendations": false,  
+    "editor.tabSize": 4,                                    // -- 间隔
+    "editor.fontSize": 16,                                  // -- 编译器字体大小
+    "editor.detectIndentation": false,                      // -- 启动时根据文件内容重写
+    // "gitlens.keymap": "alternate",
+    // "gitlens.advanced.messages": {
+    //     "suppressShowKeyBindingsNotice": true
+    // },
+    "window.zoomLevel": 1,                                  // -- 缩放比例
+    // "git.autofetch": true,                                  // -- git是否启用自动拉取
+    // "typescript.updateImportsOnFileMove.enabled": "always", // -- 文件移动时自动修改路径
+    // "explorer.confirmDragAndDrop": true,                    // -- 移动文件时是否提示
+    // "explorer.confirmDelete": true,                         // -- 删除文件时是否需要提示
+    // "javascript.implicitProjectConfig.experimentalDecorators": true,
+    // "breadcrumbs.enabled": true,
+    // "editor.formatOnSave": false,                           // -- 保存时自动修改格式
+    // "editor.codeActionsOnSave": {
+    //     "source.fixAll.tslint": false,                       // -- 文件保存时，自动按照tslint检测修正
+    //     "source.organizeImports": false                      // -- 文件保存时，自动整理页面所有import引用
+    // },
+    // "tslint.enable": true,                                  // -- 是否开启eslint检测
+    // "tslint.autoFixOnSave": false,                           // -- 文件保存时，是否自动根据eslint进行格式化
+    // "editor.quickSuggestions": {
+    //     "other": true,
+    //     "comments": true,
+    //     "strings": true
+    // },
+    // "autoprefixer.formatOnSave": true,                   // 自动生成css前缀
+    "powermode.enabled": false,
+    "powermode.presets": "flames"
+}

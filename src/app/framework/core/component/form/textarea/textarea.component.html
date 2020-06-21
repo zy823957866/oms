@@ -1,0 +1,14 @@
+<mat-form-field class="check-css" [oms-valid-style]='_formErrors?_formErrors[formCtrlName]:""'  [ngStyle]="{ height: 'calc( ' + _height + ' + 16px )'}" appearance="outline"> 
+    <mat-label>{{ label | translate }}</mat-label>
+    <textarea 
+        matInput 
+        [placeholder]="placeholder" 
+        [(ngModel)]="value"
+        [disabled]="disabled"
+        [required]="_required"
+        [ngStyle]="{height: _height}"
+        maxlength="{{maxlength}}"
+        (ngModelChange)="inputChange($event)"
+    ></textarea>
+    <p class="error-info" style="padding-top: 10px" *ngIf="_formErrors && _formErrors[formCtrlName]">{{_formErrors[formCtrlName] | translate}}</p>
+</mat-form-field>

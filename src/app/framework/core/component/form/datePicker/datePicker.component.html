@@ -1,0 +1,25 @@
+<mat-form-field 
+    appearance="outline"
+    [oms-valid-style]="_formErrors && _formErrors[name]">
+    <mat-label>{{label}}</mat-label>
+
+    <input 
+        matInput
+        type="text" 
+        [name]="name" 
+        autocomplete="off" 
+        placeholder="时间" 
+        [disabled]="disabled"
+        class="form-control oms-datePicker" 
+        (keyup)="keyUpCb($event)"
+        value=""/>
+
+    <a class="input-icon" matSuffix mat-icon-button>
+        <mat-icon svgIcon="oms-date"></mat-icon>
+    </a>
+
+    <p class="error-info" *ngIf="_formErrors && _formErrors[name]">{{_formErrors[name]}}</p>
+
+</mat-form-field>
+
+

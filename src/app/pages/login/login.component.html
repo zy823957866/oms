@@ -1,0 +1,52 @@
+<div class="login">
+    <div class="logo-part">
+        OMS
+        <span>平台管理系统</span>
+    </div>
+
+    <div class="login-part">
+        <div class="bg-wrap">
+            <div class="wrap-bj">
+                <img src="../../../assets/images/login/bulb-bj.png">
+            </div>
+
+            <div class="l-video imgBtn"></div>
+            <div class="l-skill imgBtn"></div>
+            <div class="l-method imgBtn"></div>
+            <div class="l-capacity imgBtn"></div>
+            <div class="l-achievement imgBtn"></div>
+
+            <div class="l-aircraft">
+                <i></i>
+            </div>
+        </div>
+
+        <div class="login-container">
+            <h2>OMS系统用户登录</h2>
+            <h4>USER LOGIN</h4>
+
+            <div class="form">
+                <div class="userName">
+                    <mat-icon aria-hidden="false">person</mat-icon>
+                    <input type="text" placeholder="请输入用户名">
+                </div>
+
+                <div class="password">
+                    <mat-icon aria-hidden="false">vpn_key</mat-icon>
+                    <input type="password" placeholder="请输入密码">
+                </div>
+
+                <div class="check">
+                    <mat-icon aria-hidden="false">refresh</mat-icon>
+                    <input type="text" maxlength="4" placeholder="验证码">
+                    <img src="../../../assets/images/login/check.jpg">
+                    <span>换一张</span>
+                </div>
+
+                <button class="login-in" (click)="login()">
+                    <span>登录</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

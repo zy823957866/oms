@@ -1,0 +1,59 @@
+<div class="pagination">
+  <div class="page-count">
+    <!-- 总共{{page.totalCount}}&nbsp;条数据&nbsp;&nbsp;每页&nbsp; -->
+       {{'PUBLIC.TOTAL_DATA' | translate: { value: page.totalCount } }}
+       &nbsp;<span *ngIf="showPer">{{'PUBLIC.PER_PAGE' | translate}}&nbsp;</span>
+    <label class="select" *ngIf="showPer">
+      <select 
+        name="key" 
+        (change)="setPage({offset: 0})" 
+        [(ngModel)]="page.pageSize">
+        <option *ngFor="let item of pageSelectOptions" value="{{item}}">{{ item }}</option>
+      </select>
+    </label>
+
+    <!-- &nbsp;{{'PUBLIC.UNIT_T' | translate}}&nbsp;&nbsp;共&nbsp;{{page.pageCount}}&nbsp;页 -->
+    <span *ngIf="showPer">&nbsp;{{'PUBLIC.UNIT_T' | translate}}&nbsp;&nbsp;</span>
+    {{'PUBLIC.TOTAL_PAGE' | translate: { value: page.pageCount } }}
+  </div>
+
+
+  <div class="datatable-pager">
+    <ul class="pager pull-right">
+      <li [class.disabled]="page.pageNo === 0">
+        <a role="button" (click)="setPage({offset: 0},'first')">
+          <i class="datatable-icon-prev"></i>
+        </a>
+      </li>
+
+      <li [class.disabled]="page.pageNo === 0">
+        <a role="button" (click)="setPage({offset: page.pageNo - 1})">
+          <i class="datatable-icon-left"></i>
+        </a>
+      </li>
+
+      <li>
+        <a>
+          <input type="number" [(ngModel)]="currentPage"
+            (keydown.enter)="setPage({offset: currentPage - 1})" (blur)="setPage({offset: currentPage - 1})">
+        </a>
+      </li>
+
+      <li [class.disabled]="page.pageNo + 1 === page.pageCount">
+        <a role="button" (click)="setPage({offset: page.pageNo + 1})">
+          <i class="datatable-icon-right"></i>
+        </a>
+      </li>
+
+      <li [class.disabled]="page.pageNo + 1 === page.pageCount">
+        <a role="button" (click)="setPage({offset: page.pageCount - 1}, 'last')">
+          <i class="datatable-icon-skip"></i>
+        </a>
+      </li>
+      
+      <li class="goPage">
+        <a (click)="setPage({offset: currentPage - 1})">GO</a>
+      </li>
+    </ul>
+  </div>
+</div>
