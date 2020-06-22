@@ -159,6 +159,13 @@
                 text-align: center;
                 color: #999;
             }
+            p{
+                position: absolute;
+                color: red;
+                font-size: 12px;
+                line-height: 16px;
+                top: 40px;
+            }
         }
         input{
             width: 300px;
@@ -169,7 +176,7 @@
             height: 40px;
             line-height: 20px;
             padding: 10px 10px 10px 40px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             transition: all 0.3s;
             &:active, &:focus{
                 border: 1px solid #05b4a5;
@@ -210,11 +217,12 @@
             border: none;
             cursor: pointer;
             background: linear-gradient(0deg,#15b699,#01b290);
-            font-size: 20px;
+            font-size: 18px;
             color: #fff;
             letter-spacing: 20px;
-            &:hover{
-                background: #1bcdae;
+            box-shadow: none !important;
+            &:active{
+                box-shadow: none !important;
             }
         }
     }

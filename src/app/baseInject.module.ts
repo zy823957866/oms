@@ -14,6 +14,8 @@ import { UserService } from './framework/core/services/user.service';
 import { StorageService } from './framework/core/services/storage.service';
 import { I18nService } from './framework/core/services/i18n.service';
 import { MessageService } from './framework/core/services/message.service';
+import { OmsFormService } from './framework/core/services/form.service';
+import { ResourceService } from './framework/core/services/resource.service';
 
 // 模块
 import { SnackBarModule } from './framework/core/component/snack-bar/snack-bar.module';
@@ -23,6 +25,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './framework/core/interceptor/http-header.interceptor';
 import { HttpResponseInterceptor } from './framework/core/interceptor/http-response.interceptor';
 
+
+
 // 服务汇总
 const SERVICE = [
     UserService,
@@ -30,6 +34,8 @@ const SERVICE = [
     StorageService,
     MessageService,
     HttpApiService,
+    OmsFormService,
+    ResourceService,
     DatePipe,
     {
         provide: HTTP_INTERCEPTORS,

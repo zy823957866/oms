@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 
 const APP_ROUTES: Routes = [
-    // { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     { 
         path: '', 
         component: HomeComponent,
@@ -14,6 +13,10 @@ const APP_ROUTES: Routes = [
                 path: 'dashboard',
                 loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule),
             },
+            {
+                path: 'system',
+                loadChildren: () => import('../../pages/system/system.module').then(m => m.SystemModule),
+            }
         ]
     }
 ];

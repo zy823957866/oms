@@ -1,0 +1,27 @@
+<div class="flex">
+    <oms-form
+        [userDefine]="[userDefine0]"
+        [formGroup]="searchForm" 
+        (formCb)="formCb($event)" 
+        [(searchItems)]="searchItems" 
+        [loadingState]="loading"
+    ></oms-form>
+
+    <ng-template #userDefine0 let-value="value">
+        <div>
+            这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试{{ value }}
+        </div>
+    </ng-template>
+
+
+    <div class="dataTable">
+        <oms-table
+            [rows]="rows" 
+            [pageDTO]="pageDTO"
+            
+            [tableFrame]="tableFrame"
+        ></oms-table>
+
+        
+    </div>
+</div>

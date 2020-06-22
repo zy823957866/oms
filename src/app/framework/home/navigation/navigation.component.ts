@@ -28,6 +28,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     getMenus(){
+        // this.treeChangeSub = this.resourceSer.onNavigationModelChange.subscribe(
+		// 	navigation => {
+		// 		this.navigationModel = navigation;
+		// 	}
+        // );
+        
         this.resourceSer.setNavigationModelMock();
 
         this.treeChangeSub = this.resourceSer.menuTreeChange.subscribe(res => {

@@ -1,8 +1,12 @@
+
+
 <div class="login">
     <div class="logo-part">
         OMS
         <span>平台管理系统</span>
     </div>
+
+    
 
     <div class="login-part">
         <div class="bg-wrap">
@@ -25,15 +29,17 @@
             <h2>OMS系统用户登录</h2>
             <h4>USER LOGIN</h4>
 
-            <div class="form">
+            <div class="form" [formGroup]="form">
                 <div class="userName">
                     <mat-icon aria-hidden="false">person</mat-icon>
-                    <input type="text" placeholder="请输入用户名">
+                    <input type="text" placeholder="请输入用户名" formControlName="userName">
+                    <p class="error">{{form_error.userName}}</p>
                 </div>
 
                 <div class="password">
                     <mat-icon aria-hidden="false">vpn_key</mat-icon>
-                    <input type="password" placeholder="请输入密码">
+                    <input type="password" placeholder="请输入密码" formControlName="userPass">
+                    <p class="error">{{form_error.userPass}}</p>
                 </div>
 
                 <div class="check">
@@ -43,8 +49,8 @@
                     <span>换一张</span>
                 </div>
 
-                <button class="login-in" (click)="login()">
-                    <span>登录</span>
+                <button class="login-in" mat-raised-button color="primary" type="button" (click)="login()" [loading]="loading">
+                    登录
                 </button>
             </div>
         </div>

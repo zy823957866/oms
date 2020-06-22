@@ -18,7 +18,6 @@ export class PreloadService implements PreloadingStrategy {
     preload(route: Route, load: () => Observable<any>): Observable<any> {
         if (route.data && route.data.preload) {
             this.preloadedModules.push(route.path); // 会将所选路由记录在数组中
-            console.log('Preloaded: ' + route.path);
             return load();
         } else {
             return of(null);

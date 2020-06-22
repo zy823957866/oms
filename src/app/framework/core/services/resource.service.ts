@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 
 // model
 import { MenuTree } from '../models/menu-tree.model';
+import { StorageService } from './storage.service';
 
 @Injectable()
 
@@ -49,6 +50,21 @@ export class ResourceService {
                     url: '/dashboard2',
                 },
             ]
+        },
+        {
+            id: '1',
+            title: '系统配置',
+            type: 'collapse',
+            icon: 'system',
+            children: [
+                {
+                    id: '2',
+                    title: '视图管理',
+                    type: 'item',
+                    icon: 'home',
+                    url: '/oms/system/view',
+                }
+            ]
         }
     ];
 
@@ -58,13 +74,14 @@ export class ResourceService {
 
     
 
-    constructor() {
-        // this.onNavigationModelChange.next(model);
-        // let storageService = new StorageService();
-        // let resources = storageService.getObject('resources');
-        // if(resources && resources.length>0){
-        //     this.onNavigationModelChange.next(this.resource2Nav(resources));
-        // }
+    constructor(
+        public storageService: StorageService,
+
+    ) {
+        let resources = storageService.getObject('resources');
+        if(resources && resources.length>0){
+            this.onNavigationModelChange.next(this.resource2Nav(resources));
+        }
     }
 
     setNavigationModel(navigation) {

@@ -13,7 +13,6 @@ import { Injectable } from "@angular/core";
 export class MomentService {
     //当前时间
     private date: Date = new Date();
-    
 
     //获取时间戳
     public getTimeStamp(date: any=new Date()): number{

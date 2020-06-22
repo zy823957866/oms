@@ -62,7 +62,7 @@ export abstract class BaseComponent implements OnInit {
     };
     // 查询状态
     loading: any={
-        onSearch: false
+        onSearch: true
     };
 
     // =================基类基本属性和方法 start===================

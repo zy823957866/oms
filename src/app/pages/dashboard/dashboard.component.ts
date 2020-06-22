@@ -34,11 +34,11 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     constructor( public injector: Injector) {
         super(injector);
         
-        this.dialog.open(OmsConfirmComponent, { 
-            disableClose: true, 
-            width: '450px',
-            height: '250px',
-            data: { title: '这是标题', message: '这是一个测试这是一个' } });
+        // this.dialog.open(OmsConfirmComponent, { 
+        //     disableClose: true, 
+        //     width: '450px',
+        //     height: '250px',
+        //     data: { title: '这是标题', message: '这是一个测试这是一个' } });
     }
 
 }

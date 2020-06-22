@@ -1,3 +1,70 @@
 {
-  
+    "/api-vat": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-base": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-option": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-gateway": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-report": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-finance": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-enter": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-doc": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-receipt": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-file": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-asset": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-cit": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-carry": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-output": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-risk": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-other": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    },
+    "/api-stat": {
+        "target": "http://192.168.91.54:8800",
+        "secure": false
+    }
 }
