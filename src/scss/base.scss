@@ -128,10 +128,10 @@
 	}
 }
 
-//
 //弹框动画处理
 .mat-dialog-container{
     overflow: visible !important;
+    padding: 0 !important;
 	.ng-trigger-routeAnimation{
 		position: inherit !important;
 		width: 100% !important;

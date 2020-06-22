@@ -10,7 +10,7 @@ import { OmsFormModule } from 'src/app/framework/core/component/form/form.module
 
 // 路由
 import { RoutingModule } from './dashboard.routing';
-import { OmsAlertModule } from 'src/app/framework/core/component/alert/alert.module';
+import { OmsConfirmModule } from 'src/app/framework/core/component/confim/confirm.module';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { OmsAlertModule } from 'src/app/framework/core/component/alert/alert.mod
     imports: [
         OmsTableModule,
         OmsFormModule,
-        OmsAlertModule,
+        OmsConfirmModule,
         RoutingModule
     ],
     providers: [ ]

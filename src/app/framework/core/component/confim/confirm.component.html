@@ -1,0 +1,18 @@
+<oms-dialog-title [title]="data.title">
+    <div mat-dialog-content class="confirm-content">
+        <mat-icon>help_outline</mat-icon>
+        <p [innerHTML]="data.message"></p>
+    </div>
+
+    <div class="action">
+        <button mat-raised-button color="primary" (click)="submit()">
+            <mat-icon>done_all</mat-icon>
+            确定
+        </button>
+
+        <button color="warn" mat-raised-button [mat-dialog-close]="false" tt="关闭">
+            <mat-icon>close</mat-icon>
+            取消
+        </button>
+    </div>
+</oms-dialog-title>

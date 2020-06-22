@@ -1,0 +1,57 @@
+
+
+:host ::ng-deep {
+    .mat-dialog-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 150px;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .action{
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 20px;
+        padding: 10px 0 15px 0;
+
+        .mat-raised-button{
+            color: rgba(0, 0, 0, 0.65);
+            box-shadow: none;
+            background-color: #f4f4f4;
+            line-height: 34px;
+            border: 1px solid #d9d9d9;
+            padding: 0 14px;
+            margin-left: 15px;
+            display: block;
+            overflow: hidden;
+            &:active{
+                box-shadow: none !important;
+            }
+        }
+    
+        .mat-primary{
+            color: #fff;
+            border: none;
+            background-color: #0cb495;
+        }
+    }
+
+    .confirm-content{
+        padding: 0 20px; 
+        box-sizing: border-box;
+        line-height: 24px;
+        .mat-icon{
+            line-height: 26px; 
+            display: block; 
+            font-size: 28px;
+            padding-right: 20px; 
+            color: #e74d4d;
+        }
+    }
+
+    
+    
+}

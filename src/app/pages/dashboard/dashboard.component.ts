@@ -5,7 +5,8 @@ import { Component, OnInit, HostBinding, Inject, Injector } from '@angular/core'
 import { routeAnimation } from 'src/app/framework/core/animations/route-animate';
 import { BaseComponent } from 'src/app/framework/core/component/base/base.component';
 import { DASHBOAR_CONFIG } from './dashboard.config';
-import { OmsAlertComponent } from 'src/app/framework/core/component/alert/alert.component';
+
+import { OmsConfirmComponent } from 'src/app/framework/core/component/confim/confirm.component';
 
 @Component({
     selector: 'app-dashboard',
@@ -32,12 +33,12 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
     constructor( public injector: Injector) {
         super(injector);
-
-        this.dialog.open(OmsAlertComponent, { 
+        
+        this.dialog.open(OmsConfirmComponent, { 
             disableClose: true, 
-            minWidth: '450px',
-            minHeight: '250px',
-            data: { title: '这是标题', message: '这是一个测试' } });
+            width: '450px',
+            height: '250px',
+            data: { title: '这是标题', message: '这是一个测试这是一个' } });
     }
 
 }
