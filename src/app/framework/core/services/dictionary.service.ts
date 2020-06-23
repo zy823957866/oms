@@ -12,16 +12,7 @@ export class DictionaryService {
 
     dictionaryMap: Map<string | number, Map<string | number, string>> = new Map<string, Map<string | number, string>>();
 
-    constructor(private httpApiService: HttpApiService) {
-        // for (let prop in SYSTEM_CONFIG.DIC) {
-        //     let subDictionaryMap = new Map<string | number, string>();
-        //     for (let i = 0; i < SYSTEM_CONFIG.DIC[prop].length; i++) {
-        //         subDictionaryMap.set(SYSTEM_CONFIG.DIC[prop][i].DIC_KEY,
-        //             SYSTEM_CONFIG.DIC[prop][i].DIC_VALUE);
-        //     }
-        //     this.dictionaryMap.set(prop, subDictionaryMap);
-        // }
-    }
+    constructor(private httpApiService: HttpApiService) {}
 
     getDicValuByDicCode(dicCode: string, dicKey: any): Observable<string> {
         let dicKeyStr = dicKey + '';

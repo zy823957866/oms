@@ -8,7 +8,6 @@ import { HttpApiService } from '../../services/http.service';
 import { DictionaryService } from '../../services/dictionary.service';
 import { StructureService } from '../../services/structure.service';
 import { MomentService } from '../../services/moment.service';
-import { DownLoadService } from '../../services/download.service';
 import { ExcelService } from '../../services/excel.service';
 import { MessageService } from '../../services/message.service';
 
@@ -21,6 +20,7 @@ import { Order } from '../../models/order.model';
 import { SearchItem } from '../../models/search-item.model';
 
 import { FormCbData } from '../../models/form-cb.module';
+import { InitDictionaryService } from '../../services/init-dictionary.service';
 
 
 
@@ -62,18 +62,18 @@ export abstract class BaseComponent implements OnInit {
     };
     // 查询状态
     loading: any={
-        onSearch: true
+        onSearch: false
     };
 
     // =================基类基本属性和方法 start===================
     protected httpApiService: HttpApiService;
     protected formBuilder: FormBuilder;
     protected messageSer: MessageService;
+    protected initDict: InitDictionaryService;
     protected dialog: MatDialog;
     protected dictionaryService: DictionaryService;
     protected excelService: ExcelService;
     protected structureService: StructureService;
-    protected downloadService: DownLoadService;
     protected translate: TranslateService;
     protected _moment: MomentService;
 
@@ -81,11 +81,11 @@ export abstract class BaseComponent implements OnInit {
         this.httpApiService = this.injector.get(HttpApiService);
         this.formBuilder = this.injector.get(FormBuilder);
         this.messageSer = this.injector.get(MessageService);
+        this.initDict = this.injector.get(InitDictionaryService);
         this.dialog = this.injector.get(MatDialog);
         this.dictionaryService = this.injector.get(DictionaryService);
         this.excelService = this.injector.get(ExcelService);
         this.structureService = this.injector.get(StructureService);
-        this.downloadService = this.injector.get(DownLoadService);
         this.translate = this.injector.get(TranslateService);
         this._moment = this.injector.get(MomentService);
     }
@@ -185,6 +185,7 @@ export abstract class BaseComponent implements OnInit {
 
     // 数据改变
     vChange(e) {
+        console.log(e)
         this.searchForm.patchValue({ [e.prop]: (e && e.value !== null ? e.value : null ) });
         //为带点击的输入框时候 点击清除按钮 清除内容
         if(e.originProp) {

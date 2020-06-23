@@ -7,9 +7,16 @@
         [loadingState]="loading"
     ></oms-form>
 
-    <ng-template #userDefine0 let-value="value">
-        <div>
-            这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试这是测试{{ value }}
+    
+    <ng-template #userDefine0>
+        <div class="item">
+            <oms-select
+                [value]="searchForm.controls.isEnable.value"
+                (selectV)="vChange($event)"
+                [formCtrlName]="'isEnable'"
+                [label]="'测试'"
+                [options]="options"
+            ></oms-select>
         </div>
     </ng-template>
 

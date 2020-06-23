@@ -150,3 +150,20 @@
 	pointer-events: none;
 }
 
+// form表单userdefine样式
+.form{
+    .item{
+        display: block;
+        width: calc(20% - 40px) !important;
+        margin-right: 40px;
+    }
+}
+
+// checkbox选中状态样式
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate{
+    background: #0cb495;
+}
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #0cb495;
+}
+

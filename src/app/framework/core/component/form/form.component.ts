@@ -74,17 +74,22 @@ export class OmsFormComponent {
                 this.formGroup.controls[element.prop].disable();
             }
 
-            //下拉数组字典赋值
-            if (element.type === 'select' && typeof element.options === 'string') {
-                //通过管道过滤
-                if (element.async !== false) element.options = this.initDic[element.options]();
-                //通过其他接口过滤
-                else {
-                    this.initDic[element.options]().then(res => {
-                        element.selectOptions = res;
-                    })
-                }
-            }
+            // 设置下拉值
+            // if(element.type === 'select' && typeof element.options === 'string') {
+            //     element.optionLists = this.initDic[element.options]();
+            // }
+
+            // //下拉数组字典赋值
+            // if (element.type === 'select' && typeof element.options === 'string') {
+            //     //通过管道过滤
+            //     if (element.async !== false) element.options = this.initDic[element.options]();
+            //     //通过其他接口过滤
+            //     else {
+            //         this.initDic[element.options]().then(res => {
+            //             element.selectOptions = res;
+            //         })
+            //     }
+            // }
         });
     }
 

@@ -5,10 +5,6 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { DatePipe } from "@angular/common"
 import { cloneDeep } from 'lodash';
 
-
-//组件
-import { SnackBarComponent } from '../component/snack-bar/snack-bar.component';
-
 //服务
 import {UserService} from "./user.service";
 import {I18nService} from "./i18n.service";
@@ -51,37 +47,6 @@ export class HttpApiService {
         }
         return null;
     }
-
-    //过滤请求参数,时间格式转换
-    filterParams(body) {
-        let entityDTO = Object.assign({}, body['entityDTO']);
-
-        if (entityDTO) {
-            for (let propertyKey in entityDTO) {
-                let property = entityDTO[propertyKey];
-                if (property != null) {
-                    if (property._isAMomentObject) {
-                        entityDTO[propertyKey] = property.valueOf();
-                    }
-                } else {
-                    delete entityDTO[propertyKey];
-                }
-            }
-        } else {
-            for (let propertyKey in body) {
-                let property = body[propertyKey];
-                if (property != null) {
-                    if (property._isAMomentObject) {
-                        body[propertyKey] = JSON.parse(JSON.stringify(property.valueOf()));
-                    }
-                } else {
-                    delete body[propertyKey];
-                }
-            }
-        }
-        return body;
-    }
-
     
     /**
      * 导出流文件
@@ -89,8 +54,6 @@ export class HttpApiService {
     exportExcel(url: string, body: any, fileName: string=''){
         let downLoadSubject: BehaviorSubject<any> = new BehaviorSubject('');
 
-        //过滤请求参数,时间格式转换
-        body = this.filterParams(body);
         //http返回观察者对象
         let observable = this.http.post(url, body, {
             responseType: "blob",
@@ -214,10 +177,6 @@ export class HttpApiService {
      *                getAllData 获取所有返回的数据
      */
     post(url: string, body: any, cb: Function, options: any={}): Observable<any> {
-        
-        //过滤请求参数,时间格式转换
-        body = this.filterParams(body);
-
         //短时间内,url,body,callback相同则认定为短时间内重复查询,合并为一次查询
         let requestKey = url + JSON.stringify(body);
 
@@ -247,7 +206,6 @@ export class HttpApiService {
                     if(this.apiSubjects[requestKey]) {
                         let callbacks = this.apiSubjects[requestKey].callbacks;
                         for (let i = 0; i < callbacks.length; i++) {
-                            
                             callbacks[i](cloneDeep(result));
                         }
                     }
@@ -273,16 +231,12 @@ export class HttpApiService {
     //文件上传
     postFile(url: string, param: any, callback: Function) {
         let formData = new FormData();
-        //过滤请求参数,时间格式转换
-        param = this.filterParams(param);
 
         for (let key in param) {
             formData.append(key, param[key]);
         }
 
-        const headers = new HttpHeaders({
-            // 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-        });
+        const headers = new HttpHeaders();
 
         let _url = this.getResourceId() ? url + '?resourceId=' + this.getResourceId() : url;
 

@@ -1,7 +1,6 @@
 <div class="form-outer">
     <form [formGroup]="formGroup" class="form">
         <ng-container *ngFor="let item of formData.data; let i = index;">
-
            <div *ngIf="
                     (  item.type==='text' 
                     || item.type==='number' 
@@ -53,7 +52,7 @@
             </div>
 
             <!-- 下拉框 -->
-            <div *ngIf="item.type==='select' && item.async !== false && (!more || (more && i< minShowColumn))"
+            <div *ngIf="item.type==='select' && (!more || (more && i< minShowColumn))"
                 [ngClass]="{'search-form': !formData.layer}">
                 <oms-select
                     [form]="formGroup"
@@ -73,7 +72,7 @@
                 ></oms-select>
             </div>
 
-            <div *ngIf="item.type==='select' && item.async === false && (!more || (more && i< minShowColumn))"
+            <!-- <div *ngIf="item.type==='select' && item.async === false && (!more || (more && i< minShowColumn))"
                 [ngClass]="{'search-form': !formData.layer}">
                 <oms-select
                     [form]="formGroup"
@@ -91,7 +90,7 @@
                     [disabled]="formGroup.controls[item.prop].disabled || item.disabled || item.cb"
                     [syncOptions]="item.options"
                 ></oms-select>
-            </div>
+            </div> -->
 
             <div *ngIf="item.type==='date' && (!more || (more && i< minShowColumn))"
                 [ngClass]="{'search-form': !formData.layer}">
@@ -110,6 +109,10 @@
                     (timeChange)="vChange($event, item)"
                 ></oms-datepicker>
             </div>
+
+            <ng-container *ngIf="item.type==='userDefine'">
+                <ng-container *ngTemplateOutlet="userDefine[item.template];"></ng-container>
+            </ng-container>
         </ng-container> 
 
         <div class="actions">

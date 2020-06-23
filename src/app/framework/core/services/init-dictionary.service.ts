@@ -38,4 +38,9 @@ export class InitDictionaryService {
 
     returnTaskStatusList() { return this.getDicList('DIC_TAXPAYER'); }
 
+    // 是否启用
+    isEnables() { return this.dictionaryService.getDicListByDicCode('IS_ENABLE') }
+
+    // 用户还是系统
+    userType() { return this.dictionaryService.getDicListByDicCode('USER_CATEGORY', 'string') }
 }

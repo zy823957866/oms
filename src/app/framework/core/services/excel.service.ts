@@ -141,12 +141,12 @@ export class ExcelService {
     }
 
     read(file, component) {
-        var fileReader = new FileReader();
+        let fileReader = new FileReader();
         fileReader.readAsArrayBuffer(file);
         fileReader.onload = function (ev) {
-            var data = ev.target['result'];
-            var workbook = XLSX.read(data, { type: 'array' });
-            var sheet = workbook.Sheets[workbook.SheetNames[0]];
+            let data = ev.target['result'];
+            let workbook = XLSX.read(data, { type: 'array' });
+            let sheet = workbook.Sheets[workbook.SheetNames[0]];
             let jSheet = XLSX.utils.sheet_to_json(sheet, { header: 1 });
             component.buildTextValue(jSheet);
         }

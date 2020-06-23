@@ -1,9 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+// 工具包
+import { Component,ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { take, takeUntil, throttleTime } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { isArray } from 'lodash';
+// 服务
+import { InitDictionaryService } from '../../../services/init-dictionary.service';
 
 @Component({
     selector: 'oms-select',
@@ -16,79 +20,41 @@ export class OmsSelectComponent {
 	@ViewChild('multiSelect') multiSelect: MatSelect;
 
 	//dict_key
-	@Input() dic_key: any='DIC_KEY';
+    @Input() dic_key: any='DIC_KEY';
+    
 	//dic_value
-	@Input() dic_value: any='DIC_VALUE';
-	//同步下拉数据是否可以为空值
-	@Input() syncOptionsCanNull: boolean=false;
-	//下拉框数据是否为异步
-	@Input() 
-		get syncOptions () { return this._syncOptions;}
-		set syncOptions(v) {
-			this._syncOptions = v;
-			if((v && v.length > 0) || this.syncOptionsCanNull) this.getSelect(v);
-			this.patchValue(this.syncOptions, this._value);
-		};
+    @Input() dic_value: any='DIC_VALUE';
+    
 	//属性绑定的值
     @Input() formCtrlName: any = null;
+
 	//占位符
-	@Input() label: string="";
+    @Input() label: string="";
+    
 	//是否需要请选择
-	@Input() showDefault: boolean=false;
+    @Input() showDefault: boolean=true;
+    
 	//是否为多选
-	@Input() multifySelect: boolean=false;
-	// input间距
-    @Input() gap: number=40;
-    // 每行多少个input
-	@Input() colSpan: number=null;
+    @Input() multifySelect: boolean=false;
+
 	// 是否为点击的下拉框
-	@Input() selectWithClick: boolean=false;
+    @Input() selectWithClick: boolean=false;
+    
 	//form表单
-    @Input() form;
+    @Input() form: FormGroup;
+
 	//列表
-	@Input() 
-		set options(v) {
-			if(v) {
-                this._options = v;
-				v.subscribe(res => {
-					//防止options为异步加载异常
-					if(this._value && res && res.length>0) this.patchValue(res,this._value);
-					this.getSelect(res);
-				})
-			} else {
-				this.getSelect([]);
-			}
-		};
+    @Input() set options(v) { this.getOptionLists(v) };
+    
 	//是否禁用
-	@Input() 
-		set disabled(v) { v ? this.modelCtrl.disable() : this.modelCtrl.enable(); };
-	//是否为必填
-	@Input()
-		set isRequired(v){
-			setTimeout(() => {
-				if(v && !this._value) {
-					if(this.syncOptions && this.syncOptions.length>0) {
-						this.patchValue(this.syncOptions, this._value);
-					}else {
-						this._options.subscribe(res => {
-							if(res && res.length>0) this.patchValue(res,this._value);
-						})
-					}
-				}
-			});
-		}
+	@Input() set disabled(v) { v ? this.modelCtrl.disable() : this.modelCtrl.enable(); };
+	
 	// 错误信息
-    @Input() set formErrors(v) {
-        if(v) {
-            this._formErrors = v;
-			this._required = ((this.form ? this.form.controls[this.formCtrlName].hasError('required') : true) && this._formErrors[this.formCtrlName] !== undefined ) 
-				? true : false;
-        }
-	}
+    @Input() set formErrors(v) { this.setFormError(v) }
 	
 	//监听值的变化，主要用于页面中的重置功能
-	@Input()
-    set value(v) {this.multifySelect ? this.checkboxValue(v) : this.raidoValue(v); }
+	@Input() set value(v) { this.setValue(v); }
+
 
 	//下拉框改变回调
 	@Output() selectV: any=new EventEmitter<any>();
@@ -105,126 +71,61 @@ export class OmsSelectComponent {
 	public filteredOptions: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
 	//销毁事件
 	protected _onDestroy = new Subject<void>();
-	//当前选择，用于重置功能，对比数据，防止数据重复赋值(patchValue)
-	private currentSelect: any;
-	_value: any;
-	//下拉
-	public _options: ReplaySubject<any> = new ReplaySubject<any>(1);
     //未搜索到数据
 	noData:string = this.translate.instant('PUBLIC.NO_DATA_WAS_FOUND');
-	_syncOptions: any=[];
-	filterData: string='';
 	//错误提示信息
 	_formErrors: any={};
 	//是否必填
-  _required: boolean=false;
-  modelCtrlChangeSub: Subscription;
+    _required: boolean=false;
+    modelCtrlChangeSub: Subscription;
+    // 当前选择对象
+    private currentSelect: any = {};
 	
 	
 	constructor(
+        private initDic: InitDictionaryService,
         private  translate: TranslateService
     ) {  }
 
-	ngOnInit() {
-		//获取下拉数据
-		if(!this.syncOptions) {
-			this._options.subscribe(res => {
-				this.getSelect(res);
-			})
-		}
-	}
 
-	ngAfterViewInit() {
-		this.setInitialValue();
-	}
+    // 解析下拉数据
+    getOptionLists(v) {
+        if(!v) return;
 
-	ngOnDestroy() {
-		this._onDestroy.next();
-		this._onDestroy.complete();
-	}
+        if(typeof v === 'string') {
 
-	//单选设置value
-	raidoValue(v){
-		//单选
-		this._value= v;
-		if( v !== this.currentSelect) {
-			if(v===null) {
-				this.modelCtrl.patchValue({
-					name: null,
-					id: null
-				});
-			}else {
-				if(this.syncOptions && this.syncOptions.length>0) {
-					
-					this.patchValue(this.syncOptions, v);
-				}else {
-					this._options.subscribe(res => {
-						if(res && res.length>0) this.patchValue(res,v);
-					})
-				}
-			}
-		}else if(v === this.currentSelect && v) {
-			this.modelCtrl.patchValue({
-				name: this.formCtrlName,
-				id: v
-			});
-		}
-	}
+            // 传入initDictionary方法名
+            this.initDic[v]().subscribe(res => {
+                if(res) this.getSelect(res);
+            })
+        }else if(isArray(v)){
 
-	//多选设置
-	checkboxValue(v) {
-		//多选
-		// if(v !== this.currentSelect && v && v.length > 0) {
-		if(v) {
-			if(this.syncOptions && this.syncOptions.length>0) {
-				this.patchValue(this.syncOptions, v);
-			}else {
-				this._options.subscribe(res => {
-					if(res && res.length>0) this.patchValue(res,v);
-				})
-			}
-		}else {
-			// this.modelCtrl.patchValue([]);
-		}	
-	}
+            // 直接传入数组
+            this.getSelect(v);
+        } else {
+
+            // 传入观察者对象
+            v.subscribe(res => {
+                if(res) this.getSelect(res);
+            })
+        }
+    }
 
 
+    // 设置错误信息及必填
+    setFormError(v) {
+        if(v) {
+            this._formErrors = v;
+            this._required = Boolean(this.form.controls[this.formCtrlName].hasError('required') || v[this.formCtrlName] !== undefined)
+        }
+    }
 
-	//设置下拉框选中的值
-	patchValue(data,v) {
-		if(this.multifySelect) {
-			let patchData = [];
-
-			if(data && data.length) {
-				//多选时候 获取指定的ids
-				data.forEach(item => {
-					if(v && v.includes(item[this.dic_key])){
-						patchData.push({
-							name: item[this.dic_value],
-							id: item[this.dic_key]
-						})
-					}
-				});
-			}
-
-			this.modelCtrl.patchValue(patchData);
-
-		}else {
-			let patchData = {name: null, id: null};
-			if(data && data.length){
-				let _default = data.filter(child => child[this.dic_key]===v)[0];
-				if(_default && _default[this.dic_value]) {
-					patchData = Object.assign({}, {
-						name: _default[this.dic_value],
-						id: _default[this.dic_key]
-					})
-				}
-			}
-
-			this.modelCtrl.patchValue(patchData);
-		}
-		
-	}
+    // 设置form的值
+    setValue(v) {
+        if(v === null) {
+            this.modelCtrl.patchValue({name: (this.multifySelect ? [] : null), id: null});
+        } 
+    }
 
 	//获取下拉数据并处理
 	getSelect(data) {
@@ -242,14 +143,15 @@ export class OmsSelectComponent {
 			this.optionList = [];
 
 			this.multifySelect ? this.modelCtrl.patchValue([]) : this.modelCtrl.patchValue({name: null, id: null});
-		}
+        }
 
 		if(this.modelCtrlChangeSub){
 			this.modelCtrlChangeSub.unsubscribe();
 		}
     
 		//model改变事件
-		this.modelCtrlChangeSub = this.modelCtrl.valueChanges.pipe(throttleTime(100)).subscribe(res => {
+		this.modelCtrlChangeSub = this.modelCtrl.valueChanges.subscribe(res => {
+
 			if(res === '') {
 				this.modelCtrl.patchValue({
 					name: null,
@@ -267,14 +169,12 @@ export class OmsSelectComponent {
 					prop: this.formCtrlName,
 					value: emitId
 				};
-				this.currentSelect = emitId;
 			}else {
 				if((res && res.id !== null) || res===''){
           			emitVal ={
 						prop: this.formCtrlName,
-						value: (res&&res.id !== null)?res.id: null
+						value: (res&&res.id !== null) ? res.id: null
 					};
-					this.currentSelect = res.id;
 				}
       		}
 
@@ -285,8 +185,7 @@ export class OmsSelectComponent {
 		this.optionFilterCtrl.valueChanges
 			.pipe(takeUntil(this._onDestroy))
 			.subscribe((res) => {
-				this.filterData = res;
-				this.filterOptionss();
+				this.filterOptions();
 			});
 
 		//过滤
@@ -303,7 +202,7 @@ export class OmsSelectComponent {
 			});
 	}
 
-	protected filterOptionss() {
+	protected filterOptions() {
 		if (!this.optionList) {
 			return;
 		}
@@ -325,5 +224,15 @@ export class OmsSelectComponent {
 	//select点击事件
 	selectClick() {
 		this.clickInput.emit();
+    }
+    
+    ngAfterViewInit() {
+		this.setInitialValue();
 	}
+
+	ngOnDestroy() {
+		this._onDestroy.next();
+		this._onDestroy.complete();
+	}
+
 }

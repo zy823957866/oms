@@ -9,7 +9,6 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { DictionaryService } from '../core/services/dictionary.service';
 import { StructureService } from '../core/services/structure.service';
 import { ExcelService } from '../core/services/excel.service';
-import { DownLoadService } from '../core/services/download.service';
 import { MomentService } from '../core/services/moment.service';
 import { InitDictionaryService } from '../core/services/init-dictionary.service';
 
@@ -19,7 +18,6 @@ const SERVICE = [
     DictionaryService,
     StructureService,
     ExcelService,
-    DownLoadService,
     MomentService,
     InitDictionaryService,
 ];

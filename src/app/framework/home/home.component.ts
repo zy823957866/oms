@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     ) {}
     
     ngOnInit() {
-        console.log("xxxxxxxxxxxxxxxxxxxxxxxxx")
         // 监听页面布局模式
         this.watchMode();
     }

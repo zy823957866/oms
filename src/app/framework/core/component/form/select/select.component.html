@@ -2,7 +2,6 @@
     <mat-form-field 
         class="ey-select"  
         (click)="selectClick()"
-        [ngStyle]="colSpan ? {'width': 'calc('+ (100 / colSpan) + '% - ' + ((colSpan - 1 ) / colSpan * 0.4) + 'rem)','margin-right': gap / 100 + 'rem'} : {}"
         [ngClass]="{'ng-invalid-form-select':_formErrors ? _formErrors[formCtrlName]:'','ng-valid-form-select':_formErrors? !_formErrors[formCtrlName]:'','selectClick': selectWithClick}">
         <mat-select
             *ngIf="!multifySelect" 
