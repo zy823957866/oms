@@ -1,0 +1,33 @@
+<button color="primary" mat-raised-button [matMenuTriggerFor]="downLoad">
+    <mat-icon>file_download</mat-icon>
+    导出
+</button>
+
+<mat-menu #downLoad="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="currentDownLoad">导出当前页</button>
+    <button mat-menu-item [matMenuTriggerFor]="allDownLoad" *ngIf="isEnable">导出所有</button>
+    <button mat-menu-item [matMenuTriggerFor]="selectedDownLoad">导出选择</button>
+</mat-menu>
+
+<mat-menu #currentDownLoad="matMenu">
+    <button mat-menu-item *ngFor="let item of downLoadTypes" (click)="downLoadTarget(item.type,'current')" matTooltip="{{item.tips}}" matTooltipPosition="left">
+        <mat-icon class="icon" svgIcon="{{item.type}}"></mat-icon>
+        {{item.tips}}
+      </button>
+</mat-menu>
+
+<mat-menu #selectedDownLoad="matMenu">
+    <button mat-menu-item *ngFor="let item of downLoadTypes" (click)="downLoadTarget(item.type,'select')" matTooltip="{{item.tips}}" matTooltipPosition="left">
+        <mat-icon class="icon" svgIcon="{{item.type}}"></mat-icon>
+        {{item.tips}}
+      </button>
+</mat-menu>
+
+<mat-menu #allDownLoad="matMenu">
+    <ng-container *ngFor="let item of downLoadTypes">
+        <button mat-menu-item *ngIf="!item.hide" (click)="downLoadTarget(item.type,'all')" matTooltip="{{item.tips}}" matTooltipPosition="left">
+        <mat-icon svgIcon="{{item.type}}"></mat-icon>
+        {{item.tips}}
+        </button>
+    </ng-container>
+</mat-menu>

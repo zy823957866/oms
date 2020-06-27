@@ -1,8 +1,5 @@
-<div class="form-outer">
-    <form 
-        [formGroup]="formGroup" 
-        class="form"
-        [ngClass]="{'search-form': !formData.layer}">
+<div class="form-outer" [ngClass]="{'search-form': !formData.layer}">
+    <form [formGroup]="formGroup" class="form">
         <ng-container *ngFor="let item of formData.data; let i = index;">
            <div *ngIf="
                     (  item.type==='text' 

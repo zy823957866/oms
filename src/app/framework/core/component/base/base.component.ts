@@ -206,4 +206,23 @@ export abstract class BaseComponent implements OnInit {
         }
     }
 
+    // 新增
+    onNew() {
+        
+    }
+
+    // 批量删除
+    onDeleteByIds() {
+
+    }
+
+    // 设置选中的数据
+    onSelect(e) {
+        this.selected = e.selected;
+    }
+
+    // 下载
+    onDownLoadPage(e) {
+        
+    }
 }

@@ -8,14 +8,15 @@
     </oms-form>
 
     <div class="oms-btns">
-        <button mat-raised-button (click)="onNew($event)">
+        <button mat-raised-button (click)="onNew()">
             <mat-icon>add</mat-icon>
             添加
         </button>
-        <button mat-raised-button (click)="onDeleteByIds(selected)" [disabled]="!selected || selected.length===0">
+        <button mat-raised-button (click)="onDeleteByIds()" [disabled]="!selected || selected.length===0">
             <mat-icon>delete</mat-icon>
             删除
         </button>
+        <oms-download-page (downLoadFile)="onDownLoadPage($event)"></oms-download-page>
     </div>
 
     <ng-template #userDefine0>
@@ -35,7 +36,8 @@
         <oms-table
             [rows]="rows" 
             [pageDTO]="pageDTO"
-            
+            (select)='onSelect($event)'
+            [selected]="selected"
             [tableFrame]="tableFrame"
         ></oms-table>
 

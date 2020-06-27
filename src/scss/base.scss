@@ -13,20 +13,6 @@
 		flex-flow: column;
         overflow: hidden;
         border: 1px solid #e7e7e7;
-		&>.ngx-table{
-			height: 100%;
-			.visible{
-				height: 100%;
-				.datatable-body{
-					width: 100%;
-					height: calc(100% - 81px) !important;
-					overflow-y: scroll;
-                    overflow-x: hidden;
-                    border-bottom: none;
-					border-top: none;
-				}
-			}
-		}
 	}
 	oms-table{
 		height: 100%;
@@ -51,43 +37,14 @@
             height: 49px;
         }
     }
-
-	
-
-	app-pagination{
-		margin-top: 8px;
-		padding-right: 15px;
-	}
-  }
+}
   
-  .tableCheckbox{
+.tableCheckbox{
 	padding: 0 !important;
 	line-height: 30px;
-	.datatable-body-cell-label, .datatable-header-cell-template-wrap{
-		line-height: 30px;
-		.mat-checkbox-inner-container-no-side-margin{
-			width: 14px;
-			height: 14px;
-			top: -2px;
-		}
-	}
-
 	.datatable-header-cell-template-wrap{
 		.mat-checkbox-inner-container-no-side-margin{
-			top: -2px;
-		}
-	}
-
-	.mat-checkbox{
-		width: 100%;
-		padding: 0;
-		height: 30px;
-		display: block;
-		label{
-			width: 100%;
-			height: 100%;
-			line-height: 30px;
-			display: block;
+			top: -5px;
 		}
 	}
 }
@@ -104,7 +61,7 @@
 
 // 如果为查询条件，则缩小form表单子项目的padding-bottom值
 .search-form{
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed #e2e2e2;
     margin-bottom: 15px;
     .mat-form-field-wrapper{
         padding-bottom: 16px !important;
@@ -167,5 +124,32 @@
 }
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
     color: #0cb495;
+}
+
+// 操作按钮样式
+.oms-btns{
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 15px;
+
+    oms-download-page{
+        margin-left: auto;
+        .mat-raised-button{
+            margin-right: 0;
+        }
+    }
+    .mat-raised-button{
+        color: #fff;
+        box-shadow: none;
+        background-color: #0cb495;
+        line-height: 34px;
+        padding: 0 14px;
+        margin-right: 15px;
+        display: block;
+        overflow: hidden;
+        &:active{
+            box-shadow: none !important;
+        }
+    }
 }
 
