@@ -151,8 +151,7 @@ export class OmsSelectComponent {
     
 		//model改变事件
 		this.modelCtrlChangeSub = this.modelCtrl.valueChanges.subscribe(res => {
-
-			if(res === '') {
+ 			if(res === '') {
 				this.modelCtrl.patchValue({
 					name: null,
 					id: null
@@ -176,8 +175,7 @@ export class OmsSelectComponent {
 						value: (res&&res.id !== null) ? res.id: null
 					};
 				}
-      		}
-
+            }
 			this.selectV.emit(emitVal);
 		})
 

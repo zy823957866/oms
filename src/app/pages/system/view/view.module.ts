@@ -1,5 +1,7 @@
 // 工具包
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 // 组件
 import { SystemViewComponent } from './view.component';
@@ -18,6 +20,8 @@ import { OmsSelectModule } from 'src/app/framework/core/component/form/select/se
         OmsTableModule,
         OmsFormModule,
         OmsSelectModule,
+        MatButtonModule,
+        MatIconModule,
         RoutingModule
     ]
 })

@@ -104,8 +104,10 @@
 
 // 如果为查询条件，则缩小form表单子项目的padding-bottom值
 .search-form{
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 15px;
     .mat-form-field-wrapper{
-        padding-bottom: 14px !important;
+        padding-bottom: 16px !important;
     }
 }
 

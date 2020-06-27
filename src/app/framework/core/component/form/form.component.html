@@ -1,13 +1,15 @@
 <div class="form-outer">
-    <form [formGroup]="formGroup" class="form">
+    <form 
+        [formGroup]="formGroup" 
+        class="form"
+        [ngClass]="{'search-form': !formData.layer}">
         <ng-container *ngFor="let item of formData.data; let i = index;">
            <div *ngIf="
                     (  item.type==='text' 
                     || item.type==='number' 
                     || item.type==='inputWithClick')
                     && (!more || (more && i< minShowColumn))
-                "
-                [ngClass]="{'search-form': !formData.layer}">
+                ">
                 <!-- 输入框 -->
                 <oms-input
                     [form]="formGroup"
@@ -34,7 +36,6 @@
 
             <!-- 文本域 -->
             <div *ngIf="item.type==='textarea' && (!more || (more && i< minShowColumn))" 
-                [ngClass]="{'search-form': !formData.layer}"
                 [ngStyle]="{ width: item.type==='textarea' && (item.width || '100%')}">
                 <oms-textarea
                     [form]="formGroup"
@@ -44,7 +45,7 @@
                     [maxlength]="item.rules && item.rules.maxlength"
                     [formErrors]="formErrors"
                     [placeholder]="item.placeholder"
-                    [formCtrlName]="item.value"
+                    [formCtrlName]="item.prop"
                     [disabled]="formGroup.controls[item.prop].disabled || item.disabled"
                     [value]="formGroup.controls[item.prop].value"
                     (textareaV)="vChange($event, item)"
@@ -52,8 +53,7 @@
             </div>
 
             <!-- 下拉框 -->
-            <div *ngIf="item.type==='select' && (!more || (more && i< minShowColumn))"
-                [ngClass]="{'search-form': !formData.layer}">
+            <div *ngIf="item.type==='select' && (!more || (more && i< minShowColumn))">
                 <oms-select
                     [form]="formGroup"
                     [dic_key]="item.dic_key || 'DIC_KEY'"
@@ -61,7 +61,7 @@
                     [multifySelect]="item.multify"
                     [value]="formGroup.controls[item.prop].value"
                     (selectV)="vChange($event, item)"
-                    [formCtrlName]="item.value"
+                    [formCtrlName]="item.prop"
                     [formErrors]="formErrors"
                     [label]="item.label"
                     [showDefault]="!item.showDefault"
@@ -72,28 +72,7 @@
                 ></oms-select>
             </div>
 
-            <!-- <div *ngIf="item.type==='select' && item.async === false && (!more || (more && i< minShowColumn))"
-                [ngClass]="{'search-form': !formData.layer}">
-                <oms-select
-                    [form]="formGroup"
-                    [dic_key]="item.dic_key || 'DIC_KEY'"
-                    [dic_value]="item.dic_value|| 'DIC_VALUE'"
-                    [multifySelect]="item.multify"
-                    [value]="formGroup.controls[item.prop].value"
-                    (selectV)="vChange($event, item)"
-                    [formCtrlName]="item.value"
-                    [formErrors]="formErrors"
-                    [label]="item.label"
-                    [showDefault]="!item.showDefault"
-                    (clickInput)="vChange(item.cb, item)"
-                    [selectWithClick]="item.cb ? true : false"
-                    [disabled]="formGroup.controls[item.prop].disabled || item.disabled || item.cb"
-                    [syncOptions]="item.options"
-                ></oms-select>
-            </div> -->
-
-            <div *ngIf="item.type==='date' && (!more || (more && i< minShowColumn))"
-                [ngClass]="{'search-form': !formData.layer}">
+            <div *ngIf="item.type==='date' && (!more || (more && i< minShowColumn))">
                 <oms-datepicker
                     [opens]="item.openPos"
                     [name]="item.name || 'daterange'"
@@ -110,7 +89,7 @@
                 ></oms-datepicker>
             </div>
 
-            <ng-container *ngIf="item.type==='userDefine'">
+            <ng-container *ngIf="item.type==='userDefine' && (!more || (more && i< minShowColumn))">
                 <ng-container *ngTemplateOutlet="userDefine[item.template];"></ng-container>
             </ng-container>
         </ng-container> 

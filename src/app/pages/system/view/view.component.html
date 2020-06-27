@@ -4,18 +4,28 @@
         [formGroup]="searchForm" 
         (formCb)="formCb($event)" 
         [(searchItems)]="searchItems" 
-        [loadingState]="loading"
-    ></oms-form>
+        [loadingState]="loading">
+    </oms-form>
 
-    
+    <div class="oms-btns">
+        <button mat-raised-button (click)="onNew($event)">
+            <mat-icon>add</mat-icon>
+            添加
+        </button>
+        <button mat-raised-button (click)="onDeleteByIds(selected)" [disabled]="!selected || selected.length===0">
+            <mat-icon>delete</mat-icon>
+            删除
+        </button>
+    </div>
+
     <ng-template #userDefine0>
-        <div class="item">
+        <div class="item" *ngIf="searchForm.value.userCategory === 'USER'">
             <oms-select
-                [value]="searchForm.controls.isEnable.value"
+                [value]="searchForm.value.userId"
                 (selectV)="vChange($event)"
-                [formCtrlName]="'isEnable'"
-                [label]="'测试'"
-                [options]="options"
+                [formCtrlName]="'userId'"
+                [label]="'用户名称'"
+                [options]="'getUsersName'"
             ></oms-select>
         </div>
     </ng-template>

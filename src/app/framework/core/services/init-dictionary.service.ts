@@ -43,4 +43,7 @@ export class InitDictionaryService {
 
     // 用户还是系统
     userType() { return this.dictionaryService.getDicListByDicCode('USER_CATEGORY', 'string') }
+
+    // 获取用户名称
+    getUsersName() { return this.structureService.getDicListByDicCode('GET_USERS_NAME') };
 }

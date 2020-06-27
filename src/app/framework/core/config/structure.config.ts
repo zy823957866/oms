@@ -11,4 +11,10 @@ export const STRUCTURE_CONFIG = {
         CODE_COLUMN: 'id',
         VALUE_COLUMN: 'taxpayerName',
     },
+
+    GET_USERS_NAME: {
+        URL: SYSTEM_CONFIG.APP.BASE_SERVER+ '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/user/queryUserList.do',
+        CODE_COLUMN: 'id',
+        VALUE_COLUMN: 'userNo'
+    }
 }
