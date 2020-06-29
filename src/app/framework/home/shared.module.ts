@@ -11,6 +11,13 @@ import { StructureService } from '../core/services/structure.service';
 import { ExcelService } from '../core/services/excel.service';
 import { MomentService } from '../core/services/moment.service';
 import { InitDictionaryService } from '../core/services/init-dictionary.service';
+import { OmsDownloadPageService } from '../core/services/download-page.service';
+import { OmsPageCodeService } from '../core/services/page-code.service';
+
+// 模块
+import { OmsDownloadColumnModule } from '../core/component/download-column/download-column.module';
+
+
 
 
 // 服务汇总
@@ -20,10 +27,15 @@ const SERVICE = [
     ExcelService,
     MomentService,
     InitDictionaryService,
+    OmsDownloadPageService,
+    OmsPageCodeService
 ];
 
 @NgModule({
-    providers: [...SERVICE]
+    providers: [...SERVICE],
+    imports: [
+        OmsDownloadColumnModule
+    ]
 })
 
 export class OmsSharedModule {

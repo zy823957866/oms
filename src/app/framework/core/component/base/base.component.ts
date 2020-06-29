@@ -10,6 +10,9 @@ import { StructureService } from '../../services/structure.service';
 import { MomentService } from '../../services/moment.service';
 import { ExcelService } from '../../services/excel.service';
 import { MessageService } from '../../services/message.service';
+import { InitDictionaryService } from '../../services/init-dictionary.service';
+import { OmsDownloadPageService } from '../../services/download-page.service';
+
 
 // 配置
 import { SYSTEM_CONFIG } from '../../config/system.config';
@@ -18,10 +21,11 @@ import { SYSTEM_CONFIG } from '../../config/system.config';
 import { PageDTO } from '../../models/page.model';
 import { Order } from '../../models/order.model';
 import { SearchItem } from '../../models/search-item.model';
-
 import { FormCbData } from '../../models/form-cb.module';
-import { InitDictionaryService } from '../../services/init-dictionary.service';
 
+// 组件
+import { OmsDownloadColumnComponent } from '../download-column/download-column.component';
+import { OmsPageCodeService } from '../../services/page-code.service';
 
 
 export abstract class BaseComponent implements OnInit {
@@ -37,19 +41,25 @@ export abstract class BaseComponent implements OnInit {
     //查询
     public searchForm: FormGroup;
     public searchItems: SearchItem;
+    //表头code
+    public headCode: string = '';
+    //页面code
+    public code: any = null;
     //table数据
     public rows: any[] = [];
     //选中项
     public selected: any[] = [];
 
-    //子类覆盖该属性
+    // 子类覆盖该属性
     public apiPath: any = {};
-    //子类覆盖该属性
+    // 子类覆盖该属性
     public formConfig: any = {};
-    //子类覆盖该属性
+    // 子类覆盖该属性
     public formErrors: any = {};
-    //子类覆盖该属性
+    // 子类覆盖该属性
     public validationMessages: any = {};
+    // 导出文件名
+    public exportName: string;
     
     //表格头部信息
     public tableFrame: any = [];
@@ -75,6 +85,8 @@ export abstract class BaseComponent implements OnInit {
     protected excelService: ExcelService;
     protected structureService: StructureService;
     protected translate: TranslateService;
+    protected downPageSer: OmsDownloadPageService;
+    protected pageCodeSer: OmsPageCodeService
     protected _moment: MomentService;
 
     constructor(public injector: Injector){
@@ -87,11 +99,16 @@ export abstract class BaseComponent implements OnInit {
         this.excelService = this.injector.get(ExcelService);
         this.structureService = this.injector.get(StructureService);
         this.translate = this.injector.get(TranslateService);
+        this.downPageSer = this.injector.get(OmsDownloadPageService);
+        this.pageCodeSer = this.injector.get(OmsPageCodeService);
         this._moment = this.injector.get(MomentService);
     }
     
 
     ngOnInit() {
+        // 获取当前页面code码
+        this.getPageCode();
+
         // 创建表单
         this.createForm();
 
@@ -105,6 +122,15 @@ export abstract class BaseComponent implements OnInit {
         this.searchForm = this.formBuilder.group(this.formConfig);
     }
 
+    // 获取code
+    getPageCode() {
+        this.headCode = this.pageCodeSer.getPageCode(this.code);
+    }
+
+    // 获取表头数据
+    getPageHeader() {
+        
+    }
 
     // 查询之前插槽
     beforeSearch() {}
@@ -222,7 +248,70 @@ export abstract class BaseComponent implements OnInit {
     }
 
     // 下载
-    onDownLoadPage(e) {
-        
+    onDownLoadPage(data) {
+        console.log(this.tableFrame)
+        this.dialog.open(OmsDownloadColumnComponent, {
+            disableClose: true,
+            width: '50%',
+            height: 'auto',
+            data: this.tableFrame
+        }).afterClosed().subscribe(res => {
+            if(res) {
+                console.log(data.type)
+                switch(data.arg){
+                    
+                    case 'all': this.onDownLoadAllPage(data.type, this.exportName, res); break;
+                    case 'current': this.onDownLoadCurrentPage(data.type, this.exportName, res); break;
+                    case 'select': this.onDownLoadCurrentPage(data.type, this.exportName, res, data.arg); break;
+                }
+            }
+        })
+    }
+
+    //设置导出条件
+    downloadEntityDTO() {
+        return this.searchForm.getRawValue();
+    }
+
+    // 下载所有
+    onDownLoadAllPage(type: string, name: any=null, data: any=[]) {
+        // 表名、列信息和检索条件...
+        let exprotDTO = {
+            tableName: name || this.exportName,
+            fileType: type,
+            fields: this.downPageSer.getFields(data),
+            searchDTO: {
+                entityDTO: this.downloadEntityDTO(),
+                pageDTO: {},
+                orderDTOs: this.orderDTOs
+            }
+        }
+        this.loading.download = true;
+
+        // 获取下载链接并下载
+        this.httpApiService.exportExcel(this.apiPath[SYSTEM_CONFIG.API.LIST.EXPORT.NAME] + '?resourceId=' + this.httpApiService.getResourceId(), exprotDTO, (name || this.exportName) + '.' + type).subscribe(res => {
+            if(res){
+                this.loading.download = false;
+            } 
+        })
+    }
+
+    // 下载当前
+    onDownLoadCurrentPage(type: string, name: any=null, data: any=[], downType: string = 'current') {
+        let _data = downType === 'current' ? this.rows : this.selected;
+        if(!_data || _data.length <= 0){
+            this.showMessage('没有数据可导出!', 'clear');
+            return;
+        }
+        //导出前初始化所有字典表
+        if (SYSTEM_CONFIG.DOWN_LOAD.TYPE.XLSX === type) {
+            this.excelService.export2xlsx(this.downPageSer.convert(_data, data), name || this.exportName);
+        } else if (SYSTEM_CONFIG.DOWN_LOAD.TYPE.XLS === type) {
+            this.excelService.export2xls(this.downPageSer.convert(_data, data), name || this.exportName);
+        } else if (SYSTEM_CONFIG.DOWN_LOAD.TYPE.CSV === type) {
+            this.excelService.export2csv(this.downPageSer.convert(_data, data), name || this.exportName);
+        } else if (SYSTEM_CONFIG.DOWN_LOAD.TYPE.TXT === type) {
+            this.excelService.export2txt(this.downPageSer.convert(_data, data), name || this.exportName);
+        }
     }
 }

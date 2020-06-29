@@ -75,10 +75,10 @@ export const SYSTEM_CONFIG = {
 
     DOWN_LOAD: {
         TYPE: {
-            XLSX: 'xlsx',
-            XLS: 'xls',
-            CSV: 'csv',
-            TXT: 'txt'
+            XLSX: 'oms-xlsx',
+            XLS: 'oms-xls',
+            CSV: 'oms-csv',
+            TXT: 'oms-txt'
         }
     },
     DATE_LOCAL: 'zh_CN',

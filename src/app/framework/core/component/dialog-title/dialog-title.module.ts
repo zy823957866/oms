@@ -40,4 +40,4 @@ import { OmsDialogDragModule } from '../../directives/dialog-drag/dialog-drag.mo
     ]
 })
 
-export class AntaDialogTitleModule {}
+export class OmsDialogTitleModule {}

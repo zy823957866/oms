@@ -1,1 +1,42 @@
-自定义列导出
+<oms-dialog-title [title]="data.title || '设置导出列'">
+    <div class="border-bottom">
+        <mat-checkbox
+            class="example-margin"
+            (change)="checkedAll()"
+            [(ngModel)]="checked"
+            [(indeterminate)]="indeterminate">
+            全选
+        </mat-checkbox>
+    </div>
+
+    <div class="column-container">
+        <div class="column-content">
+            <ng-container *ngFor="let item of tableColumnList">
+                <ng-container *ngIf="!item.hideDownload">
+                    <mat-checkbox
+                        *ngIf="item.type !== 'checkbox' && item.type !== 'actions'"
+                        (change)="checkedItem(item)"
+                        [(ngModel)]="item.ifDisplay">
+                        <span matTooltip="{{item.name}}">{{ item.name }}</span>
+                    </mat-checkbox>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+    
+
+    <mat-dialog-actions align="end" class="diaglog-actions">
+        <button color="primary" mat-raised-button (click)="onSave()" type="button" tt="导出">
+            <mat-icon>file_download</mat-icon>
+            导出
+        </button>
+        <button mat-raised-button (click)="onReset()" type="button" tt="重置">
+            <mat-icon>refresh</mat-icon>
+            重置
+        </button>
+        <button color="warn" mat-raised-button [mat-dialog-close]="false" tt="关闭">
+            <mat-icon>close</mat-icon>
+            关闭
+        </button>
+    </mat-dialog-actions>
+</oms-dialog-title>
