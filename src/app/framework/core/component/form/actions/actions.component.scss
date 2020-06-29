@@ -5,6 +5,9 @@ $primary-color: #0cb495;
     align-items: center;
     div{
         margin-right: 15px;
+        .btn{
+            display: inline-block;
+        }
     }
 }
 
@@ -30,5 +33,17 @@ $primary-color: #0cb495;
 
     .more {
         cursor: pointer;
+    }
+
+    .mat-dialog-actions{
+        margin-bottom: 0;
+        min-height: 34px;
+        padding: 0;
+        display: block;
+    }
+
+    .btn-outer{
+        margin-left: 15px;
+        display: inline-block;
     }
 }

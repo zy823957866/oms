@@ -21,7 +21,7 @@ import { LoadingModule } from '../../../directives/loading/loading.module';
         MatIconModule,
         MatDialogModule,
         TranslateModule,
-        LoadingModule,
+        LoadingModule
     ]
 })
 

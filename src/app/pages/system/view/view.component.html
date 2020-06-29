@@ -39,9 +39,9 @@
             [pageDTO]="pageDTO"
             (select)='onSelect($event)'
             [selected]="selected"
+            (activate)="onActivate($event)"
+            (cb)="tableCb($event)"
             [tableFrame]="tableFrame"
         ></oms-table>
-
-        
     </div>
 </div>

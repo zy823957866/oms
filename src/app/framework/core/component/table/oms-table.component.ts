@@ -116,7 +116,7 @@ export class OmsTableComponent {
 	//排序
 	@Output() sort: any = new EventEmitter<any>();
 	//按钮事件回调
-	@Output() actionsClick: any = new EventEmitter<any>();
+	@Output() cb: any = new EventEmitter<any>();
 	//默认td宽度
 	public defaultWidth: number = 150;
 	//保存table数据
@@ -435,5 +435,5 @@ export class OmsTableComponent {
 	//排序
 	onSort(event: any) { this.sort.emit(event); }
 	//按钮事件回调
-	actionsFun(event: any) { this.actionsClick.emit(event); }
+	actionsFun(event: any) { this.cb.emit(event); }
 }

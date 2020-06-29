@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OmsAlertComponent } from './alert.component';
 
 // 模块
-import { AntaDialogTitleModule } from '../dialog-title/dialog-title.module';
+import { OmsDialogTitleModule } from '../dialog-title/dialog-title.module';
 
 @NgModule({
     declarations: [ OmsAlertComponent ],
@@ -18,7 +18,7 @@ import { AntaDialogTitleModule } from '../dialog-title/dialog-title.module';
         MatButtonModule,
         MatDialogModule,
         MatIconModule,
-        AntaDialogTitleModule
+        OmsDialogTitleModule
     ]
 })
 

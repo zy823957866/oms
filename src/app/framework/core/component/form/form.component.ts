@@ -32,7 +32,7 @@ export class OmsFormComponent {
     @Input() set loadingState(v){ this.loading = v };
 
     // 每行显示多少个
-    public rowSpanNum: number = 5;
+    public rowSpanNum: number;
     @Input() set rowSpan(v) { this.rowSpanNum = v; }
 
     //form表单原始数据
@@ -58,7 +58,7 @@ export class OmsFormComponent {
     handleItems(v) {
         // 计算每行显示多少个内容
         if(!this.rowSpanNum) {
-            this.rowSpanNum = v.isLayer ? 3 : 5;
+            this.rowSpanNum = v.layer ? 3 : 5;
         }
 
         // 设置form数据

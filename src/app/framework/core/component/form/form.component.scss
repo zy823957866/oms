@@ -1,14 +1,14 @@
 .form-outer{
     width: 100%;
     .form{
-        width: calc(100% + 40px);
+        width: calc(100% + 36px);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         div{
             display: block;
-            width: calc(20% - 40px) !important;
-            margin-right: 40px;
+            width: calc(20% - 36px);
+            margin-right: 36px;
         }
 
         .actions{
@@ -16,5 +16,14 @@
             padding-bottom: 15px;
         }  
     }
-}
 
+    .cols-3 {
+        div{
+            width: calc((100% / 3) - 36px); 
+        }
+    }
+
+    .layer-action{
+        margin-left: auto;
+    }
+}

@@ -161,3 +161,17 @@
     cursor: not-allowed;
 }
 
+
+// menus样式
+.mat-menu-item{
+    line-height: 32px !important;
+    height: 32px !important;
+    font-size: 12px;
+}
+
+.mat-menu-content .mat-icon{
+    height: 18px !important;
+    width: 18px !important;
+    margin-right: 10px !important;
+    font-size: 18px !important;
+}

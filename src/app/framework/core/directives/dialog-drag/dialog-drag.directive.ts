@@ -20,7 +20,7 @@ export class DialogDragDirective{
     ngAfterViewInit() {
         //获取外层浏览器Dom
         this.element=this.el.nativeElement.parentNode.parentNode.parentNode.parentNode.parentNode;
-        console.log(this.element)
+
         this.elementDlalog=this.el.nativeElement.parentNode.parentNode.parentNode;
         // Drag&Drop boundary组件
         if(this.element) this.rend2.addClass(this.element,'example-boundary');

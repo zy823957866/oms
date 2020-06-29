@@ -26,6 +26,8 @@ import { FormCbData } from '../../models/form-cb.module';
 // 组件
 import { OmsDownloadColumnComponent } from '../download-column/download-column.component';
 import { OmsPageCodeService } from '../../services/page-code.service';
+import { OmsFormService } from '../../services/form.service';
+import { StorageService } from '../../services/storage.service';
 
 
 export abstract class BaseComponent implements OnInit {
@@ -60,9 +62,13 @@ export abstract class BaseComponent implements OnInit {
     public validationMessages: any = {};
     // 导出文件名
     public exportName: string;
+    // 跟新组件(弹框)
+    public addComponent: any;
     
     //表格头部信息
     public tableFrame: any = [];
+    // 是否可以单击改变背景颜色
+    public clickChangeTableBg: boolean=false;
 
     //message显示参数全局定义
     public tableMessage = {
@@ -86,7 +92,9 @@ export abstract class BaseComponent implements OnInit {
     protected structureService: StructureService;
     protected translate: TranslateService;
     protected downPageSer: OmsDownloadPageService;
-    protected pageCodeSer: OmsPageCodeService
+    protected pageCodeSer: OmsPageCodeService;
+    protected storeSer: StorageService;
+    protected formSer: OmsFormService;
     protected _moment: MomentService;
 
     constructor(public injector: Injector){
@@ -101,6 +109,8 @@ export abstract class BaseComponent implements OnInit {
         this.translate = this.injector.get(TranslateService);
         this.downPageSer = this.injector.get(OmsDownloadPageService);
         this.pageCodeSer = this.injector.get(OmsPageCodeService);
+        this.storeSer = this.injector.get(StorageService);
+        this.formSer = this.injector.get(OmsFormService);
         this._moment = this.injector.get(MomentService);
     }
     
@@ -108,6 +118,9 @@ export abstract class BaseComponent implements OnInit {
     ngOnInit() {
         // 获取当前页面code码
         this.getPageCode();
+
+        // 获取table表头数据
+        this.getPageHeader();
 
         // 创建表单
         this.createForm();
@@ -129,7 +142,9 @@ export abstract class BaseComponent implements OnInit {
 
     // 获取表头数据
     getPageHeader() {
-        
+        this.pageCodeSer.getTableHeader(this.code).subscribe(res => {
+            if (Object.keys(res).length) this.tableFrame = res;
+        });
     }
 
     // 查询之前插槽
@@ -211,8 +226,7 @@ export abstract class BaseComponent implements OnInit {
 
     // 数据改变
     vChange(e) {
-        console.log(e)
-        this.searchForm.patchValue({ [e.prop]: (e && e.value !== null ? e.value : null ) });
+        this.searchForm.patchValue({ [e.prop]: e.value });
         //为带点击的输入框时候 点击清除按钮 清除内容
         if(e.originProp) {
             e.originProp.forEach(item => { this.searchForm.patchValue({ [item]: null }) })
@@ -233,8 +247,29 @@ export abstract class BaseComponent implements OnInit {
     }
 
     // 新增
-    onNew() {
-        
+    onNew(w: string='50%', h: string='auto', mh: string='0') {
+        this.dialog.open(this.addComponent, {
+            width: w,
+            height: h,
+            minHeight: mh,
+            data: {},
+            disableClose: true
+        }).afterClosed().subscribe(result => {
+            if (result) this.onSearch();
+        });
+    }
+
+    // 更新
+    onUpdate(row, w: string='50%', h: string='auto', mh: string='0') {
+        this.dialog.open(this.addComponent, {
+            width: w,
+            height: h,
+            minHeight: mh,
+            data: { id: row.id },
+            disableClose: true
+        }).afterClosed().subscribe(result => {
+            if (result) this.onSearch();
+        });
     }
 
     // 批量删除
@@ -244,7 +279,67 @@ export abstract class BaseComponent implements OnInit {
 
     // 设置选中的数据
     onSelect(e) {
+         //判断是否高亮背景
+         if(this.clickChangeTableBg) {
+            this.rows.forEach(child => {
+                child.checked = e.selected.filter(selectNode => selectNode.id === child.id).length > 0 ? true : false;
+            })
+        }
+
         this.selected = e.selected;
+    }
+
+    // table中操作按钮回调
+    tableCb(arg: any = { data: null, fun: function () {} }) {
+        this[arg.fun](arg.data, arg.w, arg.h);
+    }
+
+    //是否有双击编辑的权限
+    dbClickTestAuth() {
+        if(this.tableFrame.length > 0 && this.tableFrame[this.tableFrame.length-1].actions){
+            let _actions = this.tableFrame[this.tableFrame.length-1].actions;
+            let _authArr = _actions.length > 0 ? _actions.filter(item => item.actionFun === 'onUpdate') : [];
+            let _auth = _authArr.length > 0 ? _authArr[0].auth : null
+
+            if(_auth !== null && _auth !== '' && (this.storeSer.getObject('auth') || []).indexOf(_auth) === -1) {
+                this.showMessage("对不起，您没有编辑权限，请联系管理员！", "clear");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 双击事件
+    dbClick(e) { return true; }
+
+    //多种鼠标事件回调方法
+    onActivate(event) {
+        if (event.type == SYSTEM_CONFIG.EVENT.MOUSE.DOUBLE_CLICK) {
+            //鼠标双击事件
+            if(this.dbClick(event) && this.dbClickTestAuth()){
+                this.onUpdate(event.row);
+            }
+        } else if (event.type == SYSTEM_CONFIG.EVENT.MOUSE.ENTER) {
+            //鼠标划入事件
+            //console.log(event.row);
+        } else if (event.type == SYSTEM_CONFIG.EVENT.MOUSE.CLICK) {
+            if(this.clickChangeTableBg) {
+                //如果不是点击checkbox
+                if(
+                    event.event.target['className'].indexOf('mat-checkbox-layout') === -1 
+                    && event.event.target['className'].indexOf('mat-checkbox-input') === -1
+                    && event.event.target['className'].indexOf('mat-checkbox-inner-container') === -1
+                ){
+                    event.row.checked = !event.row.checked;
+                    //单击事件
+                    if(this.selected.filter(item => item.id === event.row.id).length === 0) {
+                        this.selected = this.selected.concat([event.row]);
+                    }else{
+                        this.selected = this.selected.filter(item => item.id !== event.row.id);
+                    }
+                }
+            }
+        }
     }
 
     // 下载

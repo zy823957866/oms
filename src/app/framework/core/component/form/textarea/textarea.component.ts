@@ -16,12 +16,8 @@ export class OmsTextareaComponent {
     @Input() label: string='';
     // model名
     @Input() formCtrlName: string='';
-
-    _height: string='1.5rem';
     // 高度
-    @Input() set height(v){
-        this._height = parseInt(v) / 100 + 'rem';
-    };
+    @Input() height: string = '34px';
     // 是否禁用
     @Input() disabled: boolean=false;
     // class

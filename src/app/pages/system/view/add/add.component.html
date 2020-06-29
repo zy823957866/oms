@@ -1,0 +1,8 @@
+<oms-dialog-title [title]="data.id==null ? message.addTitle : message.updateTitle">
+    <oms-form
+        [formGroup]="addForm" 
+        (formCb)="formCb($event)" 
+        [(searchItems)]="formItems"
+        [loadingState]="loading" 
+    ></oms-form>
+</oms-dialog-title>

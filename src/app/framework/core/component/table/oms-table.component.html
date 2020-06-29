@@ -149,74 +149,74 @@
 		[cellClass]="'align0' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
 		[draggable]="false"
 		[canAutoResize]="scrollbarH ? false : true"
-		*ngIf="item.type==='actions' && hasAuth(item.auth) " 
+		*ngIf="item.type==='actions'" 
 		[width]="actionW" 
 		name="{{ item.name | translate }}" 
-		[sortable]="false">
-		<ng-template ngx-datatable-cell-template let-row="row" *ngIf="item.shrink"> 
-			
-			<ng-container *ngFor="let action of item.actions;let actionIndex=index">
-                <button
-					mat-icon-button 
-					*ngIf="!action.matMenuTrigger && !row['hide' + actionIndex]"
-					(click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
-					title="{{ action.name | translate }}"
-					style="margin-top: -20px">
-					<mat-icon>{{action.icon}}</mat-icon>
+        [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-row="row">
+            <ng-container *ngIf="!item.shrink">
+                <button mat-button [matMenuTriggerFor]="menuFirst" style="margin-top:0">
+                    <mat-icon>settings</mat-icon>
                 </button>
-      
-                <button
-                  mat-icon-button 
-                  *ngIf="action.matMenuTrigger"
-                  title="{{ action.name | translate }}"
-                  [matMenuTriggerFor]="menu"
-                  style="margin-top: -20px">
-                  <mat-icon>{{action.icon}}</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu" class="matMenuLayer">
-                    <button *ngFor="let matMenu of action.matMenuTrigger" mat-menu-item  (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})">{{matMenu.name | translate}} </button>
-                </mat-menu>
-              </ng-container>
-              
-            </ng-template>
-
-            <ng-template ngx-datatable-cell-template let-row="row" *ngIf="!item.shrink" > 
-					<button mat-button [matMenuTriggerFor]="menuFirst" style="margin-top:0">
-                          <mat-icon>settings</mat-icon>
-					  </button>
-                      <mat-menu #menuFirst="matMenu">
-                          <ng-container *ngFor="let action of item.actions;let actionIndex=index">
-							  <!-- [permission]="action.auth" -->
-                          <button
+                <mat-menu #menuFirst="matMenu">
+                    <ng-container *ngFor="let action of item.actions;let actionIndex=index">
+                        <button
                             [permission]="action.auth"
                             mat-menu-item
                             *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex] && !(row.disDelete === 1 && action.icon === 'delete')"
                             (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
                             title="{{ action.name | translate }}" >
-						 <mat-icon>{{action.icon}}</mat-icon>
-                          {{ action.name | translate }}
+                            <mat-icon>{{action.icon}}</mat-icon>
+                            {{ action.name | translate }}
                         </button>
-                        <button
-                          mat-menu-item
-                          [permission]="action.auth"
-                          *ngIf="action.matMenuTrigger"
-                          title="{{ action.name | translate }}"
-                          [matMenuTriggerFor]="menus"
-                        >
-					   <mat-icon>{{action.icon}}</mat-icon>
-                        {{ action.name | translate }}
-                      </button>
-                      <mat-menu #menus="matMenu">
-							<button mat-menu-item  [permission]="matMenu.auth" matTooltipPosition="left" *ngFor="let matMenu of action.matMenuTrigger" (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})" >
-								{{matMenu.name | translate}} 
-							</button>
-                      </mat-menu>
-                      </ng-container>
-                      </mat-menu>
-              
-                  </ng-template>
 
-          </ngx-datatable-column>
+                        <button
+                            mat-menu-item
+                            [permission]="action.auth"
+                            *ngIf="action.matMenuTrigger"
+                            title="{{ action.name | translate }}"
+                            [matMenuTriggerFor]="menus">
+                            <mat-icon>{{action.icon}}</mat-icon>
+                            {{ action.name | translate }}
+                        </button>
+
+                        <mat-menu #menus="matMenu">
+                            <button mat-menu-item  [permission]="matMenu.auth" matTooltipPosition="left" *ngFor="let matMenu of action.matMenuTrigger" (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})" >
+                                {{matMenu.name | translate}} 
+                            </button>
+                        </mat-menu>
+                    </ng-container>
+                </mat-menu>
+            </ng-container>
+
+            <ng-container *ngIf="item.shrink">
+                <ng-container *ngFor="let action of item.actions;let actionIndex=index">
+                
+                    <button
+                        mat-icon-button 
+                        *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex]"
+                        (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
+                        title="{{ action.name | translate }}"
+                        style="margin-top: -20px">
+                        <mat-icon>{{action.icon}}</mat-icon>
+                    </button>
+      
+                    <button
+                        mat-icon-button 
+                        *ngIf="action.matMenuTrigger"
+                        title="{{ action.name | translate }}"
+                        [matMenuTriggerFor]="menu"
+                        style="margin-top: -20px">
+                        <mat-icon>{{action.icon}}</mat-icon>
+                    </button>
+
+                    <mat-menu #menu="matMenu" class="matMenuLayer">
+                        <button *ngFor="let matMenu of action.matMenuTrigger" mat-menu-item  (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})">{{matMenu.name | translate}} </button>
+                    </mat-menu>
+                </ng-container>
+            </ng-container>
+        </ng-template>
+    </ngx-datatable-column>
 
   </ng-container>
       

@@ -1,5 +1,5 @@
 <div class="form-outer" [ngClass]="{'search-form': !formData.layer}">
-    <form [formGroup]="formGroup" class="form">
+    <form [formGroup]="formGroup" class="form" [ngClass]="'cols-' + rowSpanNum">
         <ng-container *ngFor="let item of formData.data; let i = index;">
            <div *ngIf="
                     (  item.type==='text' 
@@ -91,7 +91,7 @@
             </ng-container>
         </ng-container> 
 
-        <div class="actions">
+        <div class="actions" [ngClass]="{'layer-action':formData.layer}">
             <oms-actions
                 [layer]="formData.layer"
                 [btns]="formData.actions"

@@ -13,11 +13,10 @@ import { MomentService } from '../core/services/moment.service';
 import { InitDictionaryService } from '../core/services/init-dictionary.service';
 import { OmsDownloadPageService } from '../core/services/download-page.service';
 import { OmsPageCodeService } from '../core/services/page-code.service';
+import { OmsFormService } from '../core/services/form.service';
 
 // 模块
 import { OmsDownloadColumnModule } from '../core/component/download-column/download-column.module';
-
-
 
 
 // 服务汇总
@@ -28,7 +27,8 @@ const SERVICE = [
     MomentService,
     InitDictionaryService,
     OmsDownloadPageService,
-    OmsPageCodeService
+    OmsPageCodeService,
+    OmsFormService
 ];
 
 @NgModule({

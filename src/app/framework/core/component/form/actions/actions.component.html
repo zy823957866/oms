@@ -20,25 +20,30 @@
 </div>
 
 <ng-container *ngIf="layer && (btns && btns.length > 0)">
-<mat-dialog-actions align="end" [ngClass]="{'layer-action':layer}">
-    <ng-container *ngFor="let item of btns">
+    <mat-dialog-actions>
+        <ng-container *ngFor="let item of btns">
 
-        <div class="btn-outer" *ngIf="item.icon!=='close' && item.action">
-            <button 
-                color="{{item.color}}" 
-                mat-raised-button 
-                [loading]="loading[item.action]"
-                (click)="backFunToForm(item.action)" 
-                type="button" >
-                <mat-icon>{{ item.icon }}</mat-icon>
-                {{ item.label | translate }}
-            </button>
-        </div>
-        
-        <button *ngIf="item.icon==='close' || !item.action" color="{{item.color}}" mat-raised-button [mat-dialog-close]="false">
-            <mat-icon>{{ item.icon }}</mat-icon>
-            {{ item.label | translate }}
-        </button>
-    </ng-container>
-</mat-dialog-actions>
+            <div class="btn-outer">
+                <ng-container *ngIf="item.icon!=='close' && item.action">
+                    <button 
+                        color="{{item.color}}" 
+                        mat-raised-button 
+                        [loading]="loading[item.action]"
+                        (click)="backFunToForm(item.action)" 
+                        type="button" >
+                        <mat-icon>{{ item.icon }}</mat-icon>
+                        {{ item.label | translate }}
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="item.icon==='close' || !item.action">
+                    <button color="{{item.color}}" mat-raised-button [mat-dialog-close]="false">
+                        <mat-icon>{{ item.icon }}</mat-icon>
+                        {{ item.label | translate }}
+                    </button>
+                </ng-container>
+            </div>
+            
+            
+        </ng-container>
+    </mat-dialog-actions>
 </ng-container>
