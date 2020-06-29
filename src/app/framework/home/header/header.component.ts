@@ -13,4 +13,12 @@ export class HeaderComponent {
     
     constructor() {
     }
+
+    // 切换菜单显示隐藏
+    autoMenu() {
+        this.sidenav.opened = !this.sidenav.opened;
+        setTimeout(function () {
+            window.dispatchEvent(new Event('resize'));
+        }, 500);
+    }
 }

@@ -1,11 +1,11 @@
 <div class="navigation-container">
     <div class="navigation-scrollbar-container">
-      <perfect-scrollbar>
-        <ng-container *ngFor="let navigation of navigationModel">
-          <oms-nav-collapse *ngIf="navigation.type == 'collapse'" [item]="navigation"></oms-nav-collapse>
-          <stbui-nav-item *ngIf="navigation.type=='item'" [item]="navigation"></stbui-nav-item>
-        </ng-container>
-      </perfect-scrollbar>
+        <perfect-scrollbar>
+            <ng-container *ngFor="let navigation of navigationModel">
+                <oms-nav-collapse *ngIf="navigation.type == 'collapse'" [item]="navigation"></oms-nav-collapse>
+                <stbui-nav-item *ngIf="navigation.type=='item'" [item]="navigation"></stbui-nav-item>
+            </ng-container>
+        </perfect-scrollbar>
     </div>
   
     <div class="navigation-footer">

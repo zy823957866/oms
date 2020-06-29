@@ -1,0 +1,49 @@
+<button mat-icon-button (click)="toggleDropdown()" class="toolbar-notification-btn" [class.open]="isOpen">
+    <mat-icon>notifications_none</mat-icon>
+    <span class="badge" *ngIf="unReadCount !== 0">{{unReadCount}}</span>
+</button>
+
+<div class="dropdown mat-elevation-z1" [class.open]="isOpen">
+    <div class="card">
+        <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="title">
+                <div class="name">通知</div>
+                <div class="extra">您有 {{ unReadCount }} 条新的通知</div>
+            </div>
+        </div>
+
+        <div *ngIf="notifications.length !== 0; then thenBlock else elseBlock;"></div>
+
+        <div class="footer" fxLayout="row" fxLayoutAlign="center center">
+            <div class="action" (click)="getAllMessage()">查看所有通知</div>
+
+            <ng-template #thenBlock>
+                <perfect-scrollbar class="content">
+                    <ng-container *ngFor="let notification of notifications; last as isLast">
+                        <div 
+                            class="notice" 
+                            fxLayout="row" 
+                            fxLayoutAlign="start center" 
+                            mat-ripple
+                            (click)="read(notification)">
+                            <mat-icon *ngIf="notification.messageType == 0" class="icon">notifications</mat-icon>
+                            <mat-icon *ngIf="notification.messageType == 1" class="icon" style="color:green">notifications</mat-icon>
+                            <mat-icon *ngIf="notification.messageType == 2" class="icon" style="color:red">notifications</mat-icon>
+                            <div class="title" fxLayout="column">
+                                <div class="name">{{ notification.messageTitle }}</div>
+                                <div class="time"> {{ notification.createTime | date:'yyyy-MM-dd HH:mm:ss'}} </div>
+                            </div>
+                            <span fxFlex></span>
+                        </div>
+                        
+                        <div class="divider" *ngIf="!isLast"></div>
+                    </ng-container>
+                </perfect-scrollbar>
+            </ng-template>
+
+            <ng-template #elseBlock>
+                <div class="no" fxLayout="row" fxLayoutAlign="center center">暂无通知</div>
+            </ng-template>
+        </div>
+    </div> 
+</div>

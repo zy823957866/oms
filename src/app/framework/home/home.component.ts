@@ -44,4 +44,9 @@ export class HomeComponent implements OnInit {
             this.customizerSidenavAlign = this.settings.layout.navigation === 'right' ? 'start' : 'end';
 		});
     }
+
+
+    onActivate(event, scrollContainer) {
+		scrollContainer.scrollTop = 0;
+	}
 }

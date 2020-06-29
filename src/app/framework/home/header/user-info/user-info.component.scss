@@ -1,0 +1,17 @@
+.role{
+    padding-left: 25px;
+    padding-right: 20px;
+}
+
+:host ::ng-deep{
+    .user-info{
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 600px;
+        margin-right: 15px;
+        font-size: 15px;
+        box-shadow: none;
+    }
+}

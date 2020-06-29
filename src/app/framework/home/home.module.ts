@@ -12,7 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // 组件
 import { HomeComponent } from './home.component';
-import { HeaderComponent } from './header/header.component';
+import { OmsHeaderModule } from './header/header.module';
 import { BrandComponent } from './brand/brand.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -29,7 +29,6 @@ import { RoutingModule } from './home.routing';
 @NgModule({
     declarations: [ 
         HomeComponent,
-        HeaderComponent,
         BrandComponent,
         FooterComponent
     ],
@@ -40,13 +39,13 @@ import { RoutingModule } from './home.routing';
         RouterModule,
         NavigationModule,
         OmsSharedModule,
+        OmsHeaderModule,
         RoutingModule
     ],
     providers: [
         ConfigService
     ],
     exports: [
-        HeaderComponent,
         BrandComponent,
         FooterComponent
     ]

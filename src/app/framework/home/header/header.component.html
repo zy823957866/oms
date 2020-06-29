@@ -2,5 +2,15 @@
     class="main-toolbar mat-elevation-z2" 
     fxLayout="row"
     fxLayoutAlign="start center">
-    <p>xxxxx</p>
+    <button mat-icon-button (click)="autoMenu()">
+		<mat-icon>menu</mat-icon>
+    </button>
+    
+    <span fxFlex></span>
+
+    <oms-user-info></oms-user-info>
+
+    <oms-notification></oms-notification>
+
+    <oms-user-toolbar></oms-user-toolbar>
 </div>

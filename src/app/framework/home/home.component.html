@@ -12,8 +12,8 @@
             *ngIf="settings.layout.header=='below'"
         ></oms-header>
 
-        <div class="main-container">
-            <router-outlet></router-outlet>
+        <div class="main-container" #scrollContainer>
+            <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
         </div>
 
         <!-- <oms-footer></oms-footer> -->
