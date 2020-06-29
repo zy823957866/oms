@@ -2,11 +2,12 @@
     height: 100%;
 }
 .dialog-wrap{
-  height: 100%;
+    height: 100%;
 }
 .content-wrap{
-  max-height: calc(100vh - 35px);
-  overflow-y: auto;
+    max-height: calc(100vh - 35px);
+    overflow-y: auto;
+    padding: 15px 36px 25px 36px;
 }
 
 :host ::ng-deep{

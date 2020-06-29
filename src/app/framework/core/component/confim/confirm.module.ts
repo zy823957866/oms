@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OmsConfirmComponent } from './confirm.component';
 
 // 模块
-import { AntaDialogTitleModule } from '../dialog-title/dialog-title.module';
+import { OmsDialogTitleModule } from '../dialog-title/dialog-title.module';
 
 @NgModule({
     declarations: [ OmsConfirmComponent ],
@@ -18,7 +18,7 @@ import { AntaDialogTitleModule } from '../dialog-title/dialog-title.module';
         MatButtonModule,
         MatDialogModule,
         MatIconModule,
-        AntaDialogTitleModule
+        OmsDialogTitleModule
     ]
 })
 

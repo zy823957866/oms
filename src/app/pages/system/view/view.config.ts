@@ -3,6 +3,8 @@ export const SYSTEM_VIEW_CONFIG = {
         QUERY_PAGE: '/api-option/v1/viewTable/queryPage.do'
     },
 
+    EXPORT_NAME: '视图管理',
+
     SEARCH_FROM: {
         layer: false,
         data: [
@@ -29,10 +31,10 @@ export const SYSTEM_VIEW_CONFIG = {
 
     TABLE_FRAME: [
         { type: 'checkbox' },
-        { name: '数据表编码', prop: 'tableCode' },
-        { name: '表名', prop: 'tableName' },
-        { name: '是否启用', prop: 'isEnable' },
-        { name: '描述', prop: 'tableDesc' },
-        { name: '用户名称', prop: 'userId' }
+        { name: '数据表编码', prop: 'tableCode', ifDisplay: true },
+        { name: '表名', prop: 'tableName', ifDisplay: true },
+        { name: '是否启用', prop: 'isEnable', ifDisplay: true },
+        { name: '描述', prop: 'tableDesc', ifDisplay: true },
+        { name: '用户名称', prop: 'userId', ifDisplay: true }
     ],
 }

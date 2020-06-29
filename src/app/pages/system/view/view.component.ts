@@ -25,6 +25,7 @@ export class SystemViewComponent extends BaseComponent {
     formConfig  : any = SYSTEM_VIEW_CONFIG.FORM_CONFIG;         // 查询配置
     apiPath     : any = SYSTEM_VIEW_CONFIG.API;                 // api接口
     tableFrame  : any = SYSTEM_VIEW_CONFIG.TABLE_FRAME;         // table头部
+    exportName  : any = SYSTEM_VIEW_CONFIG.EXPORT_NAME;         // 设置导出文件名
 
     options = this.initDict.isEnables()
     

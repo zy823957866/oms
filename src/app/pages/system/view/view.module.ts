@@ -10,10 +10,12 @@ import { SystemViewComponent } from './view.component';
 import { OmsTableModule } from 'src/app/framework/core/component/table/oms-table.module';
 import { OmsFormModule } from 'src/app/framework/core/component/form/form.module';
 import { OmsDownloadPageModule } from 'src/app/framework/core/component/download-page/download-page.module';
+import { OmsSelectModule } from 'src/app/framework/core/component/form/select/select.module';
+import { OmsCtrlColsModule } from 'src/app/framework/core/component/ctrl-cols/ctrl-cols.module';
 
 // 路由
 import { RoutingModule } from './view.routing';
-import { OmsSelectModule } from 'src/app/framework/core/component/form/select/select.module';
+
 
 @NgModule({
     declarations: [ SystemViewComponent ],
@@ -24,6 +26,7 @@ import { OmsSelectModule } from 'src/app/framework/core/component/form/select/se
         MatButtonModule,
         MatIconModule,
         OmsDownloadPageModule,
+        OmsCtrlColsModule,
         RoutingModule
     ]
 })

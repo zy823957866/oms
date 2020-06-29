@@ -1,0 +1,104 @@
+.border-bottom{
+    border-bottom: 1px dashed #e2e2e2;
+}
+
+.diaglog-actions{
+    padding-top: 25px;
+}
+
+.column-container{
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;;
+}
+
+.column-content{
+    overflow: hidden;
+}
+
+:host ::ng-deep{
+    .mat-checkbox{
+        width: calc((100% - 80px) / 3);
+        padding-right: 40px;
+        display: block;
+        float: left;
+        line-height: 36px;
+        .mat-checkbox-layout{
+            width: 100%;
+        }
+        .mat-checkbox-label{
+            width: calc(100% - 20px);
+            display: inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }  
+    }
+
+    .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, 
+    .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background{
+        background: #0cb495;
+    }
+
+    .mat-checkbox:nth-of-type(3n) {
+        padding-right: 0;
+    }
+
+    .mat-checkbox-inner-container{
+        height: 16px;
+        margin-right: 8px;
+        width: 16px;
+    }
+
+    .border-bottom{
+        overflow: hidden;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+
+    .diaglog-actions{
+        padding-top: 10px;
+
+        .mat-raised-button{
+            color: rgba(0, 0, 0, 0.65);
+            box-shadow: none;
+            background-color: #f4f4f4;
+            line-height: 34px;
+            border: 1px solid #d9d9d9;
+            padding: 0 14px;
+            margin-left: 15px;
+            display: block;
+            &:hover,&:active{
+                box-shadow: none !important;
+                color: #0cb495;
+                border: 1px solid #0cb495;
+            }
+        }
+    
+        .mat-primary{
+            color: #fff;
+            border: none;
+            background-color: #0cb495;
+            &:hover,&:active{
+                box-shadow: none !important;
+                color: #fff;
+                border: none;
+            }
+        }
+
+        .mat-warn{
+            background-color: #fff;
+            color: rgba(0, 0, 0, 0.65);
+            &:hover,&:active{
+                background: #fff;
+                color: #0cb495;
+                border: 1px solid #0cb495;
+            }
+        }
+    }
+
+    
+}
