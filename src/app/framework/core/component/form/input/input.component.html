@@ -5,7 +5,7 @@
     
     <mat-label>
         {{ label | translate }}
-        <span aria-hidden="true" *ngIf="inputClass === 'inputWithClick' && _required" class="mat-placeholder-required mat-form-field-required-marker">&nbsp;*</span>
+        <span aria-hidden="true" *ngIf="_required" class="mat-placeholder-required mat-form-field-required-marker">&nbsp;*</span>
     </mat-label>
     <span (click)="inputClick()">
         <input 
@@ -23,7 +23,6 @@
             [disabled]="disabled"
             (focus)="focus($event)"
             (blur)="blur($event)"
-            [required]="_required"
         >
     </span>
     

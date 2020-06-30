@@ -1,11 +1,4 @@
-<div class="flex">
-    <oms-form
-        [formGroup]="searchForm" 
-        (formCb)="formCb($event)" 
-        [(searchItems)]="searchItems" 
-        [loadingState]="loading">
-    </oms-form>
-
+<oms-dialog-title title="设置字典项-{{data.dictName}}">
     <div class="oms-btns">
         <button mat-raised-button (click)="onNew()">
             <mat-icon>add</mat-icon>
@@ -33,4 +26,4 @@
             [tableFrame]="tableFrame"
         ></oms-table>
     </div>
-</div>
+</oms-dialog-title>

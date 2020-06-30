@@ -258,13 +258,43 @@ app-pagination{
 
     //进度条
     .progress-linear{
+        display: block;
+        width: 100%;
+        height: 5px;
+        padding: 0;
+        margin: 0;
+        position: absolute;
         top: 0;
         .container{
-            background-color: #ffe8e7;
-            height: 2px;
+            background-color: #d6f5ef;
+            height: 3px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            transform: translate(0, 0) scale(1, 1);
             .bar{
-                background-color: red;
+                background-color: #0cb495;
+                animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+                transition: transform .2s linear;
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                height: 5px;
             }
         }
+    }
+
+    @keyframes query {
+        0% {
+            opacity: 1;
+            transform: translateX(35%) scale(0.3, 1); 
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-50%) scale(0, 1); 
+        } 
     }
 }

@@ -422,7 +422,6 @@ export abstract class BaseComponent implements OnInit {
 
     // 下载
     onDownLoadPage(data) {
-        console.log(this.tableFrame)
         this.dialog.open(OmsDownloadColumnComponent, {
             disableClose: true,
             width: '50%',
@@ -430,10 +429,9 @@ export abstract class BaseComponent implements OnInit {
             data: this.tableFrame
         }).afterClosed().subscribe(res => {
             if(res) {
-                console.log(data.type)
+                let type = data.type.split('-')[1];
                 switch(data.arg){
-                    
-                    case 'all': this.onDownLoadAllPage(data.type, this.exportName, res); break;
+                    case 'all': this.onDownLoadAllPage(type, this.exportName, res); break;
                     case 'current': this.onDownLoadCurrentPage(data.type, this.exportName, res); break;
                     case 'select': this.onDownLoadCurrentPage(data.type, this.exportName, res, data.arg); break;
                 }

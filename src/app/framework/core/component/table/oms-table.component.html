@@ -28,203 +28,203 @@
 	(sort)="onSort($event)">
 
   	<ng-container *ngFor="let item of tableFrameParse;let index=index">
-    <!-- 多选 -->
-    <ngx-datatable-column 
-		*ngIf="item.type === 'checkbox' || (showCheckbox && index===0)"
-		[width]="60" 
-		[sortable]="false" 
-		[canAutoResize]="false" 
-		[headerClass]="'align0' + ' tableCheckbox' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
-		[cellClass]="'align0' + ' tableCheckbox' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
-		[draggable]="false"
-		[frozenLeft]="true"
-		[resizeable]="true">
+        <!-- 多选 -->
+        <ngx-datatable-column 
+            *ngIf="item.type === 'checkbox' || (showCheckbox && index===0)"
+            [width]="60" 
+            [sortable]="false" 
+            [canAutoResize]="false" 
+            [headerClass]="'align0' + ' tableCheckbox' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
+            [cellClass]="'align0' + ' tableCheckbox' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
+            [draggable]="false"
+            [frozenLeft]="true"
+            [resizeable]="true">
 
-        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-            <mat-checkbox [disabled]="tableData[0] && tableData[0].disabled !== undefined" (change)="selectFn(!allRowsSelected)" [checked]="allRowsSelected"></mat-checkbox>
-		</ng-template>
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <mat-checkbox [disabled]="tableData[0] && tableData[0].disabled !== undefined" (change)="selectFn(!allRowsSelected)" [checked]="allRowsSelected"></mat-checkbox>
+            </ng-template>
 
-        <ng-template let-row="row" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-			<mat-checkbox [disabled]='row.disabled' [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
-        </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <mat-checkbox [disabled]='row.disabled' [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+            </ng-template>
 
-    </ngx-datatable-column>
+        </ngx-datatable-column>
 
-    <!-- 无特殊处理的列 -->
-	<ngx-datatable-column 
-		[sortable]="item.ifOrder !== '0'" 
-		[headerClass]="'align'+item.textAlign" 
-		[cellClass]="'align'+item.textAlign" 
-		*ngIf="!item.type && !item.pipes && item.show && item.ifDisplay !== 0" 
-		[width]="item.width && scrollbarH ? item.width:defaultWidth" 
-		[minWidth]="60"
-		[canAutoResize]="item.width && scrollbarH" 
-		name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
-		prop="{{item.prop}}"></ngx-datatable-column>
-    
-    <!-- 带管道的列 -->
-	<ngx-datatable-column 
-		[sortable]="item.ifOrder !== '0'" 
-		[headerClass]="'align'+item.textAlign" 
-		[cellClass]="'align'+item.textAlign" 
-		*ngIf="(item.type === 'async' || item.type === 'userDefine') && item.show && item.ifDisplay !== 0" 
-		[width]="item.width && scrollbarH ? item.width:defaultWidth" 
-		[minWidth]="60"
-		[canAutoResize]="item.width && scrollbarH" 
-		name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
-		prop="{{item.prop}}">
-		<ng-container *ngIf="item.type === 'async'">
-			<ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-				{{value | dictionary:item.dictionary | async}}
-			</ng-template>
-		</ng-container>  
-    </ngx-datatable-column>
+        <!-- 无特殊处理的列 -->
+        <ngx-datatable-column 
+            [sortable]="item.ifOrder !== '0'" 
+            [headerClass]="'align'+item.textAlign" 
+            [cellClass]="'align'+item.textAlign" 
+            *ngIf="!item.type && !item.pipes && item.show && item.ifDisplay !== 0" 
+            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [minWidth]="60"
+            [canAutoResize]="item.width && scrollbarH" 
+            name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            prop="{{item.prop}}"></ngx-datatable-column>
+        
+        <!-- 带管道的列 -->
+        <ngx-datatable-column 
+            [sortable]="item.ifOrder !== '0'" 
+            [headerClass]="'align'+item.textAlign" 
+            [cellClass]="'align'+item.textAlign" 
+            *ngIf="(item.type === 'async' || item.type === 'userDefine') && item.show && item.ifDisplay !== 0" 
+            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [minWidth]="60"
+            [canAutoResize]="item.width && scrollbarH" 
+            name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            prop="{{item.prop}}">
+            <ng-container *ngIf="item.type === 'async'">
+                <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                    {{value | dictionary:item.dictionary | async}}
+                </ng-template>
+            </ng-container>  
+        </ngx-datatable-column>
 
-    <!-- 带管道的列TEST -->
-	<ngx-datatable-column 
-		[sortable]="item.ifOrder !== '0'" 
-		[headerClass]="'align'+item.textAlign" 
-		[cellClass]="'align'+item.textAlign" 
-		*ngIf="item.pipes && item.show && item.ifDisplay !== 0" 
-		[width]="item.width && scrollbarH ? item.width:defaultWidth" 
-		[minWidth]="60"
-		[canAutoResize]="item.width && scrollbarH"  
-		name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
-		prop="{{item.prop}}">
-        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-			<ng-container *ngIf="!row.pipes || !item.showByData">
-				<ng-container *ngIf="item.pipes && item.pipes.userDefine!==undefined">
-					<ng-container *ngTemplateOutlet="userDefine[item.pipes.userDefine]; context: { $implicit: row, value: value }"></ng-container>
-				</ng-container> 
-				<!-- 同步 -->
-				<span *ngIf="item.pipes==='uppercase'">{{ value | uppercase }}</span>
-				<span *ngIf="item.pipes==='lowercase'">{{ value | lowercase }}</span>
-				<span *ngIf="item.pipes==='percent'">{{ value | percent }}</span>
-				<span *ngIf="item.pipes==='json'">{{ value | json }}</span>
-				<span *ngIf="(item.pipes&&item.pipes.number!==undefined)||item.pipes==='number'">{{ value | number: ('0.'+(item.pipes.number || 2)+'-' + (item.pipes.number || 2)) }}</span>
-				<span *ngIf="item.pipes&&item.pipes.percent!==undefined">{{ value | percent: item.pipes.percent }}</span>
-				<span *ngIf="item.pipes&&item.pipes.date!==undefined">{{ value | date: (item.pipes.date||'yyyy-MM-dd') }}</span>
-				<span *ngIf="item.pipes&&item.pipes.currency!==undefined">{{ value | currency: item.pipes.currency }}</span>
-				<!-- 异步 -->
-				<span *ngIf="item.pipes&&item.pipes.dictionary">{{ value | dictionary: item.pipes.dictionary | async }}</span>
-				<span *ngIf="item.pipes&&item.pipes.structure">{{ value | structure: item.pipes.structure | async }}</span>
-			</ng-container>
-        </ng-template>
-    </ngx-datatable-column>
+        <!-- 带管道的列TEST -->
+        <ngx-datatable-column 
+            [sortable]="item.ifOrder !== '0'" 
+            [headerClass]="'align'+item.textAlign" 
+            [cellClass]="'align'+item.textAlign" 
+            *ngIf="item.pipes && item.show && item.ifDisplay !== 0" 
+            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [minWidth]="60"
+            [canAutoResize]="item.width && scrollbarH"  
+            name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            prop="{{item.prop}}">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                <ng-container *ngIf="!row.pipes || !item.showByData">
+                    <ng-container *ngIf="item.pipes && item.pipes.userDefine!==undefined">
+                        <ng-container *ngTemplateOutlet="userDefine[item.pipes.userDefine]; context: { $implicit: row, value: value }"></ng-container>
+                    </ng-container> 
+                    <!-- 同步 -->
+                    <span *ngIf="item.pipes==='uppercase'">{{ value | uppercase }}</span>
+                    <span *ngIf="item.pipes==='lowercase'">{{ value | lowercase }}</span>
+                    <span *ngIf="item.pipes==='percent'">{{ value | percent }}</span>
+                    <span *ngIf="item.pipes==='json'">{{ value | json }}</span>
+                    <span *ngIf="(item.pipes&&item.pipes.number!==undefined)||item.pipes==='number'">{{ value | number: ('0.'+(item.pipes.number || 2)+'-' + (item.pipes.number || 2)) }}</span>
+                    <span *ngIf="item.pipes&&item.pipes.percent!==undefined">{{ value | percent: item.pipes.percent }}</span>
+                    <span *ngIf="item.pipes&&item.pipes.date!==undefined">{{ value | date: (item.pipes.date||'yyyy-MM-dd') }}</span>
+                    <span *ngIf="item.pipes&&item.pipes.currency!==undefined">{{ value | currency: item.pipes.currency }}</span>
+                    <!-- 异步 -->
+                    <span *ngIf="item.pipes&&item.pipes.dictionary">{{ value | dictionary: item.pipes.dictionary | async }}</span>
+                    <span *ngIf="item.pipes&&item.pipes.structure">{{ value | structure: item.pipes.structure | async }}</span>
+                </ng-container>
+            </ng-template>
+        </ngx-datatable-column>
 
 
-    <!-- 时间转换 -->
-	<ngx-datatable-column  
-		[sortable]="item.ifOrder !== '0'" 
-		[headerClass]="'align'+item.textAlign" 
-		[cellClass]="'align'+item.textAlign" 
-		*ngIf="item.type === 'date'&&!item.pipes && item.show && item.ifDisplay !== 0" 
-		[width]="item.width && scrollbarH ? item.width:defaultWidth" 
-		[minWidth]="60"
-		[canAutoResize]="item.width && scrollbarH" 
-		name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
-		prop="{{item.prop}}">
-        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-            {{value | date: item.dictionary}}
-        </ng-template>
-    </ngx-datatable-column>
+        <!-- 时间转换 -->
+        <ngx-datatable-column  
+            [sortable]="item.ifOrder !== '0'" 
+            [headerClass]="'align'+item.textAlign" 
+            [cellClass]="'align'+item.textAlign" 
+            *ngIf="item.type === 'date'&&!item.pipes && item.show && item.ifDisplay !== 0" 
+            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [minWidth]="60"
+            [canAutoResize]="item.width && scrollbarH" 
+            name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            prop="{{item.prop}}">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                {{value | date: item.dictionary}}
+            </ng-template>
+        </ngx-datatable-column>
 
-    <!-- 图标 -->
-	<ngx-datatable-column 
-		[sortable]="false" [headerClass]="'align'+item.textAlign" 
-		[cellClass]="'align'+item.textAlign" *ngIf="item.type === 'icon' && item.show && item.ifDisplay !== 0" 
-		[width]="item.width && scrollbarH ? item.width:defaultWidth" 
-		[minWidth]="60"
-		[canAutoResize]="item.width && scrollbarH" name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
-		prop="{{item.prop}}">
-        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-            <mat-icon>{{value}}</mat-icon>
-        </ng-template>
-	</ngx-datatable-column>
+        <!-- 图标 -->
+        <ngx-datatable-column 
+            [sortable]="false" [headerClass]="'align'+item.textAlign" 
+            [cellClass]="'align'+item.textAlign" *ngIf="item.type === 'icon' && item.show && item.ifDisplay !== 0" 
+            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [minWidth]="60"
+            [canAutoResize]="item.width && scrollbarH" name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            prop="{{item.prop}}">
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                <mat-icon>{{value}}</mat-icon>
+            </ng-template>
+        </ngx-datatable-column>
 
-    <!-- 操作 -->
-	<ngx-datatable-column 
-		[frozenRight]="scrollbarH"
-		[headerClass]="'align0' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
-		[cellClass]="'align0' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
-		[draggable]="false"
-		[canAutoResize]="scrollbarH ? false : true"
-		*ngIf="item.type==='actions'" 
-		[width]="actionW" 
-		name="{{ item.name | translate }}" 
-        [sortable]="false">
-        <ng-template ngx-datatable-cell-template let-row="row">
-            <ng-container *ngIf="!item.shrink">
-                <button mat-button [matMenuTriggerFor]="menuFirst" style="margin-top:0">
-                    <mat-icon>settings</mat-icon>
-                </button>
-                <mat-menu #menuFirst="matMenu">
-                    <ng-container *ngFor="let action of item.actions;let actionIndex=index">
-                        <button
-                            [permission]="action.auth"
-                            mat-menu-item
-                            *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex] && !(row.disDelete === 1 && action.icon === 'delete')"
-                            (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
-                            title="{{ action.name | translate }}" >
-                            <mat-icon>{{action.icon}}</mat-icon>
-                            {{ action.name | translate }}
-                        </button>
-
-                        <button
-                            mat-menu-item
-                            [permission]="action.auth"
-                            *ngIf="action.matMenuTrigger"
-                            title="{{ action.name | translate }}"
-                            [matMenuTriggerFor]="menus">
-                            <mat-icon>{{action.icon}}</mat-icon>
-                            {{ action.name | translate }}
-                        </button>
-
-                        <mat-menu #menus="matMenu">
-                            <button mat-menu-item  [permission]="matMenu.auth" matTooltipPosition="left" *ngFor="let matMenu of action.matMenuTrigger" (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})" >
-                                {{matMenu.name | translate}} 
+        <!-- 操作 -->
+        <ngx-datatable-column 
+            [frozenRight]="scrollbarH"
+            [headerClass]="'align0' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
+            [cellClass]="'align0' + ' ' + (scrollbarH ? 'hasShadow' : 'noShadow')" 
+            [draggable]="false"
+            [canAutoResize]="scrollbarH ? false : true"
+            *ngIf="item.type==='actions'" 
+            [width]="actionW" 
+            name="{{ item.name | translate }}" 
+            [sortable]="false">
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <ng-container *ngIf="!item.shrink">
+                    <button mat-button [matMenuTriggerFor]="menuFirst" style="margin-top:0">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                    <mat-menu #menuFirst="matMenu">
+                        <ng-container *ngFor="let action of item.actions;let actionIndex=index">
+                            <button
+                                [permission]="action.auth"
+                                mat-menu-item
+                                *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex] && !(row.disDelete === 1 && action.icon === 'delete')"
+                                (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
+                                title="{{ action.name | translate }}" >
+                                <mat-icon>{{action.icon}}</mat-icon>
+                                {{ action.name | translate }}
                             </button>
-                        </mat-menu>
-                    </ng-container>
-                </mat-menu>
-            </ng-container>
 
-            <ng-container *ngIf="item.shrink">
-                <ng-container *ngFor="let action of item.actions;let actionIndex=index">
-                
-                    <button
-                        mat-icon-button 
-                        *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex]"
-                        (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
-                        title="{{ action.name | translate }}"
-                        style="margin-top: -20px">
-                        <mat-icon>{{action.icon}}</mat-icon>
-                    </button>
-      
-                    <button
-                        mat-icon-button 
-                        *ngIf="action.matMenuTrigger"
-                        title="{{ action.name | translate }}"
-                        [matMenuTriggerFor]="menu"
-                        style="margin-top: -20px">
-                        <mat-icon>{{action.icon}}</mat-icon>
-                    </button>
+                            <button
+                                mat-menu-item
+                                [permission]="action.auth"
+                                *ngIf="action.matMenuTrigger"
+                                title="{{ action.name | translate }}"
+                                [matMenuTriggerFor]="menus">
+                                <mat-icon>{{action.icon}}</mat-icon>
+                                {{ action.name | translate }}
+                            </button>
 
-                    <mat-menu #menu="matMenu" class="matMenuLayer">
-                        <button *ngFor="let matMenu of action.matMenuTrigger" mat-menu-item  (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})">{{matMenu.name | translate}} </button>
+                            <mat-menu #menus="matMenu">
+                                <button mat-menu-item  [permission]="matMenu.auth" matTooltipPosition="left" *ngFor="let matMenu of action.matMenuTrigger" (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})" >
+                                    {{matMenu.name | translate}} 
+                                </button>
+                            </mat-menu>
+                        </ng-container>
                     </mat-menu>
                 </ng-container>
-            </ng-container>
-        </ng-template>
-    </ngx-datatable-column>
 
-  </ng-container>
+                <ng-container *ngIf="item.shrink">
+                    <ng-container *ngFor="let action of item.actions;let actionIndex=index">
+                    
+                        <button
+                            mat-icon-button 
+                            *ngIf="!action.matMenuTrigger && !row['hide' + actionIndex]"
+                            (click)="actionsFun({data: row, fun: action.actionFun,w:action.width, h:action.height})" 
+                            title="{{ action.name | translate }}"
+                            style="margin-top: -20px">
+                            <mat-icon>{{action.icon}}</mat-icon>
+                        </button>
+        
+                        <button
+                            mat-icon-button 
+                            *ngIf="action.matMenuTrigger"
+                            title="{{ action.name | translate }}"
+                            [matMenuTriggerFor]="menu"
+                            style="margin-top: -20px">
+                            <mat-icon>{{action.icon}}</mat-icon>
+                        </button>
+
+                        <mat-menu #menu="matMenu" class="matMenuLayer">
+                            <button *ngFor="let matMenu of action.matMenuTrigger" mat-menu-item  (click)="actionsFun({data: row, fun: matMenu.actionFun,w:action.width, h:action.height})">{{matMenu.name | translate}} </button>
+                        </mat-menu>
+                    </ng-container>
+                </ng-container>
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ng-container>
       
   <!-- 分页器 -->
-  <ngx-datatable-footer>
-    <ng-template ngx-datatable-footer-template >
-      <app-pagination [(pageDto)]="pageData" (searchData)="setPage($event)" ></app-pagination>
-    </ng-template>
-  </ngx-datatable-footer>
+    <ngx-datatable-footer>
+        <ng-template ngx-datatable-footer-template >
+            <app-pagination [(pageDto)]="pageData" (searchData)="setPage($event)" ></app-pagination>
+        </ng-template>
+    </ngx-datatable-footer>
   
 </ngx-datatable>

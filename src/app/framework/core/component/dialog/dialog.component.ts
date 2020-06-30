@@ -95,8 +95,11 @@ export abstract class DialogComponent extends BaseComponent{
             this.formErrors[field] = '';
         }
 
-        // 监听form变化
-        this.formSer.formValueChange( this.addForm, this.formErrors, this.validMes );
+        this.addForm.valueChanges.subscribe(data => {
+            // 监听form变化
+            this.formSer.formValueChange( this.addForm, this.formErrors, this.validMes );
+        });
+        
     }
 
     // 弹框内数据重置

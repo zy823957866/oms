@@ -36,6 +36,7 @@
     <div class="dataTable">
         <oms-table
             [rows]="rows" 
+            [loadingIndicator]="loadingIndicator"
             [pageDTO]="pageDTO"
             (select)='onSelect($event)'
             [selected]="selected"

@@ -69,8 +69,10 @@ export class OmsInputComponent {
     @Input() set formErrors(v) {
         if(v) {
             this._formErrors = v;
-            this._required = ((this.form ? this.form.controls[this.formCtrlName].hasError('required') : true) && this._formErrors[this.formCtrlName] !== undefined ) 
-                ? true : false;
+            setTimeout(() => {
+                this._required = ((this.form ? this.form.controls[this.formCtrlName].hasError('required') : true) && this._formErrors[this.formCtrlName] !== undefined ) 
+                                ? true : false;
+            });
         }
     }
 

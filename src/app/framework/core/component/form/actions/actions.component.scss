@@ -22,6 +22,7 @@ $primary-color: #0cb495;
         padding: 0 14px;
         display: block;
         transition: ease-in;
+        transform: none;
         &:hover, &:active{
             box-shadow: none !important;
             color: #0cb495;

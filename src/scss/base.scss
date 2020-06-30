@@ -12,6 +12,7 @@
 		display:flex;
 		flex-flow: column;
         border: 1px solid #e7e7e7;
+        overflow: hidden;
 	}
 	oms-table{
 		height: 100%;
@@ -209,8 +210,6 @@
 .user-toolbar-menu{
     width: 160px;
     margin-top: 15px;
-    // border-radius: 0 !important;
-    // background: #f7f7f7;
     border: 1px solid #dfdfdf;
     box-shadow: 0 0 6px rgba(0,0,0,0.1);
 }

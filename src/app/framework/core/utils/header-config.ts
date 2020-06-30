@@ -18,4 +18,9 @@ export const actions = {
 export const headerCodeConfig = {
     // 视图管理
     'system_view': { hasCheck: true, code: 'EyViewManagement', actions: [{ btn: 'setting', auth: '' }, { btn: 'edit', auth: '' }, { btn: 'delete', auth: '' }] },
+
+    // 数据字典
+    'system_dict': { hasCheck: true, code: 'EyOptionDictionary', actions: [{ btn: 'setting', auth: '' }, { btn: 'edit', auth: '' }, { btn: 'delete', auth: '' }] },
+    // 数据字典-设置
+    'system_dict_setting': { hasCheck: true, code: 'EySettingDictionary', actions: [{ btn: 'edit', auth: '' }, { btn: 'delete', auth: '' }] }
 }
