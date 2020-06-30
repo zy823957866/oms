@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // 组件
 import { SystemViewComponent } from './view.component';
 import { ViewAddComponent } from './add/add.component';
+import { OmsViewColumnComponent } from './column/column.component';
+import { ColumnAddComponent } from './column/add/add.component';
 
 // 模块
 import { OmsTableModule } from 'src/app/framework/core/component/table/oms-table.module';
@@ -20,11 +23,12 @@ import { OmsDialogTitleModule } from 'src/app/framework/core/component/dialog-ti
 import { RoutingModule } from './view.routing';
 
 
-
 @NgModule({
     declarations: [ 
         SystemViewComponent,
-        ViewAddComponent
+        ViewAddComponent,
+        OmsViewColumnComponent,
+        ColumnAddComponent
     ],
     imports: [
         OmsTableModule,
@@ -32,6 +36,7 @@ import { RoutingModule } from './view.routing';
         OmsSelectModule,
         MatButtonModule,
         MatIconModule,
+        MatSlideToggleModule,
         OmsDownloadPageModule,
         OmsCtrlColsModule,
         OmsDialogTitleModule,
@@ -39,7 +44,9 @@ import { RoutingModule } from './view.routing';
         RoutingModule
     ],
     entryComponents: [
-        ViewAddComponent
+        ViewAddComponent,
+        OmsViewColumnComponent,
+        ColumnAddComponent
     ]
 })
 

@@ -1,0 +1,46 @@
+<oms-dialog-title [title]="'视图管理列详情'">
+    <oms-form
+        [rowSpan]="4"
+        [formGroup]="searchForm" 
+        (formCb)="formCb($event)" 
+        [(searchItems)]="searchItems"
+        [loadingState]="loading" 
+    ></oms-form>
+
+    <div class="oms-btns">
+        <button mat-raised-button (click)="onNew()">
+            <mat-icon>add</mat-icon>
+            添加
+        </button>
+    </div>
+
+    <div class="dataTable">
+        <oms-table
+            [userDefine]="[userDefine]"
+            [rows]="rows" 
+            [pageDTO]="pageDTO"
+            (select)='onSelect($event)'
+            [selected]="selected"
+            (activate)="onActivate($event)"
+            (searchData)="setPage($event)"
+            (sort)="onSort($event)"
+            (cb)="tableCb($event)"
+            [tableFrame]="tableFrame"
+        ></oms-table>
+    </div>
+
+    <ng-template #userDefine let-data let-value="value">
+        <mat-slide-toggle
+            [checked]="data.ifDisplay == '0' ? false : true"
+            (toggleChange)="toggleChange(data)">
+            <span>{{data.ifDisplay == '0'? '不显示': '显示'}}</span>
+        </mat-slide-toggle>
+    </ng-template>
+
+    <div class="oms-btns oms-btns-bot">
+        <button mat-raised-button color="primary" (click)="updateCloumn()">
+            <mat-icon>save</mat-icon>
+            保存
+        </button>
+    </div>
+</oms-dialog-title>

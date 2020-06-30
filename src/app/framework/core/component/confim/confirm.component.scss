@@ -14,21 +14,23 @@
     .action{
         display: flex;
         justify-content: flex-end;
-        margin-right: 20px;
         padding: 10px 0 15px 0;
 
         .mat-raised-button{
             color: rgba(0, 0, 0, 0.65);
             box-shadow: none;
-            background-color: #f4f4f4;
+            background-color: #fff;
             line-height: 34px;
             border: 1px solid #d9d9d9;
             padding: 0 14px;
             margin-left: 15px;
             display: block;
             overflow: hidden;
-            &:active{
+            transition: ease-in;
+            &:hover, &:active{
                 box-shadow: none !important;
+                color: #0cb495;
+                border: 1px solid #0cb495;
             }
         }
     
@@ -36,6 +38,10 @@
             color: #fff;
             border: none;
             background-color: #0cb495;
+            &:hover{
+                color: #fff;
+                border: none;
+            }
         }
     }
 

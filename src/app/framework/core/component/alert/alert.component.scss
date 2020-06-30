@@ -13,13 +13,20 @@
     .action{
         display: flex;
         justify-content: flex-end;
-        margin-right: 20px;
         padding: 10px 0 15px 0;
     }
 
     .alert-content{
         padding: 0 20px; 
         box-sizing: border-box;
+
+        .mat-icon{
+            line-height: 26px; 
+            display: block; 
+            font-size: 28px;
+            padding-right: 20px; 
+            color: #ffc601;
+        }
     }
 
     .mat-raised-button{

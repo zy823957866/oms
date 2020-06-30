@@ -24,7 +24,7 @@ export abstract class DialogComponent extends BaseComponent{
     // 保存编辑前的数据 ，用于重置
     public resetItems: any;
     // 弹框层数
-    public layer: any=null;
+    public code: any='dialog';
     // 保存状态
     loading: any={ onSubmit: false }
 
@@ -94,7 +94,7 @@ export abstract class DialogComponent extends BaseComponent{
         for (const field in this.formErrors){
             this.formErrors[field] = '';
         }
-        console.log(this.formSer)
+
         // 监听form变化
         this.formSer.formValueChange( this.addForm, this.formErrors, this.validMes );
     }
@@ -124,9 +124,9 @@ export abstract class DialogComponent extends BaseComponent{
     // 弹框内数据提交
     onSubmit(flag: boolean=false, type: string="onSubmit") {
         // 验证
-        if(!this.beforeValid() || this.formSer.isValid(this.addForm, this.formErrors)) return;
+        if(!this.beforeValid() || !this.formSer.isValid(this.addForm, this.formErrors)) return;
 
-        //提交数据之前进行的操作
+        // 提交数据之前进行的操作
         this.beforePost();
 
         // 请求接口

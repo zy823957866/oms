@@ -21,7 +21,7 @@ export class OmsPageCodeService {
         public httpSer: HttpApiService
     ) {}
 
-    getPageCode(layer: any = null): string {
+    getUrlCode(layer: any = null): string {
         let _url = this.router.url;
         let code = drop(_url.split('/'), 2).join('_');
 
@@ -32,62 +32,72 @@ export class OmsPageCodeService {
         return code;
     }
 
+    getPageCode(layer) {
+        let headConfig = headerCodeConfig[this.getUrlCode(layer)];
+
+        return headConfig ? headConfig.code : '';
+    }
+
+
+
     getTableHeader(layer) {
-        let headConfig = headerCodeConfig[this.getPageCode(layer)];
+        let headConfig = headerCodeConfig[this.getUrlCode(layer)];
 
         //定义一个观察者
         let headeCodeSub$: BehaviorSubject<any> = new BehaviorSubject('');
-        
-        this.httpSer.post(this.url, { tableCode: headConfig.code }, res => {
-            if(res) {
-                let tableFrame = [];
 
-                //判断是否添加checkbox
-                if (headConfig.hasCheck) {
-                    tableFrame.push({ type: 'checkbox' });
-                }
-
-                //构造后台传过来的THEAD数组
-                if (res.length > 0) {
-                    for (let item of res) {
-                        let pipes: any={};
-                        let type = this.typeOfDictCode(item.cloumnType);
-
-                        if (type !== null && item.dictCode !== undefined) {
-                            pipes[type] = item.dictCode;
-                        } else if (type !== null && item.dictCode === undefined) {
-                            if(type === 'date') {
-                                pipes[type] = 'yyyy-MM-dd'
-                            }else{
-                                pipes = type;
-                            }
-                        } else {
-                            pipes = null;
-                        }
-
-                        tableFrame.push({
-                            name: item.cloumnName,
-                            enName: item.cloumnEngName || item.cloumnName,
-                            prop: item.cloumnCode,
-                            ifOrder: item.ifOrder,
-                            pipes: pipes,
-                            textAlign: item.textAlign === undefined ? null : item.textAlign,
-                            width: item.width || null,
-                            shows: item.displayCond === undefined ? null : item.displayCond,
-                            ifDisplay: item.ifDisplay === 0 ? 0 : 1,
-                            isCheck: item.ifDisplay === 0 ? false : true,
-                        })
+        if(headConfig) {
+            this.httpSer.post(this.url, { tableCode: headConfig.code }, res => {
+                if(res) {
+                    let tableFrame = [];
+    
+                    //判断是否添加checkbox
+                    if (headConfig.hasCheck) {
+                        tableFrame.push({ type: 'checkbox' });
                     }
+    
+                    //构造后台传过来的THEAD数组
+                    if (res.length > 0) {
+                        for (let item of res) {
+                            let pipes: any={};
+                            let type = this.typeOfDictCode(item.cloumnType);
+    
+                            if (type !== null && item.dictCode !== undefined) {
+                                pipes[type] = item.dictCode;
+                            } else if (type !== null && item.dictCode === undefined) {
+                                if(type === 'date') {
+                                    pipes[type] = 'yyyy-MM-dd'
+                                }else{
+                                    pipes = type;
+                                }
+                            } else {
+                                pipes = null;
+                            }
+    
+                            tableFrame.push({
+                                name: item.cloumnName,
+                                enName: item.cloumnEngName || item.cloumnName,
+                                prop: item.cloumnCode,
+                                ifOrder: item.ifOrder,
+                                pipes: pipes,
+                                textAlign: item.textAlign === undefined ? null : item.textAlign,
+                                width: item.width || null,
+                                shows: item.displayCond === undefined ? null : item.displayCond,
+                                ifDisplay: item.ifDisplay === 0 ? 0 : 1,
+                                isCheck: item.ifDisplay === 0 ? false : true,
+                            })
+                        }
+                    }
+    
+                    //设置按钮
+                    if (headConfig.actions && headConfig.actions.length > 0) {
+                        tableFrame.push(this.getActionBtn(headConfig.actions, headConfig));
+                    }
+    
+                    headeCodeSub$.next(tableFrame);
                 }
-
-                //设置按钮
-                if (headConfig.actions && headConfig.actions.length > 0) {
-                    tableFrame.push(this.getActionBtn(headConfig.actions, headConfig));
-                }
-
-                headeCodeSub$.next(tableFrame);
-            }
-        });
+            });
+        }
 
         return headeCodeSub$;
     }

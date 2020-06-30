@@ -4,6 +4,8 @@ export const SYSTEM_VIEW_CONFIG = {
     API: {
         QUERY_PAGE: '/api-option/v1/viewTable/queryPage.do',
         QUERY_BY_ID: SYSTEM_CONFIG.APP.OPTION_SERVER + '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/viewTable' + SYSTEM_CONFIG.API.LIST.QUERY_BY_ID.VALUE,
+        DELETE_BY_ID: SYSTEM_CONFIG.APP.OPTION_SERVER + '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/viewTable' + SYSTEM_CONFIG.API.LIST.DELETE_BY_ID.VALUE,
+        DELETE_BY_ID_LIST: SYSTEM_CONFIG.APP.OPTION_SERVER + '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/viewTable' + SYSTEM_CONFIG.API.LIST.DELETE_BY_ID_LIST.VALUE,
         UPDATE_BY_ID: SYSTEM_CONFIG.APP.OPTION_SERVER + '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/viewTable' + SYSTEM_CONFIG.API.LIST.UPDATE_BY_ID.VALUE,
         ADD: SYSTEM_CONFIG.APP.OPTION_SERVER + '/' + SYSTEM_CONFIG.API.VERSION.V1 + '/viewTable' + SYSTEM_CONFIG.API.LIST.ADD.VALUE,
     },
@@ -38,7 +40,7 @@ export const SYSTEM_VIEW_CONFIG = {
         layer: true,
         data: [
             { type: 'text', label: '表名', prop: 'tableName', rules: { maxlength: 100 } },
-            { type: 'select', label: '是否启用', prop: 'isEnable', async: true, options: 'isEnables', dic_key: 'DIC_KEY', dic_value: 'DIC_VALUE', filterByPipe: true },
+            { type: 'select', label: '是否启用', prop: 'isEnable', async: true, options: 'isEnables', filterByPipe: true },
             { type: 'text', label: '数据表编码', prop: 'tableCode', rules: { maxlength: 50 } },
             { type: 'textarea', label: '描述', prop: 'tableDesc', height: '48px', rules: { maxlength: 200 } },
         ],

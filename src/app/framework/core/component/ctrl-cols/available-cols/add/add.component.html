@@ -1,0 +1,9 @@
+<oms-dialog-title [title]="'自定义列编辑'">
+    <oms-form
+        [rowSpan]="3"
+        [formGroup]="addForm" 
+        (formCb)="formCb($event)" 
+        [(searchItems)]="formItems" 
+        [loadingState]="loading">
+    </oms-form>
+</oms-dialog-title>

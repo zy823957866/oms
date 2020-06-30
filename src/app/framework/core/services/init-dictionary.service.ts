@@ -46,4 +46,17 @@ export class InitDictionaryService {
 
     // 获取用户名称
     getUsersName() { return this.structureService.getDicListByDicCode('GET_USERS_NAME') };
+
+    // 列是否显示
+    ifDisplays() { return this.dictionaryService.getDicListByDicCode('IF_DISPLAY') };
+
+    // 列的类型
+    cloumnTypes() { return this.dictionaryService.getDicListByDicCode('CONT_CLOUMN_TYPE') };
+
+    // 文字水平位置
+    textAligns() { return this.dictionaryService.getDicListByDicCode('TEXT_ALIGN_TYPE') };
+
+    //是否排序
+    isOrderBy() { return this.dictionaryService.getDicListByDicCode('VIEW_IF_ORDER', 'string'); }
+
 }

@@ -123,8 +123,10 @@ export class OmsSelectComponent {
     // 设置form的值
     setValue(v) {
         if(v === null) {
-            this.modelCtrl.patchValue({name: (this.multifySelect ? [] : null), id: null});
-        } 
+            this.modelCtrl.patchValue({name: this.formCtrlName, id: (this.multifySelect ? [] : null)});
+        } else {
+            this.modelCtrl.patchValue({name: this.formCtrlName, id: v});
+        }
     }
 
 	//获取下拉数据并处理
@@ -221,7 +223,7 @@ export class OmsSelectComponent {
 
 	//select点击事件
 	selectClick() {
-		this.clickInput.emit();
+        if(this.selectWithClick) this.clickInput.emit();
     }
     
     ngAfterViewInit() {

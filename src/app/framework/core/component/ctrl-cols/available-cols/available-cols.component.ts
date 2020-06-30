@@ -3,6 +3,7 @@ import { Component, Injector, Inject } from '@angular/core';
 
 // 组件
 import { BaseComponent } from '../../base/base.component';
+import { OmsAvailableColsAddComponent } from './add/add.component';
 
 // 配置
 import { CTRL_COLS_CONFIG } from '../ctrl-cols.config';
@@ -16,18 +17,19 @@ import { StorageService } from '../../../services/storage.service';
 })
 
 export class OmsAvailableColsComponent extends BaseComponent {
-    //API
-    public apiPath: any=CTRL_COLS_CONFIG.API;
-    //table
-    public tableFrame: any=CTRL_COLS_CONFIG.TABLE_FRAME;
-    //查询条件
-    public searchItems: any=CTRL_COLS_CONFIG.SEARCH_ITEMS;
-    //配置
+
+    apiPath     : any = CTRL_COLS_CONFIG.API;             // API
+    tableFrame  : any = CTRL_COLS_CONFIG.TABLE_FRAME;     // table
+    searchItems : any = CTRL_COLS_CONFIG.SEARCH_ITEMS;    // 查询条件
+    code        : any = 'column';                         // 定义code
+    addComponent: any = OmsAvailableColsAddComponent;     // 编辑组件
+
+    // 配置
     public formConfig: any=Object.assign({}, CTRL_COLS_CONFIG.FORM_CONFIG, {
         tableCode: [this.data, []],
         userId: [this.storeSer.getObject('userInfo').id, []]
     });
-    //加载状态
+    // 加载状态
     public loading: any={
         updateCloumn: false
     };
@@ -39,5 +41,20 @@ export class OmsAvailableColsComponent extends BaseComponent {
         public storeSer: StorageService
     ){
         super(injector);
+    }
+
+    toggleChange(rows) {
+        rows.ifDisplay = rows.ifDisplay == '0' ? '1' : '0';
+    }
+
+    // 更新
+    updateCloumn() {
+        this.loading.updateCloumn = true;
+        this.httpApiService.post(this.apiPath.UPDATE_BY_LIST, this.rows, data => {
+            if(data === null) return;
+            this.loading.updateCloumn = false;
+            this.showMessage("保存自定义列成功！");
+            this.dialogRef.close({ status: true });
+        });
     }
 }

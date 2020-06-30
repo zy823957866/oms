@@ -28,6 +28,8 @@ import { OmsDownloadColumnComponent } from '../download-column/download-column.c
 import { OmsPageCodeService } from '../../services/page-code.service';
 import { OmsFormService } from '../../services/form.service';
 import { StorageService } from '../../services/storage.service';
+import { OmsConfirmComponent } from '../confim/confirm.component';
+import { OmsAlertComponent } from '../alert/alert.component';
 
 
 export abstract class BaseComponent implements OnInit {
@@ -237,7 +239,7 @@ export abstract class BaseComponent implements OnInit {
     formCb(e: FormCbData) {
         if(typeof e.data === 'string') {
             // 返回的方法名
-            this[e.data]();
+            this[e.data](true, e.data);
         }else {
             this.vChange(e.data);
 
@@ -246,17 +248,28 @@ export abstract class BaseComponent implements OnInit {
         }
     }
 
+
+    // 新增传输数据插槽
+    data2NewDialog(){
+        return {};
+    }
+
     // 新增
     onNew(w: string='50%', h: string='auto', mh: string='0') {
         this.dialog.open(this.addComponent, {
             width: w,
             height: h,
             minHeight: mh,
-            data: {},
+            data: this.data2NewDialog(),
             disableClose: true
         }).afterClosed().subscribe(result => {
             if (result) this.onSearch();
         });
+    }
+
+    // 编辑传输数据插槽
+    data2UpdateDialog(row) {
+        return { id: row.id }
     }
 
     // 更新
@@ -265,17 +278,72 @@ export abstract class BaseComponent implements OnInit {
             width: w,
             height: h,
             minHeight: mh,
-            data: { id: row.id },
+            data: this.data2UpdateDialog(row),
             disableClose: true
         }).afterClosed().subscribe(result => {
             if (result) this.onSearch();
         });
     }
 
+    // 批量删除之前的校验，判断选中的数据是否可以被删除
+    beforeDeleteByIds() { return true; }
+
     // 批量删除
     onDeleteByIds() {
+        if(!this.beforeDeleteByIds()) return;
 
+        if (this.selected && this.selected.length > 0) {
+            this.dialog.open(OmsConfirmComponent, {
+                disableClose: true, 
+                width: '500px',
+                data: { 
+                    title: '删除确认', 
+                    message: '确定要删除所选记录?'
+                } 
+            }).afterClosed().subscribe(result => {
+                if (result) {
+                    let ids = [];
+                    for (let i = 0; i < this.selected.length; i++) {
+                        ids.push(this.selected[i].id);
+                    }
+                    this.httpApiService.post(this.apiPath[SYSTEM_CONFIG.API.LIST.DELETE_BY_ID_LIST.NAME], ids, data => {
+                        if(data){
+                            this.showMessage('批量删除成功！');
+                            this.onSearch();
+                        }
+                    });
+                }
+            });
+        } else {
+            this.dialog.open(OmsAlertComponent, { 
+                disableClose: true, 
+                width: '500px',
+                data: { 
+                    title: '删除确认',
+                    message: '请选择需要删除的数据!'
+                } 
+            });
+        }
     }
+
+    // 单条删除方法
+    onDelete(row) {
+        this.dialog.open(OmsConfirmComponent, { 
+            disableClose: true, 
+            width: '500px',
+            data: { 
+                title: '删除确认', 
+                message: '确定要删除所选记录?' 
+            } 
+        }).afterClosed().subscribe(result => {
+            if (result) {
+                this.httpApiService.post(this.apiPath[SYSTEM_CONFIG.API.LIST.DELETE_BY_ID.NAME], { 'id': row.id }, data => {
+                    if(data) this.onSearch();
+                });
+            }
+        });
+    }
+
 
     // 设置选中的数据
     onSelect(e) {
@@ -292,6 +360,16 @@ export abstract class BaseComponent implements OnInit {
     // table中操作按钮回调
     tableCb(arg: any = { data: null, fun: function () {} }) {
         this[arg.fun](arg.data, arg.w, arg.h);
+    }
+
+    // 排序
+    onSort(event) {
+        this.orderDTOs = [];
+        for (let i = 0; i < event.sorts.length; i++) {
+            this.orderDTOs.push({ propertyName: event.sorts[i].prop, dir: event.sorts[i].dir });
+        }
+        
+        this.setPage({ offset: 0 });
     }
 
     //是否有双击编辑的权限

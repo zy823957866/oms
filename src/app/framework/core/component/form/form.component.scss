@@ -17,9 +17,27 @@
         }  
     }
 
+    .cols-1 {
+        div{
+            width: calc((100% / 1) - 36px); 
+        }
+    }
+
+    .cols-2 {
+        div{
+            width: calc((100% / 2) - 36px); 
+        }
+    }
+
     .cols-3 {
         div{
             width: calc((100% / 3) - 36px); 
+        }
+    }
+
+    .cols-4 {
+        div{
+            width: calc((100% / 4) - 36px); 
         }
     }
 

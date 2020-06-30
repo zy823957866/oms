@@ -55,14 +55,21 @@ export class ResourceService {
             id: '1',
             title: '系统配置',
             type: 'collapse',
-            icon: 'system',
+            icon: 'settings',
             children: [
                 {
                     id: '2',
                     title: '视图管理',
                     type: 'item',
-                    icon: 'home',
+                    icon: 'border_all',
                     url: '/oms/system/view',
+                },
+                {
+                    id: '3',
+                    title: '数据字典',
+                    type: 'item',
+                    icon: 'local_library',
+                    url: '/oms/system/dict',
                 }
             ]
         }

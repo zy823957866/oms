@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 
 // 组件
@@ -42,6 +43,7 @@ import { OmsAlertModule } from '../../core/component/alert/alert.module';
         MatIconModule,
         MatButtonModule,
         MatTooltipModule,
+        MatMenuModule,
         CommonModule,
         PerfectScrollbarModule,
         OmsAlertModule

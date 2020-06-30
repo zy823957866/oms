@@ -4,6 +4,7 @@ import { Component, Injector, HostBinding } from '@angular/core';
 // 组件
 import { BaseComponent } from 'src/app/framework/core/component/base/base.component';
 import { ViewAddComponent } from './add/add.component';
+import { OmsViewColumnComponent } from './column/column.component';
 
 // 配置
 import { SYSTEM_VIEW_CONFIG } from './view.config';
@@ -35,4 +36,15 @@ export class SystemViewComponent extends BaseComponent {
     
     constructor( public injector: Injector ) { super(injector);}
 
+
+    // 设置弹框
+    setting(row) {
+        this.dialog.open(OmsViewColumnComponent, {
+            width: '70%',
+            data: { id: row.id },
+            disableClose: true
+        }).afterClosed().subscribe(res => {
+            
+        })
+    }
 }

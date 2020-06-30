@@ -11,7 +11,6 @@
 		flex: 1;
 		display:flex;
 		flex-flow: column;
-        overflow: hidden;
         border: 1px solid #e7e7e7;
 	}
 	oms-table{
@@ -147,10 +146,15 @@
         margin-right: 15px;
         display: block;
         overflow: hidden;
+        border: 1px solid #0cb495;
         text-shadow: 1px 1px rgba(0, 0, 0, 0.08);
         &:active{
             box-shadow: none !important;
         }
+    }
+
+    .mat-button-focus-overlay{
+        background: none;
     }
 }
 
@@ -174,4 +178,39 @@
     width: 18px !important;
     margin-right: 10px !important;
     font-size: 18px !important;
+}
+
+.mat-menu-panel{
+    min-height: auto !important;
+}
+
+// 表单禁用
+.mat-form-field-disabled:not(.inputWithClick){
+	.mat-form-field-flex{
+		background: #f2f2f2;
+		mat-label{
+			background: none !important;
+            &::before{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                z-index: -1;
+                background: #f2f2f2;
+            }
+		}
+	}
+}
+
+
+// mat-menu样式修正
+.user-toolbar-menu{
+    width: 160px;
+    margin-top: 15px;
+    // border-radius: 0 !important;
+    // background: #f7f7f7;
+    border: 1px solid #dfdfdf;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
 }

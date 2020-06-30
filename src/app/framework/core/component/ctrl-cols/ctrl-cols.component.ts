@@ -17,7 +17,7 @@ export class OmsCtrlColsComponent {
     @Input() headCode: string = '';
 
     //回调
-    @Output() callBack = new EventEmitter();
+    @Output() cb = new EventEmitter();
 
     constructor(
         private dialog: MatDialog
@@ -31,7 +31,7 @@ export class OmsCtrlColsComponent {
             height: 'auto',
             data: this.headCode
         }).afterClosed().subscribe(res => {
-            this.callBack.emit(res);
+            if(res) this.cb.emit();
         })
     }
 }

@@ -1,9 +1,37 @@
 <oms-dialog-title [title]="'设置显示项'">
-    <!-- <oms-form
+    <oms-form
+        [rowSpan]="3"
         [formGroup]="searchForm" 
-
-        (backFun)="searchFormbackFun($event)" 
+        (formCb)="formCb($event)" 
         [(searchItems)]="searchItems" 
-        
-    ></oms-form> -->
+        [loadingState]="loading">
+    </oms-form>
+
+    <div class="dataTable">
+        <oms-table
+            [rows]="rows" 
+            [userDefine]="[userDefine]"
+            [pageDTO]="pageDTO"
+            (select)='onSelect($event)'
+            [selected]="selected"
+            (activate)="onActivate($event)"
+            (cb)="tableCb($event)"
+            [tableFrame]="tableFrame"
+        ></oms-table>
+
+        <ng-template #userDefine let-data let-value="value">
+            <mat-slide-toggle
+                [checked]="data.ifDisplay == '0' ? false : true"
+                (toggleChange)="toggleChange(data)">
+                <span>{{data.ifDisplay == '0'? '不显示':'显示'}}</span>
+            </mat-slide-toggle>
+        </ng-template>
+    </div>
+
+    <div class="action">
+        <button mat-raised-button color="primary" (click)="updateCloumn()">
+            <mat-icon>save</mat-icon>
+            保存
+        </button>
+    </div>
 </oms-dialog-title>

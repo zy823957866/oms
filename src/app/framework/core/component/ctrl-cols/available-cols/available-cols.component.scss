@@ -1,0 +1,32 @@
+.dataTable{
+    height: 500px;
+}
+
+.action{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 15px 0;
+}
+
+:host ::ng-deep{
+    .mat-raised-button{
+        color: #fff;
+        box-shadow: none;
+        background-color: #0cb495;
+        line-height: 34px;
+        padding: 0 14px;
+        display: block;
+        overflow: hidden;
+        &:active, &:hover{
+            box-shadow: none !important;
+        }
+    }
+
+    .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+        background-color: #0cb495;
+    }
+
+    .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+        background-color: rgba(12,180,149,.54);
+    }
+}

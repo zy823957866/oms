@@ -14,8 +14,8 @@ export const CTRL_COLS_CONFIG = {
         { name: '列是否显示', prop: 'ifDisplay', pipes: { userDefine: '0' }},
         { name: '描述', prop: 'cloumnDesc'},
         {
-            type: 'actions', tt: '操作', name: 'PUBLIC.ACTION', actions: [
-                { tt: '修改', name: 'PUBLIC.EDIT', icon: 'edit', actionFun: 'onUpdate', auth: '' }
+            type: 'actions', name: '操作', actions: [
+                { name: '修改', icon: 'edit', actionFun: 'onUpdate', auth: '' }
             ]
         }
     ],
@@ -23,18 +23,44 @@ export const CTRL_COLS_CONFIG = {
     SEARCH_ITEMS: {
         isLayer: false,
         data: [
-            { type: 'input', label: '字段名', prop: 'cloumnName'},
+            { type: 'text', label: '字段名', prop: 'cloumnName'},
         ],
         actions: [
             // 查询
             { type: 'submit', icon: 'search', label: '查询', color: 'primary', action: 'onSearch' },
             // 重置
-            { type: 'reset', icon: 'refresh', label: '充值', color: '', action: 'onReset' },
+            { type: 'reset', icon: 'refresh', label: '重置', color: '', action: 'onReset' },
         ]
     },
 
     FORM_CONFIG: {
         cloumnName: [null, []]
     },
+
+    UPDATE_ITEMS: {
+        layer: true,
+        data: [
+            { type: 'text', label: '字段名', prop: 'cloumnName', disabled: true, rules: { maxlength: 100 } },
+            { type: 'select', label: '列是否显示', prop: 'ifDisplay', async: true, options: 'ifDisplays', filterByPipe: true },
+            { type: 'text', label: '排序', prop: 'cloumnOrder', rules: { maxlength: 11 } },
+            { type: 'textarea', label: '描述', prop: 'cloumnDesc', height: '42px', disabled: true, rules: { maxlength: 45 } }
+        ],
+        actions: [
+            { type: 'submit', icon: 'save', label: '提交', color: 'primary', action: 'onSubmit' },
+            { type: 'reset', icon: 'refresh', label: '重置', color: '', action: 'onReset' },
+            { type: 'button', icon: 'close', label: '关闭', color: 'warn' }
+        ]
+    },
+
+    UPDATE_FORM_CONFIG: {
+        cloumnName: [null, []],
+        cloumnOrder: [null, []],
+        ifDisplay: ['1', []],
+        cloumnDesc: [null, []]
+    },
+
+    MESSAGE: {
+        update_sucess: '自定义列修改成功'
+    }
 
 }
