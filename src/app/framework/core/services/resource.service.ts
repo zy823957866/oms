@@ -70,6 +70,34 @@ export class ResourceService {
                     type: 'item',
                     icon: 'local_library',
                     url: '/oms/system/dict',
+                },
+                {
+                    id: '4',
+                    title: '角色管理',
+                    type: 'item',
+                    icon: 'supervisor_account',
+                    url: '/oms/system/role',
+                },
+                {
+                    id: '4',
+                    title: '用户管理',
+                    type: 'item',
+                    icon: 'person',
+                    url: '/oms/system/user',
+                },
+                {
+                    id: '4',
+                    title: '资源管理',
+                    type: 'item',
+                    icon: 'blur_linear',
+                    url: '/oms/system/resource',
+                },
+                {
+                    id: '5',
+                    title: '接口管理',
+                    type: 'item',
+                    icon: 'shuffle',
+                    url: '/oms/system/interfaces',
                 }
             ]
         }

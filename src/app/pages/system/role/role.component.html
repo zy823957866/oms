@@ -1,0 +1,36 @@
+<div class="flex">
+    <oms-form
+        [formGroup]="searchForm" 
+        (formCb)="formCb($event)" 
+        [(searchItems)]="searchItems" 
+        [loadingState]="loading">
+    </oms-form>
+
+    <div class="oms-btns">
+        <button mat-raised-button (click)="onNew()">
+            <mat-icon>add</mat-icon>
+            添加
+        </button>
+        <button mat-raised-button (click)="onDeleteByIds()" [disabled]="!selected || selected.length===0">
+            <mat-icon>delete</mat-icon>
+            删除
+        </button>
+        <oms-download-page (downLoadFile)="onDownLoadPage($event)"></oms-download-page>
+        <oms-ctrl-cols [headCode]="headCode" (cb)="getPageHeader()"></oms-ctrl-cols>
+    </div>
+    
+    <div class="dataTable">
+        <oms-table
+            [rows]="rows" 
+            [loadingIndicator]="loadingIndicator"
+            [pageDTO]="pageDTO"
+            (select)='onSelect($event)'
+            [selected]="selected"
+            (activate)="onActivate($event)"
+            (searchData)="setPage($event)"
+            (sort)="onSort($event)"
+            (cb)="tableCb($event)"
+            [tableFrame]="tableFrame"
+        ></oms-table>
+    </div>
+</div>

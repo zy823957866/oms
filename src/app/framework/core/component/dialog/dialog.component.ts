@@ -60,9 +60,6 @@ export abstract class DialogComponent extends BaseComponent{
                     }
                 }
             );
-
-            // 定义id
-            this.formConfig['id'] = [this.data.id, []];
         }
     }
 
@@ -87,6 +84,9 @@ export abstract class DialogComponent extends BaseComponent{
     // 创建FORM
     createForm() {
         this.formConfig.version = [null, []];
+
+        // 定义id
+        this.formConfig['id'] = [this.data.id || null, []];
         
         this.addForm = this.formBuilder.group(this.formConfig);
 

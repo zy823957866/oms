@@ -169,8 +169,10 @@ export abstract class BaseComponent implements OnInit {
 
     //基本查询方法
     setPage(page, flag: boolean=false, type: string="onSearch") {
+        // 必须上次请求完 才能进行下一次请求 防止重复请求
+        if(this.loadingIndicator) return;
 
-        //查询之前执行的方法
+        // 查询之前执行的方法
         this.beforeSearch();
 
         this.pageDTO.pageNo = page.offset;

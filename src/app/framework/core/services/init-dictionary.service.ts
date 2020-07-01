@@ -59,4 +59,6 @@ export class InitDictionaryService {
     //是否排序
     isOrderBy() { return this.dictionaryService.getDicListByDicCode('VIEW_IF_ORDER', 'string'); }
 
+    // 角色类型
+    roleTypes() { return this.dictionaryService.getDicListByDicCode('ROLE_TYPE') }
 }

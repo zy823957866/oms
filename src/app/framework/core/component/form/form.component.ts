@@ -125,7 +125,10 @@ export class OmsFormComponent {
 
     // 回车查询
     enterToSearh(e) {
-
+        if(e.keyCode === 13) {
+            if(this.formData.actions.filter(item => item.action ==='onSearch').length)
+                this.actionsCb('onSearch');
+        }
     }
 
     // 操作功能回调
