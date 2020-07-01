@@ -1,12 +1,16 @@
 // 工具包
 import { Component } from '@angular/core';
 
+// 组件
+import { DialogComponent } from 'src/app/framework/core/component/dialog/dialog.component';
+
 @Component({
     selector: 'role-setting',
     styleUrls: ['./setting.component.scss'],
     templateUrl: './setting.component.html'
 })
 
-export class RoleSettingComponent {
-
+export class RoleSettingComponent extends DialogComponent {
+    
+    ngOnInit() {}
 }

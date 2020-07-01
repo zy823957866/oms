@@ -9,6 +9,9 @@ import { RoleSettingComponent } from './setting/setting.component';
 // 配置
 import { ROLE_CONFIG } from './role.config';
 
+// 常用方法
+import { compare } from 'src/app/framework/core/utils/shared';
+
 // 动画
 import { routeAnimation } from 'src/app/framework/core/animations/route-animate';
 
@@ -32,25 +35,39 @@ export class OmsRoleComponent extends BaseComponent {
     addComponent: any = RoleAddComponent;                // 新增 编辑弹框
 
     // 所有资源
-    allResources: Array<any> = [];
+    allResources: Array<any>;
 
     constructor( public injector: Injector ) { super(injector); }
 
+    ngAfterViewInit() {
+        // 页面渲染后获取所有的树数据，防止勾选权限时页面过卡问题
+        this.getAllResource();
+    }
+
     // 设置弹框
     setting(row) {
-        this.dialog.open(RoleSettingComponent, {
-            width: '40%',
-            data: {
-
-            },
-            disableClose: true
-        }).afterClosed().subscribe(res => {
-            
+        // 通过角色id获取选中的资源
+        this.httpApiService.post(this.apiPath.QUERY_RESOURCE_BY_ROLEID, { roleId: row.id }, res => {
+            if(res) {
+                this.dialog.open(RoleSettingComponent, {
+                    width: '40%',
+                    data: {
+                        roleId: row.id, 
+                        treeData: this.allResources, 
+                        checked: res || []
+                    },
+                    disableClose: true
+                }).afterClosed().subscribe(res => {
+                    
+                })
+            }
         })
     }
 
     // 查询所有的资源
     getAllResource() {
-
+        this.httpApiService.post(this.apiPath.QUERY_LIST, {}, res => {
+            if(res && res.records) this.allResources = res.records.sort(compare('resourceOrder')) || [];
+        })
     }
 }

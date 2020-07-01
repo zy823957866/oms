@@ -1,1 +1,8 @@
-这是设置页面
+<oms-dialog-title [title]="'分配权限'">
+    <oms-tree
+        [data]="data.treeData"
+        [checked]="data.checked"
+        [showCheckBox]="true"
+        [label]="'resourceName'"
+    ></oms-tree>
+</oms-dialog-title>

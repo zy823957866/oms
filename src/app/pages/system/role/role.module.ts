@@ -14,6 +14,7 @@ import { OmsFormModule } from 'src/app/framework/core/component/form/form.module
 import { OmsDownloadPageModule } from 'src/app/framework/core/component/download-page/download-page.module';
 import { OmsCtrlColsModule } from 'src/app/framework/core/component/ctrl-cols/ctrl-cols.module';
 import { OmsDialogTitleModule } from 'src/app/framework/core/component/dialog-title/dialog-title.module';
+import { OmsTreeModule } from 'src/app/framework/core/component/tree/tree.module';
 
 // 路由
 import { RoutingModule } from './role.routing';
@@ -34,6 +35,7 @@ import { RoutingModule } from './role.routing';
         OmsDownloadPageModule,
         OmsCtrlColsModule,
         OmsDialogTitleModule,
+        OmsTreeModule,
         RoutingModule
     ],
 
