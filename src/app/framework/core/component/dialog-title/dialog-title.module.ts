@@ -14,8 +14,10 @@ import { OmsDialogTitleComponent } from './dialog-title.component';
 import { OmsFullScreenModule } from '../full-screen/full-screen.module';
 import { OmsDialogDragModule } from '../../directives/dialog-drag/dialog-drag.module';
 
+
 //指令
 // import { LoadingDialogModule } from '../../directives/loading-dialog/loading-dialog.module';
+import { ElResizeModule } from '../../directives/resize/resize.module';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { OmsDialogDragModule } from '../../directives/dialog-drag/dialog-drag.mo
         MatDialogModule,
         TranslateModule,
         OmsFullScreenModule,
+        ElResizeModule,
         // LoadingDialogModule     
     ],
 
