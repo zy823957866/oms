@@ -1,5 +1,5 @@
-<div dialogDrag class="example-box" [ngClass]="isFullScreen ? 'fullScreen': ''" cdkDragBoundary=".example-boundary" cdkDrag style="position:relative">
-    <ng-container *ngIf="showTitle">
+<div [elResize]='true'>
+    <!-- <ng-container *ngIf="showTitle">
         <div class="example-handle" cdkDragHandle>
             <h2 mat-dialog-title>{{ title | translate }}</h2>
         </div>
@@ -7,15 +7,17 @@
         <button color="primary" mat-icon-button [mat-dialog-close]="false" class="close-icon">
             <mat-icon>close</mat-icon>
         </button>
-    </ng-container>
+    </ng-container> -->
 
     <!-- 全屏 -->
-    <ng-container *ngIf="showFullScreen">
+    <!-- <ng-container *ngIf="showFullScreen">
         <at-full-screen (backFun)="setFullScreen($event)"></at-full-screen>
-    </ng-container>
+    </ng-container> -->
     
     <!-- 传入的内容 -->
-    <div class="content-wrap flex">
+    <!-- <div class="content-wrap flex">
         <ng-content></ng-content>
-    </div>
+    </div> -->
+
+    这是测试
 </div>
