@@ -1,3 +1,13 @@
+<div class="search" *ngIf="showSearch">
+    <input type="text" placeholder="输入条件查询部门" [(ngModel)]="filter" (keyup.enter)="filterItems()">
+
+    <div class="filter">
+        <button mat-raised-button color="primary" (click)="filterItems()">
+            <mat-icon>search</mat-icon>查询
+        </button>
+    </div>
+</div>
+
 <mat-tree 
     [dataSource]="treeData" 
     [treeControl]="treeControl"
@@ -8,7 +18,12 @@
             class="mat-tree-node"
             [ngStyle]="{'border-bottom': showBottomLine ? '1px dashed #e6e6e6': 'none'}"
             [ngClass]="(highSelect && currentChecked && node && currentChecked.id === node.id) ? 'highSelect': ''">
-            <button mat-icon-button disabled [ngStyle]="{width: showCheckBox ? '28px' : '14px'}"></button>
+            <button 
+                mat-icon-button 
+                class="bgBtn" 
+                disabled 
+                [ngStyle]="{width: showCheckBox ? '28px' : '16px'}"
+            ></button>
             <mat-checkbox
                 *ngIf="showCheckBox"
                 class="checklist-leaf-node"
@@ -17,7 +32,7 @@
                 <p mat-button (click)="checkNode(node)" [title]="node[label]">{{node[label]}}</p>
             </mat-checkbox>
 
-            <button *ngIf="!showCheckBox" (click)="checkNode(node)" [ngClass]="currentNodeId === node.id ? 'active': ''" mat-button class="treeBtn" [title]="node[label]">
+            <button *ngIf="!showCheckBox" (click)="checkNode(node)" class="treeBtn" [title]="node[label]">
                 <mat-icon *ngIf="itemIcon" class="itemIcon">{{itemIcon}}</mat-icon>
                 {{node[label]}}
             </button>
@@ -44,7 +59,7 @@
                 </mat-checkbox>
 
                 <!-- 左侧图标设置 -->
-                <button [ngClass]="currentNodeId === node.id ? 'active': ''" *ngIf="!showCheckBox" class="treeBtn" (click)="checkNode(node)" mat-button [title]="node[label]">{{node[label]}}</button>
+                <button *ngIf="!showCheckBox" class="treeBtn" (click)="checkNode(node)" [title]="node[label]">{{node[label]}}</button>
             </div>
 
             <ul [class.oms-tree-invisible]="isOpen ? treeControl.isExpanded(node) : !treeControl.isExpanded(node)">

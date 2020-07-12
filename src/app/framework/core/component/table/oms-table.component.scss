@@ -120,7 +120,12 @@ app-pagination{
     
             button{
                 color: #0cb495;
+                vertical-align: top;
             }
+        }
+
+        .mat-button-focus-overlay{
+            background-color: #eaeaea !important;
         }
     
         .empty-row{

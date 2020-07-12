@@ -3,6 +3,13 @@
         [data]="data.treeData"
         [checked]="data.checked"
         [showCheckBox]="true"
+        [showBottomLine]="false"
+        
+        [highSelect]="false"
         [label]="'resourceName'"
+        [currentChecked]="data.checked[0]"
+        (clickNode)="clickNode($event)"
+        (checkedChange)="checkedChange($event)"
+        (selectNode)="selectNode($event)"
     ></oms-tree>
 </oms-dialog-title>

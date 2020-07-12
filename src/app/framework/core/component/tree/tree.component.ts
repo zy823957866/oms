@@ -9,16 +9,20 @@ import {SelectionModel} from "@angular/cdk/collections";
 })
 
 export class OmsTreeComponent {
-    @Input() set data(v) { this.data2Tree(v) };             // 所有树数据
-    @Input() set checked(v) { this.setChecked(v); };         // 所有选中的数据
+    @Input() set data(v) {                                  // 所有树数据
+        this.data2Tree(v); 
+        this.treeOriginData = v; 
+    };             
+    @Input() set checked(v) { this.setChecked(v, false); }; // 所有选中的数据
     @Input() showCheckBox: boolean;                         // 是否显示多选按钮
     @Input() label: string;                                 // 标签根据哪个属性显示
     @Input() parentId: string = 'root';                     // 根节点id
-    @Input() currentNodeId: string = '';                    // 默认选中节点的id
+    @Input() currentChecked: any;                           // 默认选中节点
     @Input() itemIcon: string='';                           // item 图标
     @Input() isOpen: boolean=false;                         // 是否展开节点
     @Input() highSelect: boolean=false;                     // 是否高亮选中节点
     @Input() showBottomLine: boolean=false;                 // 是否显示边线
+    @Input() showSearch: boolean=true;                     // 是否显示查询条件
 
     //选中的节点，分享给父元素
     @Output() clickNode: EventEmitter<any> = new EventEmitter();
@@ -35,8 +39,10 @@ export class OmsTreeComponent {
     isOpen: boolean=false;
     // 选中的树节点
     checkedNodes: any = [];
-    // 当前选中的树节点
-    currentChecked: any;
+    // 过滤条件
+    filter: string = '';
+    // 树的原始数据
+    treeOriginData: any;
     // 树控制
     treeControl = new NestedTreeControl<any>((node) => node.children);
     // 
@@ -52,6 +58,7 @@ export class OmsTreeComponent {
 
         // 获取所有的根数据
         this.treeData = tree.filter(node => (!node.parentId) || node.parentId == this.parentId);
+        console.log(this.treeData)
 
         // 将根数据设置成map
         this.treeMap = this.list2Map([...tree], 'id');
@@ -68,7 +75,7 @@ export class OmsTreeComponent {
     }
 
     // 设置选中的数据
-    setChecked(v) {
+    setChecked(v, flag: boolean = true) {
         this.checkedNodes = v || [];
 
         this.checkedNodes.forEach(item => {
@@ -76,6 +83,8 @@ export class OmsTreeComponent {
             if(node && !node.children) {
                 this.initLeafSelect(node);
                 this.expandParentNode(node);
+            }else{ 
+                this.todoItemSelectionToggle(node, flag);
             }
         })
     }
@@ -84,8 +93,6 @@ export class OmsTreeComponent {
     checkNode(node) {
         if (node.children) {
             this.todoItemSelectionToggle(node);
-        } else {
-            this.todoLeafItemSelectionToggle(node);
         }
 
         this.currentChecked = node;
@@ -102,7 +109,12 @@ export class OmsTreeComponent {
         this.checkedChange.emit(this.checkedNodes);
     }
 
-    todoItemSelectionToggle(node) {
+    /**
+     * 
+     * @param node 节点
+     * @param flag 是否向父节点分享数据
+     */
+    todoItemSelectionToggle(node, flag: boolean = true) {
         this.checklistSelection.toggle(node);
         const descendants = this.treeControl.getDescendants(node);
 
@@ -120,8 +132,11 @@ export class OmsTreeComponent {
 
         
         this.buildChecked();
-        this.checkedChange.emit(this.checkedNodes);
-        this.selectNode.emit(node);
+
+        if(flag) {
+            this.checkedChange.emit(this.checkedNodes);
+            this.selectNode.emit(node);
+        }
     }
 
     // 初始化选中数据
@@ -216,12 +231,48 @@ export class OmsTreeComponent {
         return node.children != null && node.children.length > 0;
     }
 
+    // 通过子节点获取父节点
+    getParentByChild(node, filterTree) {
+        if(node && node.parentId && node.parentId != this.parentId) {
+            if(!filterTree.filter(item => item.id === node.id).length){
+                delete node.children;
+                filterTree.push(node);
+            }
+            this.getParentByChild(this.getParentNode(node), filterTree);
+        }
+
+        return filterTree;
+    }
+
+    filterItems() {
+        let filterTree = [];
+        let allTree = [...this.treeOriginData];
+        
+        allTree.forEach(item => {
+            if(item[this.label].indexOf(this.filter) !== -1) {
+                filterTree = this.getParentByChild(item, filterTree);
+            }
+
+            if(item.parentId == this.parentId) {
+                filterTree.push(item);
+            }
+        });
+
+        this.treeData = [];
+        setTimeout(() => {
+            this.data2Tree(filterTree);
+        },1000);
+    }
+
 
     // 方法一：数组转map
     list2Map(list, key) {
         let map = new Map;
 
-        list.forEach(item => { map.set(item[key], item); });
+        list.forEach(item => { 
+            delete item.children;
+            map.set(item[key], item); 
+        });
 
         return map;
     }

@@ -1,0 +1,6 @@
+:host {
+    --primary: red;         // 默认颜色
+    
+}
+
+$primary: var(--primary);

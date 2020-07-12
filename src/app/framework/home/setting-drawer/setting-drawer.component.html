@@ -1,0 +1,14 @@
+<div cdkDrag class="setting-drawer__handle" (click)="drawerToggle()">
+    <mat-icon>settings</mat-icon>
+</div>
+
+<div class="drawer" #drawer [@slideInOut]="showDrawer">
+    <div class="title">自定义样式设置</div>
+
+    <div class="content">
+        <div class="sub_title">主题色</div>
+        <ul class="primary-color">
+            <li *ngFor="let item of COLOR" [ngStyle]="{'background': item}" (click)="primaryColor(item)"></li>
+        </ul>
+    </div>
+</div>
