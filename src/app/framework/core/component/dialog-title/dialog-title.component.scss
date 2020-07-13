@@ -5,7 +5,7 @@
     height: 100%;
 }
 .content-wrap{
-    max-height: calc(100vh - 35px);
+    max-height: calc(100vh - 50px);
     overflow-y: auto;
     padding: 25px 36px 0 36px;
     overflow-x: hidden;
@@ -25,6 +25,10 @@
         font-size: 17px;
     }
 
+    .example-box{
+        background: none !important;
+    }
+
     .close-icon{
         position: absolute;
         right: 0;
@@ -42,6 +46,8 @@
     }
     
     .flex{
+        height: calc(100% - 41px);
+        background: #fff;
         .dataTable {
             flex: none;
         }
@@ -49,6 +55,40 @@
     
 }
 
-div{
-    height: 500px;
+// 测试
+.box {
+    border: 1px solid #d6d6d6;
+    position: absolute;
 }
+
+  .left-border {
+    width: 4px;
+    height: 200px;
+    background-color: #00c0ff;
+    position: absolute;
+    cursor: w-resize;
+  }
+
+  .top-border {
+    width: 200px;
+    height: 4px;
+    background-color: #00c0ff;
+    position: absolute;
+    cursor: n-resize;
+  }
+
+  .right-border {
+    width: 4px;
+    height: 200px;
+    background-color: #00c0ff;
+    position: absolute;
+    cursor: e-resize;
+  }
+
+  .bottom-border {
+    width: 200px;
+    height: 4px;
+    background-color: #00c0ff;
+    position: absolute;
+    cursor: s-resize;
+  }
