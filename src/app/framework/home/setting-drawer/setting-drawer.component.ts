@@ -21,8 +21,10 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 
 export class SettingDrawerComponent {
     showDrawer = 'inactive';
-    // 主题色
-    COLOR: Array<string> = ['#0cb495', 'red', 'blue'];
+    // 主题色 0cb495
+    COLOR: Array<string> = [ '#0cb495', '#f54336', '#e91f63', '#9b27b0', '#683ab7', '#3f51b6', '#3f51b6', 
+                             '#2097f3', '#01bcd6', '#009688', '#4cb051', '#8bc349', '#cddc3a', '#ffec3c', 
+                             '#face1e', '#ff9800', '#ff5723', '#5f7d8c'];
 
     constructor(
         private zone: NgZone,

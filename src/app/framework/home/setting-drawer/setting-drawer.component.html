@@ -1,14 +1,16 @@
-<div cdkDrag class="setting-drawer__handle" (click)="drawerToggle()">
+<button mat-icon-button (click)="drawerToggle()" class="toolbar-notification-btn">
     <mat-icon>settings</mat-icon>
-</div>
+</button>
 
 <div class="drawer" #drawer [@slideInOut]="showDrawer">
     <div class="title">自定义样式设置</div>
 
     <div class="content">
-        <div class="sub_title">主题色</div>
+        <div class="sub_title">推荐主题色</div>
         <ul class="primary-color">
             <li *ngFor="let item of COLOR" [ngStyle]="{'background': item}" (click)="primaryColor(item)"></li>
         </ul>
+
+        
     </div>
 </div>
