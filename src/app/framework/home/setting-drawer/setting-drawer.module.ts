@@ -1,9 +1,9 @@
 // 工具包
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
 
 // 组件
 import { SettingDrawerComponent } from './setting-drawer.component';
@@ -14,10 +14,10 @@ import { SettingDrawerComponent } from './setting-drawer.component';
     ],
 
     imports: [
-        DragDropModule,
         CommonModule,
         MatIconModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatButtonModule
     ],
 
     exports: [

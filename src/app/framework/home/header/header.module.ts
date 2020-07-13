@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 // 组件
@@ -21,6 +22,7 @@ import { HttpApiService } from '../../core/services/http.service';
 
 // 模块
 import { OmsAlertModule } from '../../core/component/alert/alert.module';
+import { SettingDrawerModule } from '../setting-drawer/setting-drawer.module';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { OmsAlertModule } from '../../core/component/alert/alert.module';
         MatMenuModule,
         CommonModule,
         PerfectScrollbarModule,
-        OmsAlertModule
+        OmsAlertModule,
+        DragDropModule,
+        SettingDrawerModule
     ],
 
     providers: [

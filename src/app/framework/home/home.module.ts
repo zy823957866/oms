@@ -9,12 +9,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // 组件
 import { HomeComponent } from './home.component';
 import { OmsHeaderModule } from './header/header.module';
-import { SettingDrawerModule } from './setting-drawer/setting-drawer.module';
+
 import { BrandComponent } from './brand/brand.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -43,7 +42,6 @@ import { RoutingModule } from './home.routing';
         NavigationModule,
         OmsSharedModule,
         OmsHeaderModule,
-        SettingDrawerModule,
         RoutingModule
     ],
     providers: [
