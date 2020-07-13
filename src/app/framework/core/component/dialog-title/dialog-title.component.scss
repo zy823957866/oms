@@ -25,6 +25,10 @@
         font-size: 17px;
     }
 
+    .example-box{
+        background: none !important;
+    }
+
     .close-icon{
         position: absolute;
         right: 0;
@@ -42,6 +46,8 @@
     }
     
     .flex{
+        height: calc(100% - 41px);
+        background: #fff;
         .dataTable {
             flex: none;
         }
