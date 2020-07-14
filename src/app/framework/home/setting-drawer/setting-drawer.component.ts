@@ -35,12 +35,12 @@ export class SettingDrawerComponent {
     }
 
     primaryColor(color) {
-        setTimeout(() => {
+        // setTimeout(() => {
             this.zone.run(() => {
-                document.getElementsByTagName('body')[0].style.setProperty('--primary',color);
+                document.getElementsByTagName('html')[0].style.setProperty('--primary',color);
                 // console.log('enabled time travel');
             });
-          }, 200);
+        //   }, 200);
 
         
     }

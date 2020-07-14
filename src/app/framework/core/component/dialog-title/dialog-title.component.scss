@@ -52,4 +52,32 @@
             flex: none;
         }
     }
+
+    .left-border {
+        width: 4px;
+        height: 200px;
+        position: absolute;
+        cursor: w-resize;
+      }
+    
+      .top-border {
+        width: 200px;
+        height: 4px;
+        position: absolute;
+        cursor: n-resize;
+      }
+    
+      .right-border {
+        width: 4px;
+        height: 200px;
+        position: absolute;
+        cursor: e-resize;
+      }
+    
+      .bottom-border {
+        width: 200px;
+        height: 4px;
+        position: absolute;
+        cursor: s-resize;
+      }
 }
