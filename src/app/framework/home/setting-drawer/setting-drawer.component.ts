@@ -1,30 +1,29 @@
 import { Component, NgZone } from '@angular/core';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+
+// 配置
+import { DRAWER_CONFIG } from './setting-drawer.config';
+
+// 动画
+import { toggleAnimation } from './setting-drawer.animate';
 
 @Component({
     selector: 'setting-drawer',
     styleUrls: ['./setting-drawer.component.scss'],
     templateUrl: './setting-drawer.component.html',
-    animations: [
-        trigger('slideInOut', [
-            state('inactive', style({
-                right: '-600px'
-            })),
-            state('active', style({
-                right: '0px'
-            })),
-            transition('inactive => active', animate('200ms ease-out')),
-            transition('active => inactive', animate('200ms ease-in'))
-        ])
-    ]
+    animations: [ toggleAnimation ]
 })
 
 export class SettingDrawerComponent {
     showDrawer = 'inactive';
-    // 主题色 0cb495
-    COLOR: Array<string> = [ '#0cb495', '#f54336', '#e91f63', '#9b27b0', '#683ab7', '#3f51b6', '#3f51b6', 
-                             '#2097f3', '#01bcd6', '#009688', '#4cb051', '#8bc349', '#cddc3a', '#ffec3c', 
-                             '#face1e', '#ff9800', '#ff5723', '#5f7d8c'];
+
+    
+    CONFIG          : any = DRAWER_CONFIG.DEFAULE;              // 默认配置
+    COLOR           : Array<string> = DRAWER_CONFIG.COLORS;     // 主题色
+    BTNS            : any = DRAWER_CONFIG.BTNS;                 // 按钮设置
+    MENUS           : any = DRAWER_CONFIG.MENUS;                // 按钮设置
+    TXCOLORS        : any = DRAWER_CONFIG.TXCOLORS;             // 按钮设置
+    SPACE           : any = DRAWER_CONFIG.SPACE;                // 空格设置
+    ACTIONS         : any = DRAWER_CONFIG.ACTIONS;              // 操作按钮
 
     constructor(
         private zone: NgZone,
@@ -34,14 +33,14 @@ export class SettingDrawerComponent {
         this.showDrawer = this.showDrawer === 'inactive' ? 'active' : 'inactive' ;
     }
 
+    // 设置主题色
     primaryColor(color) {
-        // setTimeout(() => {
-            this.zone.run(() => {
-                document.getElementsByTagName('html')[0].style.setProperty('--primary',color);
-                // console.log('enabled time travel');
-            });
-        //   }, 200);
+        this.CONFIG.primary = color;
 
-        
+        document.getElementsByTagName('html')[0].style.setProperty('--primary',color);
+    }
+
+    actionsCb(e) {
+        console.log(e)
     }
 }

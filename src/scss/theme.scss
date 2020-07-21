@@ -1,6 +1,101 @@
 :root {
-    --primary: red;         // 默认颜色
+    // 主题色
+    --primary: #0cb495;
+
+    // 文字颜色
+    --txColor: #333;
+    --txAssitColor: #afafaf;
+    --requiredColor: red;
+    --successColor: #5ec82a;
+    --errorColor: #f5222d;
+    --warnColor: #f99f04;
+
+    // 内容间距
+    --hSpace: 40px;
+    --vSpace: 15px;
+
+    // 按钮
+    --primaryBg: #0cb495;
+    --primaryFontSize: 14px;
+    --primaryFontColor: #fff;
+    --primaryFontHeight: 34px;
+    --primaryFontBorder: 1px solid #0cb495;
+    --primaryFontRadius: 0px;
+    --primaryHoverColor: #fff;
+    --primaryHoverBorder: 1px solid #0cb495;
+
+    --restBg: #f4f4f4;
+    --restFontSize: 14px;
+    --restFontColor: rgba(0; 0; 0; 0.65);
+    --restFontHeight: 34px;
+    --restFontBorder: 1px solid #d9d9d9;
+    --restFontRadius: 0px;
+    --restHoverColor: #0cb495;
+    --restHoverBorder: 1px solid #0cb495;
+
+    --closeBg: #fff;
+    --closeFontSize: 14px;
+    --closeFontColor: rgba(0; 0; 0; 0.65);
+    --closeFontHeight: 34px;
+    --closeFontBorder: 1px solid #d9d9d9;
+    --closeFontRadius: 0px;
+    --closeHoverColor: #0cb495;
+    --closeHoverBorder: 1px solid #0cb495;
+
+    // 菜单
+    --menuBg: #3c4252;
+    --menuColor: #fff;
+    --menuActiveBg: #0cb495;
+    --menuActiveBorder: none;
+    --menuActiveColor: #fff
     
 }
 
 $primary: var(--primary);
+
+// 文字颜色
+$txColor: var(--txColor);
+$txAssitColor: var(--txAssitColor);
+$requiredColor: var(--requiredColor);
+$successColor: var(--successColor);
+$errorColor: var(--errorColor);
+$warnColor: var(--warnColor);
+
+// 内容间距
+$hSpace: var(--hSpace);
+$vSpace: var(--vSpace);
+
+// 按钮
+$primaryBg: var(--primaryBg);
+$primaryFontSize: var(--primaryFontSize);
+$primaryFontColor: var(--primaryFontColor);
+$primaryFontHeight: var(--primaryFontHeight);
+$primaryFontBorder: var(--primaryFontBorder);
+$primaryFontRadius: var(--primaryFontRadius);
+$primaryHoverColor: var(--primaryHoverColor);
+$primaryHoverBorder: var(--primaryHoverBorder);
+
+$restBg: var(--restBg);
+$restFontSize: var(--restFontSize);
+$restFontColor: var(--restFontColor);
+$restFontHeight: var(--restFontHeight);
+$restFontBorder: var(--restFontBorder);
+$restFontRadius: var(--restFontRadius);
+$restHoverColor: var(--restHoverColor);
+$restHoverBorder: var(--restHoverBorder);
+
+$closeBg: var(--closeBg);
+$closeFontSize: var(--closeFontSize);
+$closeFontColor: var(--closeFontColor);
+$closeFontHeight: var(--closeFontHeight);
+$closeFontBorder: var(--closeFontBorder);
+$closeFontRadius: var(--closeFontRadius);
+$closeHoverColor: var(--closeHoverColor);
+$closeHoverBorder: var(--closeHoverBorder);
+
+// 菜单
+$menuBg: var(--menuBg);
+$menuColor: var(--menuColor);
+$menuActiveBg: var(--menuActiveBg);
+$menuActiveBorder: var(--menuActiveBorder);
+$menuActiveColor: var(--menuActiveColor);
