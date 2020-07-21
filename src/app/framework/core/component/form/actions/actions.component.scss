@@ -1,4 +1,4 @@
-$primary-color: #0cb495;
+@import '../../../../../../scss/theme.scss';
 
 .btns{
     display: flex;
@@ -14,34 +14,34 @@ $primary-color: #0cb495;
 
 :host ::ng-deep{
     .mat-raised-button{
-        color: rgba(0, 0, 0, 0.65);
+        color: $restFontColor;
         box-shadow: none;
-        background-color: #f4f4f4;
-        line-height: 34px;
-        border: 1px solid #d9d9d9;
+        background-color: $restBg;
+        line-height: $restFontHeight;
+        border: $restFontBorder;
         padding: 0 14px;
         display: block;
         transition: ease-in;
         transform: none;
         &:hover, &:active{
             box-shadow: none !important;
-            color: #0cb495;
-            border: 1px solid #0cb495;
+            color: $primary;
+            border: $primaryFontBorder;
         }
     }
 
     .mat-primary{
-        color: #fff;
+        color: $primaryFontColor;
         border: none;
-        background-color: $primary-color;
-        &:hover{
-            color: #fff;
-            border: none;
+        background-color: $primaryBg;
+        &:hover, &:active{
+            color: $primaryHoverColor;
+            border: $primaryFontBorder;
         }
     }
 
     .mat-warn{
-        background-color: #fff;
+        background-color: $closeBg;
     }
 
     .more {
