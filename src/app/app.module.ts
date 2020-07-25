@@ -24,6 +24,9 @@ export function createTranslateHttpLoader(http:HttpClient){
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
+// 设置rem
+import '../scss/rem';
+
 
 @NgModule({
     declarations: [

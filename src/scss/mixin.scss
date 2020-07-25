@@ -4,3 +4,33 @@
     display: block;
     width: $width;
 }
+
+@mixin media($size, $screen: 1440) {
+    @media screen and (max-width: $screen * 1px) {
+        font-size: $size * 1px;
+    }
+}
+
+@mixin fs($fs) {
+    font-size: $fs * 1px; 
+
+    @if($fs == 14) {
+        @include media(13);
+
+    }@else if($fs == 15) {
+        @include media(14);
+
+    }@else if($fs == 16) {
+        @include media(14);
+
+    }@else if($fs == 18) {
+        @include media(16);
+
+    }@else if($fs == 20) {
+        @include media(18);
+
+    }@else if($fs == 22) {
+        @include media(20);
+    }
+    
+}

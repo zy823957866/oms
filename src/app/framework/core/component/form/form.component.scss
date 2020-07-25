@@ -1,43 +1,48 @@
+@import 'src/scss/theme.scss';
+
+$w: calc(#{$hSpace} - 0.04rem);
+$v: calc(#{$vSpace} - 0.02rem);
+
 .form-outer{
     width: 100%;
     .form{
-        width: calc(100% + 36px);
+        width: calc(100% + #{$w});
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         div{
             display: block;
-            width: calc(20% - 36px);
-            margin-right: 36px;
+            width: calc(20% - #{$w});
+            margin-right: $w;
         }
 
         .actions{
             width: auto !important;
-            padding-bottom: 15px;
+            padding-bottom: $v;
         }  
     }
 
     .cols-1 {
         div{
-            width: calc((100% / 1) - 36px); 
+            width: calc((100% / 1) - #{$w}); 
         }
     }
 
     .cols-2 {
         div{
-            width: calc((100% / 2) - 36px); 
+            width: calc((100% / 2) - #{$w}); 
         }
     }
 
     .cols-3 {
         div{
-            width: calc((100% / 3) - 36px); 
+            width: calc((100% / 3) - #{$w}); 
         }
     }
 
     .cols-4 {
         div{
-            width: calc((100% / 4) - 36px); 
+            width: calc((100% / 4) - $w); 
         }
     }
 

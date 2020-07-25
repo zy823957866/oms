@@ -79,7 +79,7 @@ export abstract class DialogComponent extends BaseComponent{
             e.originProp.forEach(item => { this.addForm.patchValue({ [item]: null }) })
         }
     }
-
+    
 
     // 创建FORM
     createForm() {

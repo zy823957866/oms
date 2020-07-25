@@ -12,7 +12,11 @@
 
     // 内容间距
     --hSpace: 40px;
-    --vSpace: 15px;
+    --vSpace: 16px;
+
+    // 输入框设置
+    --formBorderRadius: 3px;
+    --formH: 34px;
 
     // 按钮
     --primaryBg: #0cb495;
@@ -22,7 +26,7 @@
     --primaryFontBorder: 1px solid #0cb495;
     --primaryFontRadius: 0px;
     --primaryHoverColor: #fff;
-    --primaryHoverBorder: 1px solid #0cb495;
+    --primaryHoverBorder: none;
 
     --restBg: #f4f4f4;
     --restFontSize: 14px;
@@ -47,7 +51,7 @@
     --menuColor: #fff;
     --menuActiveBg: #0cb495;
     --menuActiveBorder: none;
-    --menuActiveColor: #fff
+    --menuActiveColor: #fff;
     
 }
 
@@ -64,6 +68,10 @@ $warnColor: var(--warnColor);
 // 内容间距
 $hSpace: var(--hSpace);
 $vSpace: var(--vSpace);
+
+// 输入框设置
+$formBorderRadius: var(--formBorderRadius);
+$formH: var(--formH);
 
 // 按钮
 $primaryBg: var(--primaryBg);

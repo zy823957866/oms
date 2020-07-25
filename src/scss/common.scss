@@ -1,3 +1,5 @@
+@import './theme.scss';
+@import './mixin';
 
 // 样式初使化
 html {
@@ -22,7 +24,7 @@ body {
     font-family: microsoft YaHei, Roboto, 'Helvetica Neue', Arial, sans-serif;
     color: #333;
     box-sizing: border-box;
-    font-size: 12px;
+    @include fs(12);
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: 100%;
@@ -63,11 +65,10 @@ input[type=file],
 input[type=password],
 input[type=email], select {
     vertical-align: middle;
-    border-radius: 3px;
+    border-radius: $formBorderRadius;
     outline:none;
     &:focus,&:hover{
         box-shadow: none;
-        // border: 1px solid #1cc09f;
     }
 }
 select::-ms-expand { display: none; }
@@ -116,21 +117,23 @@ a.hover { color: #666; }
 .inblock{ display: inline-block;}
 
 //字体
-.F12 {font-size: 12px;}
-.F14 {font-size: 14px;}
-.F16 {font-size: 16px;}
-.F18 {font-size: 18px;}
-.F20 {font-size: 20px;}
-.F22 {font-size: 22px;}
-.F24 {font-size: 24px;}
-.F26 {font-size: 26px;}
-.F28 {font-size: 28px;}
-.F30 {font-size: 30px;}
-.F32 {font-size: 32px;}
-.F36 {font-size: 36px;}
+.F12 {@include fs(12)}
+.F13 {@include fs(13)}
+.F14 {@include fs(14)}
+.F15 {@include fs(15)}
+.F16 {@include fs(16)}
+.F18 {@include fs(18)}
+.F20 {@include fs(20)}
+.F22 {@include fs(22)}
+.F24 {@include fs(24)}
+.F26 {@include fs(26)}
+.F28 {@include fs(28)}
+.F30 {@include fs(30)}
+.F32 {@include fs(32)}
+.F36 {@include fs(36)}
 
 // 外边距
-.M0 {margin: 0px!important;}
+.M0 {margin: 0 !important;}
 .M5 {margin: 5px;}
 .M10 {margin: 10px;}
 .M15 {margin: 15px;}
