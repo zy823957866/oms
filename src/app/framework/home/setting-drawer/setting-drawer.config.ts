@@ -16,6 +16,10 @@ export const DRAWER_CONFIG = {
         hSpace: '40px',
         vSpace: '15px',
 
+        // 输入框设置
+        formBorderRadius: '3px',
+        formH: '34px',
+
         // 按钮
         primaryBg: '#0cb495',
         primaryFontSize: '14px',
@@ -114,9 +118,13 @@ export const DRAWER_CONFIG = {
         { name: '垂直间距', prop: 'vSpace' }
     ],
 
+    FORM: [
+        { name: '圆角大小', prop: 'formBorderRadius' },
+        { name: '垂直高度', prop: 'formH' }
+    ],
+
     // 操作按钮
     ACTIONS: [
-        { type: 'submit', icon: 'search', label: '预览', color: 'primary', action: 'view' },
-        { type: 'reset', icon: 'refresh', label: '生成代码', color: '', action: 'onReset' }
+        { type: 'submit', icon: 'wrap_text', label: '生成代码', color: 'primary', action: 'onReset' }
     ]
 }

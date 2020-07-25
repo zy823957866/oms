@@ -11,7 +11,7 @@
             <li 
                 *ngFor="let item of COLOR" 
                 [ngStyle]="{'background': item}" 
-                (click)="primaryColor(item)"
+                (click)="CONFIG.primary = item; setView('primary', item)"
                 [class.colorActive]="item === CONFIG.primary"
             ></li>
         </ul>
@@ -19,7 +19,7 @@
         <div class="sub_title">字体颜色</div>
         <ul class="btns">
             <li>
-                <div *ngFor="let item of TXCOLORS">
+                <div *ngFor="let item of TXCOLORS" (click)="setView(item.prop, CONFIG[item.prop])">
                     <span>{{item.name}}:</span><input type="text" [(ngModel)]="CONFIG[item.prop]">
                 </div>
             </li>
@@ -28,7 +28,16 @@
         <div class="sub_title MT17">内容间距</div>
         <ul class="btns">
             <li>
-                <div *ngFor="let item of SPACE">
+                <div *ngFor="let item of SPACE" (click)="setView(item.prop, CONFIG[item.prop])">
+                    <span>{{item.name}}:</span><input type="text" [(ngModel)]="CONFIG[item.prop]">
+                </div>
+            </li>
+        </ul>
+
+        <div class="sub_title MT17">输入框设置</div>
+        <ul class="btns">
+            <li>
+                <div *ngFor="let item of FORM" (click)="setView(item.prop, CONFIG[item.prop])">
                     <span>{{item.name}}:</span><input type="text" [(ngModel)]="CONFIG[item.prop]">
                 </div>
             </li>
@@ -38,7 +47,7 @@
         <ul class="btns">
             <li *ngFor="let item of BTNS">
                 <h4>{{item.type}}:</h4>
-                <div *ngFor="let child of item.props">
+                <div *ngFor="let child of item.props" (click)="setView(child.prop, CONFIG[child.prop])">
                     <span>{{child.name}}:</span><input type="text" [(ngModel)]="CONFIG[child.prop]">
                 </div>
             </li>
@@ -47,7 +56,7 @@
         <div class="sub_title MT17">菜单</div>
         <ul class="btns">
             <li>
-                <div *ngFor="let item of MENUS">
+                <div *ngFor="let item of MENUS"  (click)="setView(item.prop, CONFIG[item.prop])">
                     <span>{{item.name}}:</span><input type="text" [(ngModel)]="CONFIG[item.prop]">
                 </div>
             </li>

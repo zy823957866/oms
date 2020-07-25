@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     div{
-        margin-right: 15px;
+        margin-right: 0.15rem;
         .btn{
             display: inline-block;
             transform: none;
@@ -19,7 +19,7 @@
         background-color: $restBg;
         line-height: $restFontHeight;
         border: $restFontBorder;
-        padding: 0 14px;
+        padding: 0 0.14rem;
         display: block;
         transition: ease-in;
         transform: none;
@@ -36,7 +36,7 @@
         background-color: $primaryBg;
         &:hover, &:active{
             color: $primaryHoverColor;
-            border: $primaryFontBorder;
+            border: $primaryHoverBorder;
         }
     }
 
@@ -50,13 +50,13 @@
 
     .mat-dialog-actions{
         margin-bottom: 0;
-        min-height: 34px;
+        min-height: $formH;
         padding: 0;
         display: block;
     }
 
     .btn-outer{
-        margin-left: 15px;
+        margin-left: 0.15rem;
         display: inline-block;
     }
 }

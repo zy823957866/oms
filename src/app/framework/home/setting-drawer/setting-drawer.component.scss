@@ -82,12 +82,17 @@
             padding-right: 20px;
         }
     }
-    
 }
 
 :host ::ng-deep{
     .mat-icon-button {
         border-radius: 0;
         margin-right: 40px;
+    }
+
+    .actions{
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
     }
 }

@@ -10,6 +10,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 
 export class OmsTreeComponent {
     @Input() set data(v) {                                  // 所有树数据
+        this.tree2Map(v);
         this.data2Tree(v); 
         this.treeOriginData = v; 
     };             
@@ -53,15 +54,8 @@ export class OmsTreeComponent {
 
     // 将全部树数据与选中的树数据解析成树结构
     data2Tree(tree: Array<any>) {
-        // 清空map
-        this.treeMap.clear();
-
         // 获取所有的根数据
         this.treeData = tree.filter(node => (!node.parentId) || node.parentId == this.parentId);
-        console.log(this.treeData)
-
-        // 将根数据设置成map
-        this.treeMap = this.list2Map([...tree], 'id');
 
         tree.forEach(node => {
             if(node.parentId && node.parentId != this.parentId) {
@@ -247,7 +241,10 @@ export class OmsTreeComponent {
     filterItems() {
         let filterTree = [];
         let allTree = [...this.treeOriginData];
-        
+
+        // 转换map
+        this.tree2Map(allTree);
+
         allTree.forEach(item => {
             if(item[this.label].indexOf(this.filter) !== -1) {
                 filterTree = this.getParentByChild(item, filterTree);
@@ -259,9 +256,19 @@ export class OmsTreeComponent {
         });
 
         this.treeData = [];
+
         setTimeout(() => {
             this.data2Tree(filterTree);
-        },1000);
+        });
+    }
+
+    // 树转为map
+    tree2Map(tree) {
+        // 清空map
+        this.treeMap.clear();
+
+        // 将根数据设置成map
+        this.treeMap = this.list2Map([...tree], 'id');
     }
 
 
