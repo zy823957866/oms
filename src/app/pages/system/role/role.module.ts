@@ -18,13 +18,17 @@ import { OmsTreeModule } from 'src/app/framework/core/component/tree/tree.module
 
 // 路由
 import { RoutingModule } from './role.routing';
+import { OverlayComponent } from './overlay/overlay.component';
+import { overlayService } from 'src/app/framework/core/services/overlay.service';
+import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from "@angular/cdk/overlay";
 
 
 @NgModule({
     declarations: [
         OmsRoleComponent,
         RoleAddComponent,
-        RoleSettingComponent
+        RoleSettingComponent,
+        OverlayComponent
     ],
 
     imports: [
@@ -36,12 +40,20 @@ import { RoutingModule } from './role.routing';
         OmsCtrlColsModule,
         OmsDialogTitleModule,
         OmsTreeModule,
+        OverlayModule,
+        // OverlayContainer, 
+        // FullscreenOverlayContainer,
         RoutingModule
+    ],
+
+    providers: [
+        overlayService
     ],
 
     entryComponents: [
         RoleAddComponent,
-        RoleSettingComponent
+        RoleSettingComponent,
+        OverlayComponent
     ]
 })
 

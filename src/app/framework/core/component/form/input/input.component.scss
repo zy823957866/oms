@@ -1,3 +1,6 @@
+@import 'src/scss/theme.scss';
+@import 'src/scss/mixin.scss';
+
 :host ::ng-deep{
     .mat-form-field {
         width: 100%;
@@ -9,32 +12,32 @@
     .mat-form-field-appearance-outline{
         .mat-form-field-wrapper{
             margin: 0;
-            padding-bottom: 26px;
+            padding-bottom: 0.26rem;
             .mat-form-field-flex{
-                padding: 0 5px 0 15px;
+                padding: 0 0.05rem 0 0.15rem;
                 margin-top: 0;
-                height: 34px;
+                height: $formH;
             }
     
             .mat-form-field-outline{
-                height: 34px;
+                height: $formH;
             }
     
             .mat-form-field-infix{
-                padding: 5px 0;
-                line-height: 24px;
-                border-top: 5px;
+                padding: 0.05rem 0;
+                line-height: 0.24rem;
+                border-top: 0.05rem;
             }
     
             .mat-form-field-label{
                 color: #999;
-                top: 19px;
-                margin-top: -5px;
+                top: 0.19rem;
+                margin-top: -0.05rem;
             }
     
             .mat-form-field-label-wrapper{
-                top: -8px;
-                padding-top: 8px;
+                top: -0.08rem;
+                padding-top: 0.08rem;
             }
         }
 
@@ -42,13 +45,13 @@
             .mat-form-field-outline-start,
             .mat-form-field-outline-end,
             .mat-form-field-outline-gap{
-                border-width: 1px;
+                border-width: 0.01rem;
             }
         }
 
         &.mat-focused,&:hover,&:active,&:focus{
             .mat-form-field-outline-thick{
-                color: #0cb495;
+                color: $primary;
             }
         }
 
@@ -58,25 +61,25 @@
     }
 
     .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
-        transform: translateY(-16px) scale(0.9);
+        transform: translateY(-0.16rem) scale(0.9);
         color: rgba(0, 0, 0, 0.5);
 
         mat-label{
-            padding-right: 6px;
+            padding-right: 0.06rem;
             background: #fff;
         }
     }
 
     .mat-form-field-suffix{
-        top: 3px !important;
+        top: 0.03rem !important;
     }
 
     .input-icon{
         .mat-icon{
             position: relative;
-            top: 2px;
-            line-height: 20px;
-            height: 20px;
+            top: 0.02rem;
+            line-height: 0.2rem;
+            height: 0.2rem;
             text-align: center;
         }
     }
@@ -91,7 +94,7 @@
 
     .mat-form-field-required-marker{
         color: red;
-        font-size: 16px;
-        line-height: 16px;
+        line-height: 0.16rem;
+        @include fs(16);
     }
 }

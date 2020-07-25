@@ -11,8 +11,7 @@ export class HeaderComponent {
     @Input() customizer;
     @Input() sidenav;
     
-    constructor() {
-    }
+    constructor() { }
 
     // 切换菜单显示隐藏
     autoMenu() {
