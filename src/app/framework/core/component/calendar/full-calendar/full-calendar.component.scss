@@ -1,0 +1,58 @@
+:host ::ng-deep {
+    .head{
+        font-size: 16px;
+        span{
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+            line-height: 20px;
+            padding: 10px 0;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    tbody tr:nth-of-type(2) th {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    tbody tr td {
+        font-size: 14px;
+    }
+    tbody tr:nth-of-type(n>3) td{
+        border-top: 1px solid #dbdbdb;
+    }
+    .weekend{
+        color: red;
+    }
+    .month-container{
+        display: block;
+        float: left;
+        padding-bottom: 30px;
+        margin-right: 90px;
+        table{
+            width: 100%;
+            tr{
+                line-height: 30px;
+                text-align: center;
+            }
+        }
+    }
+
+    @media screen and(max-width: 1440px) {
+        .month-container{
+            width: calc((100% - 180px) / 3);
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+        }
+    }
+    
+    @media screen and(min-width: 1440px) {
+        .month-container{
+            width: calc((100% - 270px) / 4);
+            &:nth-child(4n) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
