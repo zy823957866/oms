@@ -1,0 +1,23 @@
+<oms-dialog-title title="测试">
+    <oms-upload 
+        [showDownloadTemp] = "data.showDownloadTemp"
+        [label] = "data.label"
+        [width] = "data.width"
+        [height] = "data.height"
+        [uploadSingle] = "data.uploadSingle"
+        [limitSize] = "data.limitSize"
+        [accept] = "data.accept"
+        [historyUpload] = 'data.historyUpload'
+        (downloadTempCb) = "downloadTemp($event)"
+        (cb)="change($event)"
+    ></oms-upload>
+
+    <div class="actions PB20">
+        <oms-actions
+            [layer]="true"
+            [btns]="ACTIONS"
+            [align]="'right'"
+            (actionsCb)="actionsCb($event)"
+        ></oms-actions>
+    </div>
+</oms-dialog-title>

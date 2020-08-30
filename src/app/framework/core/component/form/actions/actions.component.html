@@ -20,7 +20,7 @@
 </div>
 
 <ng-container *ngIf="layer && (btns && btns.length > 0)">
-    <mat-dialog-actions>
+    <mat-dialog-actions [ngClass]="'text-' + align">
         <ng-container *ngFor="let item of btns">
 
             <div class="btn-outer">
@@ -42,8 +42,6 @@
                     </button>
                 </ng-container>
             </div>
-            
-            
         </ng-container>
     </mat-dialog-actions>
 </ng-container>

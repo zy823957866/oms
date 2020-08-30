@@ -1,4 +1,4 @@
-<div [elResize] dialogDrag class="example-box" [ngClass]="isFullScreen ? 'fullScreen': ''" cdkDragBoundary=".example-boundary" cdkDrag style="position:relative">
+<div dialogDrag class="example-box" [ngClass]="isFullScreen ? 'fullScreen': ''" cdkDragBoundary=".example-boundary" cdkDrag style="position:relative">
     <ng-container *ngIf="showTitle">
         <div class="example-handle" cdkDragHandle>
             <h2 mat-dialog-title>{{ title | translate }}</h2>

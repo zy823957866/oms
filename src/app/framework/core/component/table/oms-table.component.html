@@ -56,9 +56,9 @@
             [headerClass]="'align'+item.textAlign" 
             [cellClass]="'align'+item.textAlign" 
             *ngIf="!item.type && !item.pipes && item.show && item.ifDisplay !== 0" 
-            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [width]="item.width ? item.width:defaultWidth" 
             [minWidth]="60"
-            [canAutoResize]="item.width && scrollbarH" 
+            [canAutoResize]="item.width" 
             name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
             prop="{{item.prop}}"></ngx-datatable-column>
         
@@ -68,9 +68,9 @@
             [headerClass]="'align'+item.textAlign" 
             [cellClass]="'align'+item.textAlign" 
             *ngIf="(item.type === 'async' || item.type === 'userDefine') && item.show && item.ifDisplay !== 0" 
-            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [width]="item.width? item.width:defaultWidth" 
             [minWidth]="60"
-            [canAutoResize]="item.width && scrollbarH" 
+            [canAutoResize]="item.width" 
             name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
             prop="{{item.prop}}">
             <ng-container *ngIf="item.type === 'async'">
@@ -86,9 +86,9 @@
             [headerClass]="'align'+item.textAlign" 
             [cellClass]="'align'+item.textAlign" 
             *ngIf="item.pipes && item.show && item.ifDisplay !== 0" 
-            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [width]="item.width ? item.width:defaultWidth" 
             [minWidth]="60"
-            [canAutoResize]="item.width && scrollbarH"  
+            [canAutoResize]="item.width"  
             name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
             prop="{{item.prop}}">
             <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
@@ -119,9 +119,9 @@
             [headerClass]="'align'+item.textAlign" 
             [cellClass]="'align'+item.textAlign" 
             *ngIf="item.type === 'date'&&!item.pipes && item.show && item.ifDisplay !== 0" 
-            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [width]="item.width ? item.width:defaultWidth" 
             [minWidth]="60"
-            [canAutoResize]="item.width && scrollbarH" 
+            [canAutoResize]="item.width" 
             name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
             prop="{{item.prop}}">
             <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
@@ -133,9 +133,9 @@
         <ngx-datatable-column 
             [sortable]="false" [headerClass]="'align'+item.textAlign" 
             [cellClass]="'align'+item.textAlign" *ngIf="item.type === 'icon' && item.show && item.ifDisplay !== 0" 
-            [width]="item.width && scrollbarH ? item.width:defaultWidth" 
+            [width]="item.width ? item.width:defaultWidth" 
             [minWidth]="60"
-            [canAutoResize]="item.width && scrollbarH" name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
+            [canAutoResize]="item.width" name="{{ lang === 'en' ? (item.enName?item.enName:(item.name | translate)) : (item.name | translate) }}" 
             prop="{{item.prop}}">
             <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
                 <mat-icon>{{value}}</mat-icon>

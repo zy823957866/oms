@@ -1,0 +1,9 @@
+<button 
+    *ngFor="let icon of iconList" 
+    matTooltip="{{icon}}" 
+    matTooltipPosition="above"
+    mat-icon-button 
+    color="primary" 
+    (click)="onIconClick(icon)">
+    <mat-icon>{{icon}}</mat-icon>
+</button>
