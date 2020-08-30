@@ -78,8 +78,6 @@ export class OmsSelectComponent {
 	//是否必填
     _required: boolean=false;
     modelCtrlChangeSub: Subscription;
-    // 当前选择对象
-    private currentSelect: any = {};
 	
 	
 	constructor(

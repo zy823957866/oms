@@ -1,0 +1,69 @@
+<div class="activiti-design-wrap">
+    <div class="content with-diagram" id="js-drop-zone">
+        <div class="message error">
+            <div class="note">
+                <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+    
+                <div class="details">
+                    <span>Import Error Details</span>
+                    <pre></pre>
+                </div>
+            </div>
+        </div>
+        <div class="canvas" id="js-canvas"></div>
+        <div class="properties-panel-parent" id="js-properties-panel" style="width: 350px"></div>
+    </div>
+    
+    <ul class="buttons">
+        <li class="btn saveBpmn" title="保存" id="save"></li>
+        <li class="btn importBpmn" title="导入" id="import">
+            <input type="file" id="bpmnImportFile">
+        </li>
+        <li>
+            <hr class="separator">
+        </li>
+        <li class="btn clear" title="清空重绘" id="clearBpmn"></li>
+        <li>
+            <hr class="separator">
+        </li>
+        <li class="btn undo disabled" title="撤销" id="undo"></li>
+        <li class="btn redo disabled" title="重做" id="redo"></li>
+        <li>
+            <hr class="separator">
+        </li>
+        <li class="btn keyboard" title="快捷键" id="keyboard"></li>
+        <li class="btn fullScreen" title="全屏" id="fullScreen"></li>
+        <li>
+            <hr class="separator">
+        </li>
+        <li class="btn reset" title="重置位置" id="reset"></li>
+        <li class="btn add" title="放大" id="add"></li>
+        <li class="btn minus" title="缩小" id="minus"></li>
+    
+        <li>
+            <hr class="separator">
+        </li>
+    
+        <li class="btn downloadBPMN" title="存储为BPMN">
+            <a id="js-download-diagram"></a>
+        </li>
+        <li class="btn downloadSvg" title="存储为svg">
+            <a id="js-download-svg"></a>
+        </li>
+    </ul>
+    
+    <div class="keyboardModal" id="keyboardModal">
+        <h4>快捷键</h4>
+        <ul>
+            <li><span>撤销:</span><span>ctrl + Z</span></li>
+            <li><span>重做:</span><span>ctrl + Y</span></li>
+            <li><span>全选:</span><span>ctrl + A</span></li>
+            <li><span>缩放:</span><span>ctrl + 滚轮</span></li>
+            <li><span>平移:</span><span>H</span></li>
+            <li><span>框选:</span><span>L</span></li>
+            <li><span>分割移动:</span><span>S</span></li>
+            <li><span>微调(选中):</span><span>↑ ↓ ← →</span></li>
+            <li><span>编辑(选中):</span><span>E</span></li>
+        </ul>
+    </div>
+</div>

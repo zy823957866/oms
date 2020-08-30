@@ -1,0 +1,67 @@
+<div class="upload">
+    <div class="actions header-btns" [ngStyle]="{'padding-left': 'calc((100% - ' + width + ')/2)'}">
+        <button mat-raised-button (click)="downloadTemp()" color="primary" *ngIf="showDownloadTemp">
+            <mat-icon>file_download</mat-icon>
+            模板下载
+        </button>
+
+        <button mat-raised-button title="上传" color="primary">
+            <div class="upload-btn">
+                <mat-icon>file_upload</mat-icon>
+                <p class="file-upload-btn">{{label}}</p>
+                <!-- 文件上传 -->
+                <input
+                    #singleUploadBtn
+                    type="file" 
+                    name="file" 
+                    ngFileSelect
+                    [accept]="accept"
+                    [options]="options"
+                    [uploadInput]="uploadInput"
+                    (change)="fileChange($event)"
+                    (uploadOutput)="onUploadOutput($event)"
+                    id="UploadFile">
+            </div>
+        </button>
+    </div>
+
+    <div
+        ngFileDrop 
+        class="drag-container" 
+        [options]="options" 
+        (uploadOutput)="onUploadOutput($event)"
+        (drop)="onDrop($event)"
+        [ngStyle]="{'width': width, 'height': height}"
+        [uploadInput]="uploadInput">
+        <div class="upload-item" *ngFor="let file of uploadDatas; let i = index;">
+            <img [src]="'assets/images/upload-type/'+ file.img + '.gif'">
+            <div class="upload-info">
+                <span class="file-name">{{file.name}}<i>({{file.size}})</i></span>
+                <span *ngIf="(file?.file?.progress?.data?.percentage === 100 || file.historyUpload) && !file.errorMsg">完成上传</span>
+                <span *ngIf="file.errorMsg" class="error">{{file.errorMsg}}</span>
+                
+                <div class="progress-content" *ngIf="file?.file?.progress?.data?.percentage !== 100 && !file.errorMsg && !file.historyUpload">
+                    <div class="progress">
+                        <span class="bar" [style.width]="file?.file?.progress?.data?.percentage + '%'" [class.is-done]="file?.file?.progress?.data?.percentage === 100"></span>
+                    </div>
+                </div>
+            </div>
+
+            <a *ngIf="file.historyUpload">
+                <mat-icon class="success" (click)="downloadFile(file)">file_download</mat-icon>
+            </a>
+
+            <mat-icon class="success" *ngIf="!file.historyUpload">check_circle</mat-icon>
+
+            <mat-icon class="error" (click)="clear(i)">clear</mat-icon>
+        </div>
+
+        <div class="note" *ngIf="uploadDatas.length === 0">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>或拖拽文件到此处</span>
+            <p>支持文件类型：{{acceptMsg}}</p>
+        </div>
+
+        <p class="isLoading" *ngIf="isLoading">正在上传中...</p>
+    </div>
+</div>

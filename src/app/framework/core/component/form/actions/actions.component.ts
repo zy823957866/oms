@@ -19,6 +19,9 @@ export class OmsActionsComponent {
     // 是否显示更多
     @Input() more: boolean = false;
 
+    // 按钮位置
+    @Input() align: string = 'left';
+
     // 回调
     @Output() actionsCb: any = new EventEmitter<any>();
 

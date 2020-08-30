@@ -26,7 +26,10 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "src/scss/base.scss"
+              "src/scss/base.scss",
+              "./node_modules/ey-activiti-designer/css/diagram-js.css",
+              "./node_modules/ey-activiti-designer/vendor/bpmn-font/css/bpmn-embedded.css",
+              "./node_modules/ey-activiti-designer/css/app.css"
             ],
             "scripts": [
                 "./node_modules/jquery/dist/jquery.min.js",

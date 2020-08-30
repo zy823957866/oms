@@ -49,9 +49,9 @@ export class HttpApiService {
     }
     
     /**
-     * 导出流文件
+     * 导出文件
     */
-    exportExcel(url: string, body: any, fileName: string=''){
+    exportFile(url: string, body: any, fileName: string=''){
         let downLoadSubject: BehaviorSubject<any> = new BehaviorSubject('');
 
         //http返回观察者对象
