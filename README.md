@@ -34,6 +34,22 @@ c、在"fileheader.customMade"中配置作者信息,
 
 ## 路由
     1.路由中是否需要#，在app.routing.ts中设置useHash属性；
-    2. 考虑到首页信息量较大，采用预加载模式; 其它页面采用懒加载模式！
+    2.考虑到首页信息量较大，采用预加载模式; 其它页面采用懒加载模式！
+
+## img-view组件
+    1.安装oms-img-view
+    2.安装viewerjs
+    3.demo
+        `
+            <div class="test">
+                <img-view
+                [imgs]="images"
+                ></img-view>
+            </div>
+        `
+
+## 工作流
+    1、npm install --save ey-activiti-designer bpmn-js
+
 
     

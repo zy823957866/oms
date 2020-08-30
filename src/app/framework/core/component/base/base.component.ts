@@ -462,7 +462,7 @@ export abstract class BaseComponent implements OnInit {
         this.loading.download = true;
 
         // 获取下载链接并下载
-        this.httpApiService.exportExcel(this.apiPath[SYSTEM_CONFIG.API.LIST.EXPORT.NAME] + '?resourceId=' + this.httpApiService.getResourceId(), exprotDTO, (name || this.exportName) + '.' + type).subscribe(res => {
+        this.httpApiService.exportFile(this.apiPath[SYSTEM_CONFIG.API.LIST.EXPORT.NAME] + '?resourceId=' + this.httpApiService.getResourceId(), exprotDTO, (name || this.exportName) + '.' + type).subscribe(res => {
             if(res){
                 this.loading.download = false;
             } 

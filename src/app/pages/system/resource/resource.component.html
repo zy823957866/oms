@@ -1,1 +1,6 @@
-<oms-calendar></oms-calendar>
+<!-- <button (click)="test()">测试</button>
+<oms-upload
+    (downloadTempCb)="downloadTemp()"
+></oms-upload> -->
+
+<activiti-design [xml]="xml" (save)="save($event)"></activiti-design>

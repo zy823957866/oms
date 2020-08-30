@@ -1,0 +1,217 @@
+.actions{
+    margin-bottom: 0;
+    display: flex;
+
+    .mat-raised-button{
+        color: rgba(0, 0, 0, 0.65);
+        box-shadow: none;
+        background-color: #f4f4f4;
+        line-height: 34px;
+        border: 1px solid #d9d9d9;
+        padding: 0 14px;
+        margin-left: 15px;
+        display: block;
+        &:hover,&:active{
+            box-shadow: none !important;
+            color: #0cb495;
+            border: 1px solid #0cb495;
+        }
+    }
+
+    .mat-primary{
+        color: #fff;
+        border: none;
+        background-color: #0cb495;
+        &:hover,&:active{
+            box-shadow: none !important;
+            color: #fff;
+            border: none;
+        }
+    }
+
+    .mat-warn{
+        background-color: #fff;
+        color: rgba(0, 0, 0, 0.65);
+        &:hover,&:active{
+            background: #fff;
+            color: #0cb495;
+            border: 1px solid #0cb495;
+        }
+    }
+}
+
+.header-btns{
+    .mat-raised-button{
+        margin-left: 0;
+        margin-right: 0.15rem;
+    }
+}
+
+.upload-btn{
+    line-height: 34px;
+    display: block;
+    height: 34px;
+    overflow: hidden;
+    p{
+      display: inline-block;
+      margin: 0;
+      padding: 0 6px 0 6px;
+    }
+    mat-icon{
+      padding-top: 4px;
+      display: block;
+      float: left;
+      
+    }
+    input{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      display: block;
+      height: 34px;
+      line-height: 34px;
+      opacity: 0;
+      z-index: 1;
+      font-size: 0;
+      cursor: pointer;
+    }
+}
+
+.note{
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 1.8rem;
+    margin: auto;
+
+    .mat-icon{
+        font-size: 28px;
+        width: 0.28rem;
+        height: 0.28rem !important;
+        padding: 0.14rem;
+        background: #e7e7e7;
+        border-radius: 0.28rem;
+        color: #666;
+        margin: auto;
+        display: block;
+    }
+    span{
+        color: #666;
+        line-height: 0.48rem;
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    p{
+        color: #c2c2c2;
+        text-align: center;
+        padding: 0 0.4rem;
+        font-size: 14px;
+    }
+}
+
+.footer{
+    display: block;
+    float: right;
+}
+
+.drag-container{
+    border: 1px solid #ccc;
+    position: relative;
+    margin: 0.2rem auto;
+
+    .upload-item{
+        border-bottom: 0.01rem solid #e7e7e7;
+        padding: 0.1rem;
+        height: 0.54rem;
+    }
+
+    img{
+		display: block;
+		width: 0.34rem;
+        height: 0.34rem;
+		float: left;
+    }
+    
+	.upload-info{
+		width: calc(100% - 1.3rem);
+		display: inline-block;
+        padding: 0 0.15rem;
+        span{
+            line-height: 0.18rem;
+            color: #979797;
+        }
+        span.error{
+            color: #C00;
+        }
+		.file-name{
+			width: 100%;
+			display: block;
+			overflow: hidden;
+			white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #333;
+            cursor:pointer;
+            i{
+                padding-left: 0.06rem;
+                font-style: normal;
+                color:#979797;
+            }
+		}
+	}
+}
+
+mat-icon.success{
+	padding-top: 0.1rem;
+	display: block;
+	float: right;
+    color: #94db7d;
+    margin-right: 0.02rem;
+}
+
+mat-icon.error {
+	width: 0.22rem;
+	height: 0.22rem;
+	background: #d3d3d3;
+	display: block;
+	border-radius: 0.11rem;
+	cursor: pointer;
+	color: #fff;
+	padding:0;
+	float: right;
+	margin-right: 0.06rem;
+	font-size: 12px;
+	margin-top: 0.1rem;
+	text-align: center;
+	line-height: 0.22rem;
+}
+
+.progress-content{
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+
+    .progress {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 12px;
+        border-radius: 10px;
+        background: #f1f1f1;
+
+        .bar{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 12px;
+            border-radius: 10px;
+            background: #94db7d;
+        }
+    }
+}
