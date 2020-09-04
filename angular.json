@@ -29,7 +29,8 @@
               "src/scss/base.scss",
               "./node_modules/ey-activiti-designer/css/diagram-js.css",
               "./node_modules/ey-activiti-designer/vendor/bpmn-font/css/bpmn-embedded.css",
-              "./node_modules/ey-activiti-designer/css/app.css"
+              "./node_modules/ey-activiti-designer/css/app.css",
+              "./node_modules/jt-web/index.css"
             ],
             "scripts": [
                 "./node_modules/jquery/dist/jquery.min.js",
