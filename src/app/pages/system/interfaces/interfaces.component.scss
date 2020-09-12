@@ -1,0 +1,63 @@
+.siemens-app-container {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+}
+
+.siemens-inner-app-container {
+    background: red;
+    height: 500px;
+    // height: calc(100% - 10px);
+    // width: calc(100% - 10px);
+}
+
+.ms-CommandBar{
+    background-color:#eff6fc;
+    height:40px;
+    white-space:nowrap;
+    padding-left:0;
+    border:0;
+    position:relative
+}
+
+.ms-CommandBar-sideCommands{
+    float:right;
+    text-align:right;
+    width:auto;
+    padding-right:8px
+}
+.ms-CommandBar-sideCommands .ms-CommandBarItem:last-child{
+    margin-right:0
+}
+
+.siemens-sideCommands, .siemens-commandBarItem-link, .siemens-commandBarItem-linkWrapper, .siemens-commandBarItem {
+    height: 28px;
+}
+
+.siemens-commandBarItem {
+    margin-right: 4px;
+}
+
+.siemens-commandBarItem-link:before{
+    content: none !important;
+ }
+ 
+ .siemens-commandBarItem-link {
+     line-height: 23px;
+     padding-right: 3px;
+     padding-left: 3px;
+ }
+
+ .siemens-commandBarItem-link.is-selected {
+    font-family: 'Segoe UI Semibold WestEuropean', 'Segoe UI Semibold', 'Segoe UI', Tahoma, Arial, sans-serif;
+    border-bottom: 2px solid #0078d7;
+  }
+
+  .ms-Panel-main .ms-CommandBar .ms-CommandBarItem:first-child .ms-CommandBarItem-linkWrapper{padding-left:12px;padding-right:12px}
+
+.siemens-sideCommands {
+    padding-right: 30px;
+}
+
+@media only screen and (min-width:640px){.ms-CommandBar-sideCommands{min-width:128px;padding-right:12px}}
+@media only screen and (min-width:1024px){.ms-CommandBar-mainArea{padding-left:24px}.ms-CommandBar-sideCommands{padding-right:16px}}

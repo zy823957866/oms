@@ -22,6 +22,8 @@ export class OmsInterfacesComponent {
     psIdMap = new Map();
     // 所有模型实例id
     instanceIds = [];
+    // 哪些属性变化需要更新indexedDB
+    updateKeys = ['version', 'title'];
 
     constructor(
         private indexDbSrv: IndexDbService
@@ -49,8 +51,8 @@ export class OmsInterfacesComponent {
             this.data2Map(this.jtData);
 
             // 在indexedDB数据库中查找模型
-            this.indexDbSrv.read(this.instanceIds).subscribe(res => {
-
+            this.indexDbSrv.read(this.instanceIds, this.updateKeys).subscribe(res => {
+                console.log(res)
                 // 设置模型map
                 if(res.data && res.data.length ) {
                     this.setModelMap(res.data);
@@ -59,18 +61,15 @@ export class OmsInterfacesComponent {
                 // 如果从indexedDB中未获取到数据，则从后台请求数据
                 if(res.emptyModel && res.emptyModel.length) {
                     this.getModelByModelID(res.emptyModel);
-                }else if(res) {
+                }
+                if(res.updateModel && res.updateModel.length){
+                    this.updateModelByModelID(res.updateModel);
+                }
+                if(res && !res.updateModel.length && !res.emptyModel.length) {
                     this.JTdataAddModel();
                 }
             });
         }, 1000);
-    }
-
-    // 赋值模型
-    setModel(data) {
-        this.indexDbSrv.read([3, 4]).subscribe(res => {
-            console.log(res);
-        });
     }
 
     // 从后台获取模型, settimeout模拟后台
@@ -79,6 +78,19 @@ export class OmsInterfacesComponent {
             this.indexDbSrv.add(MODEL.models);
 
             MODEL.models.forEach(it => {
+                this.modelMap.set(it.key, it.model);
+            })
+
+            this.JTdataAddModel();
+        }, 1000);
+    }
+
+    // 跟新模型, 往后台传入id和版本信息
+    updateModelByModelID(models) {
+        setTimeout(() => {
+            this.indexDbSrv.update(models);
+
+            models.forEach(it => {
                 this.modelMap.set(it.key, it.model);
             })
 
@@ -102,11 +114,10 @@ export class OmsInterfacesComponent {
             }
         }
 
-        console.log(this.jtData)
-
         // 渲染模型
         jt_web({
             data: this.jtData,
+            points: MODEL.points,
             cameraPos: { pos: [], rot: [], tgt: [] }
         })
     }
@@ -129,8 +140,16 @@ export class OmsInterfacesComponent {
             this.jtMap.set(data.psId, data);
 
             // 获取所有模型实例ID
-            if(data.modelId !== undefined && !this.instanceIds.includes(data.modelId)) {
-                this.instanceIds.push(data.modelId)
+            if(data.modelId !== undefined && this.instanceIds.indexOf(it => it.modelId === data.modelId) === -1) {
+                let instanceData = { modelId: data.modelId };
+
+                for(let i=0; i< this.updateKeys.length; i++){
+                    let key = this.updateKeys[i];
+
+                    instanceData[key] = data[key];
+                }
+                
+                this.instanceIds.push(instanceData)
             }
 
             if(data.children && data.children.length) {

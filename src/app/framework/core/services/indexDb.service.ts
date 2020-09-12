@@ -59,6 +59,7 @@ export class IndexDbService {
 		            //如果表格不存在，创建一个新的表格
                     let store = this.db.createObjectStore(storeName, { keyPath: this.keyPath, autoIncrement: false });
                     store.createIndex('version', 'version', { unique: false });
+                    store.createIndex('title', 'title', { unique: false });
 		        }
 			};
         }
@@ -99,47 +100,72 @@ export class IndexDbService {
 
 
     // 读取数据
-	read(keys) {
+	read(instanceData, updateKeys) {
 	    let objectStore = this.db.transaction([this.storeName]).objectStore(this.storeName);
-        // 未查询到模型的数据
-        let emptyModelData;
+        // 未查询到或需要跟新的模型数据
+        let emptyModelData, updateModelData;
         // 查询到模型的数据
         let data;
 
-        if(Array.isArray(keys)) {
+        if(Array.isArray(instanceData)) {
             data = [];
             emptyModelData = [];
+            updateModelData = [];
 
-            for(let i=0; i<keys.length; i++) {
-                let request = objectStore.get(keys[i]);
+            for(let i=0; i<instanceData.length; i++) {
+                let request = objectStore.get(instanceData[i].modelId);
 
                 request.onsuccess = (e) => {
                     if(request.result) {
-                        data.push(request.result);
+                        let flag = true;
+                        for(let i=0; i < updateKeys.length; i++) {
+                            if(request.result[updateKeys[i]] !== instanceData[i][updateKeys[i]]) {
+                                updateModelData.push(Object.assign({}, request.result, {
+                                    [updateKeys[i]]: instanceData[i][updateKeys[i]]
+                                }));
+                                flag = false;
+                            }  
+                        }
+
+                        if(flag) {
+                            data.push(request.result);
+                        }
+                        // if(request.result.version !== instanceData[i].version) {
+                        //     updateModelData.push(Object.assign({}, request.result, {
+                        //         version: instanceData[i].version
+                        //     }));
+                        // }else {
+                            
+                        // }
                     }else {
-                        emptyModelData.push(keys[i])
+                        emptyModelData.push(instanceData[i].modelId)
                     }
 
                     // 读取完成 返回数据
-                    if(i === keys.length - 1) {
-                        this.callBack({ data: data, emptyModel: emptyModelData });
+                    if(i === instanceData.length - 1) {
+                        this.callBack({ data: data, emptyModel: emptyModelData, updateModel: updateModelData });
                     }
                 } 
             }
         }else {
             // 通过物理主键获取单条数据
-            let request = objectStore.get(keys);
+            let request = objectStore.get(instanceData);
             data = {};
             emptyModelData = '';
+            updateModelData = '';
 
             request.onsuccess = (e) => {
                 if(request.result) {
-                    data = Object.assign({}, request.result);
+                    if(request.result.version !== instanceData.version) {
+                        updateModelData = instanceData.modelId
+                    }else {
+                        data = Object.assign({}, request.result);
+                    }
                 }else {
-                    emptyModelData = keys;
+                    emptyModelData = instanceData.modelId;
                 }
 
-                this.callBack({ data: data, emptyModel: emptyModelData });
+                this.callBack({ data: data, emptyModel: emptyModelData, updateModel: updateModelData });
             }
         }
         return this.cb;
